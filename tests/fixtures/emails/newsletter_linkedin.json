@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_news_li",
+  "gmail_id": "m_t_news_li",
+  "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>",
+  "from_name": "LinkedIn Job Alerts",
+  "from_domain": "linkedin.com",
+  "to": "candidate@example.com",
+  "date": "2026-09-08T03:00:00Z",
+  "subject": "30 new jobs for software engineer in Chennai",
+  "snippet": "Jobs you may be interested in: Software Engineer at Acme, Backend Developer at Foo Labs, Platform Engineer at Bar. Apply now. View all jobs.\n\nUnsubscribe from job alert emails.",
+  "body_text": "Jobs you may be interested in: Software Engineer at Acme, Backend Developer at Foo Labs, Platform Engineer at Bar. Apply now. View all jobs.\n\nUnsubscribe from job alert emails.",
+  "links": [],
+  "query_tag": "confirmation"
+}

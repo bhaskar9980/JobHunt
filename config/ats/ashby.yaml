@@ -1,0 +1,54 @@
+# Ashby job boards (jobs.ashbyhq.com). The form is a div-based React tree, not a <form>.
+
+open:
+  # Job pages land on the overview tab; the form lives on the Application tab / the /application path.
+  reveal: ["[role='tab']:has-text('Application')", "a[href$='/application']"]
+  append_path: "/application"
+  form_root: [".ashby-application-form-container"]
+  timeout_ms: 15000
+
+already_applied:
+  - "you have already applied"
+  - "already applied to this"
+
+extract:
+  heading_selector: "h2, h3"
+  field_selector: "input, textarea, select, [role='combobox']"
+  question_container: ".ashby-application-form-field-entry"
+  question_label: "label.ashby-application-form-question-title, label"
+  # Yes/No questions are two buttons plus a hidden checkbox; they become a RADIO field.
+  yesno_container: ".ashby-application-form-input-yesno"
+  # Ashby marks required questions with a hashed `_required_*` class on the label.
+  required_class_regex: "(^| )_required_"
+
+combobox:
+  container: ".ashby-application-form-field-entry"
+  toggle_selector: ""
+  option_selector: "[role='option'], [role='listbox'] li"
+  type_delay_ms: 40
+  options_timeout_ms: 1500
+
+system_fields:
+  _systemfield_name: full_name
+  _systemfield_email: email
+  _systemfield_phone: phone
+  _systemfield_resume: resume
+  _systemfield_location: location
+  _systemfield_linkedin: linkedin
+  _systemfield_github: github
+  _systemfield_website: portfolio
+
+system_label_patterns:
+  - {profile: linkedin, regex: "^linkedin"}
+  - {profile: github, regex: "^github"}
+  - {profile: portfolio, regex: "^portfolio|personal website|^website"}
+
+yesno:
+  option_selector: "button[data-option='{option}']"
+
+submit:
+  selector: "button.ashby-application-form-submit-button, button:has-text('Submit Application')"
+
+confirm:
+  url_patterns: []
+  text_patterns: ["application has been submitted", "application submitted", "thank you for applying"]

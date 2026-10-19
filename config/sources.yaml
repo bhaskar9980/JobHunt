@@ -1,0 +1,83 @@
+# Aggregator sources (not tied to one company) and inbox alert senders.
+aggregators:
+  hn_hiring:
+    enabled: true
+    max_comments: 2000
+    title_prefix: "Ask HN: Who is hiring?"
+  remotive:
+    enabled: true
+    category: software-dev
+    limit: 200
+    # Remotive terms: max 4 calls/day, 24h delay, attribution required. One call per scan.
+  wwr:
+    enabled: true
+    feeds:
+      - https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss
+      - https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss
+      - https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss
+  jobfound:
+    enabled: true
+    feed: https://jobfound.org/feed.xml
+    # Re-lists postings from other boards; India and remote heavy. Public RSS (robots: search=yes).
+    # Company and location are parsed from the link slug; hydrate fetches the real apply link.
+  tal_jobs_in_the_wild:
+    enabled: true
+    base_url: https://jobsinthewild.tal.af/
+    queries: ["sort=new", "sort=hot"]
+    default_location: "Bengaluru, India"
+    # Tal's curated LinkedIn/X hiring posts for Bangalore ("Tal Boss" app). Homepage only:
+    # robots.txt disallows /feed/page. Posts link to the original LinkedIn post, so this is
+    # discovery only and applying is manual (never automated on LinkedIn).
+
+firecrawl:
+  enabled: true
+  monthly_credit_limit: 1000
+  daily_credit_limit: 30
+  budget_reset_day: 1
+  searches_per_day: 3
+  search_cache_hours: 72
+  search_limit: 10
+  search_credits_per_ten: 2
+  scrape_credits: 1
+  min_description_chars: 80
+  blocked_domains: [linkedin.com, naukri.com, indeed.com, glassdoor.com, instahyre.com,
+                    cutshort.io, wellfound.com, foundit.in, monsterindia.com, hirist.tech,
+                    hirist.com, ziprecruiter.com, welcometothejungle.com, otta.com]
+  closed_phrases: [no longer accepting applications, position has been filled,
+                   job is no longer available, vacancy has expired, job has expired,
+                   position is no longer available, this job is closed]
+  official_sites:
+    - company: Tracebit
+      url_prefix: https://tracebit.com/jobs/
+      verified_from: https://tracebit.com/jobs/founding-engineer-relocate
+    - company: Tyler Technologies
+      url_prefix: https://www.tylertech.com/careers/job-listings/
+      verified_from: https://www.tylertech.com/careers/job-listings/software-engineer-26-24593-01
+  queries:
+    - 'site:jobs.ashbyhq.com "C#" "remote"'
+    - '".NET" "visa sponsorship" "relocation" careers'
+    - '"ASP.NET" "remote" "India" careers'
+    - '"C#" "relocation package" "visa" developer Europe'
+    - '".NET" "work from anywhere" software engineer'
+    - '"C#" "visa sponsorship" "relocation" Australia'
+    - '".NET" "remote from India" careers'
+    - '"C#" "visa sponsorship" "relocation" Canada'
+    - '"ASP.NET Core" "worldwide" "remote" jobs'
+    - '".NET" "visa sponsorship" "relocation" Japan'
+    - '"C#" "relocation" "visa" Singapore Bangkok'
+    - '".NET" "visa sponsorship" "relocation" United Kingdom'
+
+# Read by the /jobs-scan skill. One Gmail query per key: from:(senders...) newer_than:<newer_than>
+gmail_alerts:
+  newer_than: 3d
+  senders:
+    linkedin: [jobalerts-noreply@linkedin.com, jobs-noreply@linkedin.com, jobs-listings@linkedin.com]
+    naukri: [naukrialerts@naukri.com, info@naukri.com]
+    instahyre: [instahyre.com]
+    cutshort: [cutshort.io]
+    wellfound: [wellfound.com]
+    indeed: [indeed.com]                 # alert@indeed.com, noreply@indeed.com, match.indeed.com
+    foundit: [foundit.in, monsterindia.com]
+    hirist: [hirist.tech, hirist.com]
+    ziprecruiter: [ziprecruiter.com, ziprecruiter.in]
+    wttj: [welcometothejungle.com, otta.com]   # Welcome to the Jungle (formerly Otta)

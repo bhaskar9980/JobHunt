@@ -1,0 +1,40 @@
+{
+  "hits": [
+    {
+      "objectID": "49576039",
+      "author": "poster_1",
+      "comment_text": "PermitFlow (YC W22) | Staff, Fullstack &amp; Frontend Software Engineers | New York, NY | ONSITE | Full-time | <a href=\"https:&#x2F;&#x2F;permitflow.com\">https:&#x2F;&#x2F;permitflow.com</a>\nPermitFlow’s mission is to streamline and simplify construction permitting in the $1.6 trillion United States construction market. Our software reduces time to permit, supporting permitting end-to-end including permit research, application preparation, submission, and monitoring.<p>We recently raised a $54M Series B led by Accel with participation from Kleiner Perkins, Felicis, Altos Ventures, and YC.<p>NYC Onsite Roles | apply at: <a href=\"https:&#x2F;&#x2F;jobs.ashbyhq.com&#x2F;permitflow?departmentId=d33195eb-89\" rel=\"nofollow\">https:&#x2F;&#x2F;jobs.ashbyhq.com&#x2F;permitflow?departmentId=d33195eb-89</a>...",
+      "created_at": "2026-09-05T12:47:58Z",
+      "parent_id": 49522897,
+      "story_id": 49522897
+    },
+    {
+      "objectID": "49573833",
+      "author": "poster_2",
+      "comment_text": "Supero | Cloud &#x2F; Platform Engineer | REMOTE (SF Bay Area, CA, US · Bengaluru, KA, India) | Full-time | <a href=\"https:&#x2F;&#x2F;www.supero.dev&#x2F;careers&#x2F;cloud-platform-engineer&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;www.supero.dev&#x2F;careers&#x2F;cloud-platform-engineer&#x2F;</a><p>We generate full-stack apps and deploy them — a generated app becomes a live URL, on our infrastructure or in the customer&#x27;s own AWS or GCP account. It&#x27;s in production and it has more shell script in it than it should. You&#x27;d own it, and the mandate is to make it boring. Kubernetes, GCP and AWS deploy paths, CI&#x2F;CD, observability, cost, tenant boundary.<p>You can apply at: <a href=\"https:&#x2F;&#x2F;www.supero.dev&#x2F;careers&#x2F;cloud-platform-engineer&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;www.supero.dev&#x2F;careers&#x2F;cloud-platform-engineer&#x2F;</a>",
+      "created_at": "2026-09-05T06:55:49Z",
+      "parent_id": 49522897,
+      "story_id": 49522897
+    },
+    {
+      "objectID": "49571280",
+      "author": "poster_3",
+      "comment_text": "Deeter Analytics | ML Engineer | REMOTE (WORLDWIDE) | Full-time<p>Small private investment firm trading its own capital. One junior ML engineer to work directly with our senior technical lead on an AI system for our own trading. No finance background needed — we hire on fundamentals and side projects you actually shipped. Apply at <a href=\"https:&#x2F;&#x2F;jobs.ashbyhq.com&#x2F;deeter-analytics&#x2F;2c12339b-d302-427c-9a73-d825b4b942b0\" rel=\"nofollow\">https:&#x2F;&#x2F;jobs.ashbyhq.com&#x2F;deeter-analytics&#x2F;2c12339b-d302-427c...</a>",
+      "created_at": "2026-09-04T23:12:32Z",
+      "parent_id": 49522897,
+      "story_id": 49522897
+    },
+    {
+      "objectID": "49549493",
+      "author": "poster_4",
+      "comment_text": "Are you willing to consider exceptional candidates on a fully-remote basis?",
+      "created_at": "2026-09-03T13:09:47Z",
+      "parent_id": 49527475,
+      "story_id": 49522897
+    }
+  ],
+  "nbHits": 4,
+  "nbPages": 1,
+  "page": 0,
+  "hitsPerPage": 1000
+}

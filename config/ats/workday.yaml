@@ -1,0 +1,81 @@
+# Workday (*.myworkdayjobs.com). A 5 to 7 page wizard behind a per-tenant account, so this is
+# the first config with a `pages:` block. The runner fills one page, calls advance(), and
+# repeats. Selectors are Workday's stable data-automation-id hooks.
+#
+# The user signs in himself in the headed window; the runner waits up to
+# apply.login_wait_seconds and the session then persists in the Playwright profile.
+
+open:
+  # "Apply" then "Apply Manually". Autofill with Resume invents dates and titles, so it is
+  # never offered here.
+  reveal:
+    - "[data-automation-id='adventureButton']"
+    - "a:has-text('Apply')"
+    - "[data-automation-id='applyManually']"
+  form_root:
+    - "[data-automation-id='contactInformationPage']"
+    - "[data-automation-id='myExperiencePage']"
+    - "form"
+  timeout_ms: 30000
+
+already_applied:
+  - "you have already applied"
+  - "already submitted an application"
+  - "you've already applied"
+
+extract:
+  heading_selector: "h2, h3, legend"
+  field_selector: "input, textarea, select, [role='combobox']"
+  question_container: "[data-automation-id]"
+  question_label: "label"
+  yesno_container: ""
+
+# Each page swaps the section in place, so the marker says which page is showing.
+pages:
+  next_selector: "[data-automation-id='bottom-navigation-next-button']"
+  settle_ms: 8000
+  markers:
+    - "[data-automation-id='contactInformationPage']"
+    - "[data-automation-id='myExperiencePage']"
+    - "[data-automation-id='voluntaryDisclosuresPage']"
+    - "[data-automation-id='selfIdentificationPage']"
+    - "[data-automation-id='reviewPage']"
+
+combobox:
+  container: "[data-automation-id]"
+  toggle_selector: "[aria-haspopup='listbox']"
+  option_selector: "[role='option']"
+  type_delay_ms: 40
+  options_timeout_ms: 2500
+
+system_fields:
+  legalNameSection_firstName: first_name
+  legalNameSection_lastName: last_name
+  first_name: first_name
+  last_name: last_name
+  email: email
+  addressSection_city: city
+  addressSection_countryRegion: country
+  addressSection_postalCode: postal_code
+  phone-number: phone_national
+  file-upload-input-ref: resume
+
+system_label_patterns:
+  - {profile: linkedin, regex: "linkedin"}
+  - {profile: github, regex: "github"}
+  - {profile: portfolio, regex: "portfolio|personal website|^website"}
+  - {profile: city, regex: "^city$"}
+  - {profile: country, regex: "^country|country/region"}
+
+submit:
+  selector: >-
+    [data-automation-id='bottom-navigation-submit-button'],
+    [data-automation-id='bottom-navigation-next-button']:has-text('Submit'),
+    button:has-text('Submit')
+
+confirm:
+  url_patterns: ["/applications", "thankyou", "confirmation"]
+  text_patterns:
+    - "thank you for applying"
+    - "your application has been submitted"
+    - "application received"

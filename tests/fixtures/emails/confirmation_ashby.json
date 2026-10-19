@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_conf_ashby",
+  "gmail_id": "m_t_conf_ashby",
+  "from": "Linear <no-reply@ashbyhq.com>",
+  "from_name": "Linear",
+  "from_domain": "ashbyhq.com",
+  "to": "candidate@example.com",
+  "date": "2026-09-05T10:00:00Z",
+  "subject": "Your application to Linear",
+  "snippet": "Hi Alex, thanks for applying to Linear. We have received your application for Software Engineer, Backend and will be in touch if there is a fit.",
+  "body_text": "Hi Alex, thanks for applying to Linear. We have received your application for Software Engineer, Backend and will be in touch if there is a fit.",
+  "links": [],
+  "query_tag": "confirmation"
+}

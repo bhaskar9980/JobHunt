@@ -1,0 +1,45 @@
+{
+  "0-legal-notice": "Legal warning - Hey, thanks for using Remotive's API, we appreciate it! Please note that API documentation and access is granted so that developers can share our jobs further. Please do not submit Remotive jobs to third Party websites, including but not limited to: Jooble, Neuvoo, Google Jobs, LinkedIn Jobs. Please link back to the URL found on Remotive AND mention Remotive as a source in order to Remotive to get traffic from your listing. If you don't do that, we'll terminate your API access, sorry! Jobs displayed are delayed by 24 hours, the goal being that jobs are attributed to Remotive on various platforms. Displaying our jobs in order to collect signups/email addresses to show a listing constitutes a breach of our terms of services. We offer a private, paid-for API, please email us at hello(at)remotive(dot)io for more information (starting budget is $5k/mo). Please find out terms of services on https://remotive.com/api-documentation. Please note that there is absolutely no need to request Remotive Job data too frequently. Typically, you only need to GET Remotive job data through this API a couple of times a day (we advise max. 4 times a day). Our data is not changing much faster than that anyway. Note that excessive requests will be blocked. Many thanks (Rodolphe & the Remotive team!)",
+  "job-count": 2,
+  "total-job-count": 2,
+  "jobs": [
+    {
+      "id": 2091101,
+      "url": "https://remotive.com/remote-jobs/software-development/senior-react-full-stack-developer-2091101",
+      "title": "Senior React Full-stack Developer",
+      "company_name": "Lemon.io",
+      "category": "Software Development",
+      "tags": [
+        ".Net",
+        "android",
+        "AWS",
+        "backend",
+        "C"
+      ],
+      "job_type": "full_time",
+      "publication_date": "2026-08-27T14:36:09",
+      "candidate_required_location": "LATAM, Europe, USA, Canada, APAC",
+      "salary": "",
+      "description": "<p>Are you a talented Senior Developer looking for a remote job that lets you show your skills and get decent compensation? Look no further than Lemon.io — the marketplace that connects you with hand-picked startups in the US and Europe.</p><p>The rate depends on your seniority level, skills and experience. We&#x27;ve already paid out over $11M to our engineers.</p><p>No more hunting for clients or negotiating rates — let us handle the business side of things so you can focus on what you do best.</p>"
+    },
+    {
+      "id": 2069746,
+      "url": "https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746",
+      "title": "Tech Lead Full-Stack Rails Engineer",
+      "company_name": "Mitre Media",
+      "category": "Software Development",
+      "tags": [
+        "api",
+        "CSS",
+        "docker",
+        "elasticsearch",
+        "fullstack"
+      ],
+      "job_type": "full_time",
+      "publication_date": "2026-08-14T20:33:39",
+      "candidate_required_location": "USA, Canada, USA timezones",
+      "salary": "$170k - $200k",
+      "description": "<p>Mitre Media is redefining FinTech with AI-driven tools that empower millions of investors. Our portfolio, including Dividend.com and MutualFunds.com, leverages LLMs to deliver novel data insights and visually rich user experiences. For over a decade, we’ve served individual inves</p><p>Our users are deeply engaged, spending over 5 minutes per visit with a bounce rate below 10%, researching investments across hundreds of different categories. With 40 million brokerage accounts in the U.S., we take pride in building tools that make a real impact, fostering a cult</p><p>As a Full-Stack Rails Tech Lead, you’ll architect and implement LLM-powered web applications within our microservices-based Rails 8 platform. Reporting directly to our CTO, you’ll collaborate with a small, high-impact team to deliver user experiences across Dividend.com, MutualFu</p>"
+    }
+  ]
+}

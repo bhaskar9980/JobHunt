@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "firecrawl": {
+      "type": "http",
+      "url": "https://mcp.firecrawl.dev/v2/mcp-oauth"
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "node_modules/@playwright/mcp/cli.js",
+        "--browser",
+        "chrome",
+        "--user-data-dir",
+        "data/browser/mcp-profile",
+        "--output-dir",
+        "data/browser/mcp-output",
+        "--timeout-action",
+        "10000",
+        "--viewport-size",
+        "1280x900",
+        "--blocked-origins",
+        "https://www.linkedin.com;https://linkedin.com"
+      ]
+    }
+  }
+}

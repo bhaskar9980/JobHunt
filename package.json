@@ -1,0 +1,19 @@
+{
+  "name": "jobhunt",
+  "version": "1.0.0",
+  "description": "Personal job-hunt assistant: discovers roles from ATS public APIs, alert emails and remote boards, scores them against `config/profile.yaml`, tracks every job in SQLite, and applies only after explicit approval. Claude Code skills (`/jobs-scan`, `/jobs-review`, `/jobs-apply`, `/jobs-sync`, `/jobs-refer`, `/jobs-status`) provide the judgement; `uv run jobhunt <cmd>` does the deterministic work.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.80"
+  }
+}

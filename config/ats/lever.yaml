@@ -1,0 +1,60 @@
+# Lever hosted postings (jobs.lever.co and jobs.eu.lever.co), legacy multipart application form.
+
+open:
+  # The posting page links to /apply; the filler appends it when the form is not on the page.
+  reveal: ["a.postings-btn[href$='/apply']"]
+  append_path: "/apply"
+  form_root: ["form#application-form"]
+  timeout_ms: 15000
+
+already_applied:
+  - "you have already applied"
+  - "already submitted an application"
+
+extract:
+  heading_selector: "h4, legend"
+  field_selector: "input, textarea, select"
+  question_container: ".application-question"
+  question_label: ".application-label"
+  # Helper markup inside wrapping <label>s that external CSS hides; never part of the question.
+  label_exclude: ".dropdown-container, .error-message, .resume-upload-working, .resume-upload-success, .resume-upload-oversize"
+  yesno_container: ""
+
+combobox:
+  container: ".application-dropdown"
+  toggle_selector: ""
+  option_selector: "[role='option'], .dropdown-item"
+  type_delay_ms: 40
+  options_timeout_ms: 1500
+
+# Documented Lever field names.
+system_fields:
+  name: full_name
+  email: email
+  phone: phone
+  location: location
+  org: current_company
+  resume: resume
+  "urls[LinkedIn]": linkedin
+  "urls[GitHub]": github
+  "urls[Portfolio]": portfolio
+  "urls[Other]": other_website
+
+system_label_patterns:
+  - {profile: linkedin, regex: "^linkedin"}
+  - {profile: github, regex: "^github"}
+  - {profile: portfolio, regex: "^portfolio|personal website"}
+
+# Typing fast into the location autocomplete trips hCaptcha; type slowly and take the first hit.
+slow_type:
+  selectors: ["[name=\"location\"]"]
+  delay_ms: 90
+  suggestion_selector: ".location-dropdown li, .dropdown-results li, [role='option']"
+  suggestion_timeout_ms: 2500
+
+submit:
+  selector: "#btn-submit"
+
+confirm:
+  url_patterns: ["/thanks"]
+  text_patterns: ["application submitted", "thank you for applying", "thanks for applying"]

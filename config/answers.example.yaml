@@ -1,0 +1,72 @@
+# Copy to config/answers.yaml (gitignored) and fill in. Used to prefill screening questions.
+version: 1
+profile:
+  first_name: First
+  last_name: Last
+  email: you@example.com
+  phone: {country_code: "+91", number: "0000000000"}
+  location: {city: Chennai, state: Tamil Nadu, country: India, timezone: Asia/Kolkata}
+  links:
+    linkedin: https://www.linkedin.com/in/your-handle/
+    github: https://github.com/your-handle
+    portfolio: https://your-site.example/
+  current_company: Your Company
+  current_title: Software Engineer
+
+# Keyed by ISO country code. "default" applies to any other country.
+work_authorisation:
+  IN: {authorised: true, sponsorship_needed: false}
+  US: {authorised: false, sponsorship_needed: true}
+  GB: {authorised: false, sponsorship_needed: true}
+  default: {authorised: false, sponsorship_needed: true}
+
+compensation:
+  currency: INR
+  current_ctc_lpa: 0
+  expected_ctc_lpa: {min: 0, max: 0}
+  answer_style: range          # range | min | decline
+
+notice_period: {days: 60, negotiable: true, text: "60 days, negotiable"}
+relocation: {willing: true, text: "Yes, open to relocating within India"}
+remote_preference: hybrid_or_remote
+
+experience:                    # years, for "how many years with X" questions
+  total: 3
+  csharp: 3
+  dotnet: 3
+  python: 3
+  mongodb: 2
+  kafka: 2
+  kubernetes: 2
+  aws: 1
+
+policies:
+  eeo: decline                 # pick "Decline to self-identify" style options
+  how_did_you_hear: "Company careers page"
+  gdpr_consent: true
+  marketing_consent: false
+  cover_letter: attach_if_field_exists
+
+matching:
+  fuzzy_threshold: 88
+  option_threshold: 80
+
+# Ordered rules. `any`: keyword list; `regex`: pattern; `value`: dotted path into this file;
+# `per_country`: dotted path under work_authorisation resolved by country found in the question.
+question_map:
+  - {any: [work authoris, work authoriz, authorised to work, authorized to work, legally authoris, legally authoriz, eligible to work, right to work], per_country: authorised}
+  - {any: [sponsorship, visa], per_country: sponsorship_needed}
+  - {any: [notice period, earliest start, when can you start, joining date], value: notice_period.text}
+  - {any: [current ctc, current salary, current compensation], value: compensation.current_ctc_lpa}
+  - {any: [expected ctc, expected salary, salary expectation, desired compensation], value: compensation.expected_ctc_lpa}
+  - {any: [relocat], value: relocation.text}
+  - {any: [linkedin], value: profile.links.linkedin}
+  - {any: [github], value: profile.links.github}
+  - {any: [portfolio, website, personal site], value: profile.links.portfolio}
+  - {any: [how did you hear, how did you find, referral source], value: policies.how_did_you_hear}
+  - {regex: "years.*(c#|c sharp|\\.net|dotnet)", value: experience.csharp}
+  - {regex: "years.*python", value: experience.python}
+  - {regex: "years.*(total|professional|experience)", value: experience.total}
+
+# Appended automatically by `uv run jobhunt answers learn`. Normalised question -> answer record.
+learned: {}

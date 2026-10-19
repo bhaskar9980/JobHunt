@@ -1,0 +1,32 @@
+{
+  "total": 3,
+  "jobPostings": [
+    {
+      "title": "Software Engineering, MTS/ SMTS (Full-Stack)",
+      "externalPath": "/job/India---Bangalore/Software-Engineering-MTS_JR338172-1",
+      "locationsText": "2 Locations",
+      "postedOn": "Posted Today",
+      "bulletFields": [
+        "JR338172"
+      ]
+    },
+    {
+      "title": "Salesforce Technical Architect-Healthcare Domain (SF Tech Arch exp mandatory)",
+      "externalPath": "/job/India---Bangalore/Salesforce-Technical-Architect-Healthcare-Domain--SF-Tech-Arch-exp-mandatory-_JR357464",
+      "locationsText": "India - Bangalore",
+      "postedOn": "Posted Today",
+      "bulletFields": [
+        "JR357464"
+      ]
+    },
+    {
+      "title": "Software Engineer  DET| SSR",
+      "externalPath": "/job/Mexico---Mexico-City/Software-Engineer-MTS_JR318211",
+      "locationsText": "Mexico - Mexico City",
+      "postedOn": "Posted 30+ Days Ago",
+      "bulletFields": [
+        "JR318211"
+      ]
+    }
+  ]
+}

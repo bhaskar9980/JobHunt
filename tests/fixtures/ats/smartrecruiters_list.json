@@ -1,0 +1,162 @@
+{
+  "totalFound": 3,
+  "offset": 0,
+  "limit": 100,
+  "content": [
+    {
+      "id": "744000147982299",
+      "name": "Channel Partner Manager - France & Nordics",
+      "uuid": "53cc3abe-6535-431d-95db-90fd9d346612",
+      "refNumber": "REF8769I",
+      "company": {
+        "identifier": "Freshworks",
+        "name": "Freshworks"
+      },
+      "releasedDate": "2026-09-07T19:21:18.720Z",
+      "location": {
+        "city": "Paris",
+        "region": "IDF",
+        "country": "fr",
+        "remote": false,
+        "hybrid": true,
+        "hybridDescription": "Work from home on Tuesdays & Fridays.",
+        "fullLocation": "Paris, IDF, France"
+      },
+      "department": {},
+      "function": {
+        "id": "sales",
+        "label": "Sales"
+      },
+      "typeOfEmployment": {
+        "id": "permanent",
+        "label": "Full-time"
+      },
+      "experienceLevel": {
+        "id": "mid_senior_level",
+        "label": "Mid-Senior Level"
+      },
+      "customField": [
+        {
+          "fieldId": "618bba30fa9dfa25d877c58b",
+          "fieldLabel": "Brands",
+          "valueId": "default",
+          "valueLabel": "Freshworks"
+        },
+        {
+          "fieldId": "COUNTRY",
+          "fieldLabel": "Country/Region",
+          "valueId": "fr",
+          "valueLabel": "France"
+        }
+      ],
+      "ref": "https://api.smartrecruiters.com/v1/companies/freshworks/postings/744000147982299",
+      "language": {
+        "code": "en-GB",
+        "label": "English (UK)",
+        "labelNative": "English (UK)"
+      }
+    },
+    {
+      "id": "744000147960049",
+      "name": "Lead Account Executive (Spanish speaking)",
+      "uuid": "93b4232e-949e-4c87-bd0b-a534dcf2fef6",
+      "refNumber": "P-1009566_1",
+      "company": {
+        "identifier": "Freshworks",
+        "name": "Freshworks"
+      },
+      "releasedDate": "2026-09-07T14:50:07.429Z",
+      "location": {
+        "city": "Paris",
+        "country": "fr",
+        "remote": false,
+        "hybrid": false,
+        "fullLocation": "Paris, , France"
+      },
+      "department": {},
+      "function": {
+        "id": "other",
+        "label": "Other"
+      },
+      "typeOfEmployment": {
+        "id": "permanent",
+        "label": "Full-time"
+      },
+      "experienceLevel": {
+        "id": "mid_senior_level",
+        "label": "Mid-Senior Level"
+      },
+      "customField": [
+        {
+          "fieldId": "618bba30fa9dfa25d877c58b",
+          "fieldLabel": "Brands",
+          "valueId": "default",
+          "valueLabel": "Freshworks"
+        },
+        {
+          "fieldId": "COUNTRY",
+          "fieldLabel": "Country/Region",
+          "valueId": "fr",
+          "valueLabel": "France"
+        }
+      ],
+      "ref": "https://api.smartrecruiters.com/v1/companies/freshworks/postings/744000147960049",
+      "language": {
+        "code": "en",
+        "label": "English",
+        "labelNative": "English (US)"
+      }
+    },
+    {
+      "id": "744000147910359",
+      "name": "Lead - Product Marketing",
+      "uuid": "324f8171-5eaf-487e-ac55-b5149d8055f1",
+      "refNumber": "P-1009727_1",
+      "company": {
+        "identifier": "Freshworks",
+        "name": "Freshworks"
+      },
+      "releasedDate": "2026-09-07T11:20:02.307Z",
+      "location": {
+        "city": "Chennai",
+        "country": "in",
+        "remote": false,
+        "hybrid": false,
+        "fullLocation": "Chennai, , India"
+      },
+      "department": {},
+      "function": {
+        "id": "other",
+        "label": "Other"
+      },
+      "typeOfEmployment": {
+        "id": "permanent",
+        "label": "Full-time"
+      },
+      "experienceLevel": {
+        "id": "mid_senior_level",
+        "label": "Mid-Senior Level"
+      },
+      "customField": [
+        {
+          "fieldId": "618bba30fa9dfa25d877c58b",
+          "fieldLabel": "Brands",
+          "valueId": "default",
+          "valueLabel": "Freshworks"
+        },
+        {
+          "fieldId": "COUNTRY",
+          "fieldLabel": "Country/Region",
+          "valueId": "in",
+          "valueLabel": "India"
+        }
+      ],
+      "ref": "https://api.smartrecruiters.com/v1/companies/freshworks/postings/744000147910359",
+      "language": {
+        "code": "en",
+        "label": "English",
+        "labelNative": "English (US)"
+      }
+    }
+  ]
+}

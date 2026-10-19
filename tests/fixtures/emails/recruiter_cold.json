@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_recruiter",
+  "gmail_id": "m_t_recruiter",
+  "from": "Priya Nair <priya@talentco.io>",
+  "from_name": "Priya Nair",
+  "from_domain": "talentco.io",
+  "to": "candidate@example.com",
+  "date": "2026-09-07T14:00:00Z",
+  "subject": "Backend role at Ramp - quick chat?",
+  "snippet": "Hi Alex, I came across your profile and your experience with .NET and Kafka stood out. I'm a recruiter working with Ramp, and I'm hiring for a Backend Engineer on their payments platform. Would you be open to a quick chat this week?\n\nBest, Priya",
+  "body_text": "Hi Alex, I came across your profile and your experience with .NET and Kafka stood out. I'm a recruiter working with Ramp, and I'm hiring for a Backend Engineer on their payments platform. Would you be open to a quick chat this week?\n\nBest, Priya",
+  "links": [],
+  "query_tag": "recruiter_outreach"
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_conf_gh",
+  "gmail_id": "m_t_conf_gh",
+  "from": "Postman <no-reply@greenhouse.io>",
+  "from_name": "Postman",
+  "from_domain": "greenhouse.io",
+  "to": "candidate@example.com",
+  "date": "2026-09-05T10:00:00Z",
+  "subject": "Thank you for applying to Postman",
+  "snippet": "Hi Alex,\n\nThank you for applying to Postman. We have received your application for the Software Engineer II role and will review it shortly. If your background matches what we are looking for, we will be in touch.\n\nBest,\nPostman Recruiting",
+  "body_text": "Hi Alex,\n\nThank you for applying to Postman. We have received your application for the Software Engineer II role and will review it shortly. If your background matches what we are looking for, we will be in touch.\n\nBest,\nPostman Recruiting",
+  "links": [],
+  "query_tag": "confirmation"
+}

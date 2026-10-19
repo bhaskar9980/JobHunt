@@ -1,0 +1,74 @@
+# Canonical city -> phrases that map to it (matched as whole words, case-insensitive).
+# Anything containing remote / work from home / anywhere buckets to "remote" first.
+cities:
+  chennai: [chennai, madras, tamil nadu]
+  bengaluru: [bengaluru, bangalore, karnataka, blr]
+  hyderabad: [hyderabad, telangana, hyd]
+  pune: [pune, maharashtra]
+  mumbai: [mumbai, bombay, navi mumbai]
+  delhi: [delhi, new delhi, gurgaon, gurugram, noida, ncr, faridabad]
+  kolkata: [kolkata, calcutta]
+  ahmedabad: [ahmedabad, gandhinagar]
+  kochi: [kochi, cochin, kerala, trivandrum, thiruvananthapuram]
+  singapore: [singapore]
+  dubai: [dubai, uae, united arab emirates, abu dhabi]
+  london: [london, united kingdom, uk, england]
+  amsterdam: [amsterdam, netherlands]
+  berlin: [berlin, germany, munich]
+  dublin: [dublin, ireland]
+  sf: [san francisco, bay area, sf, palo alto, mountain view, menlo park, san jose]
+  nyc: [new york, nyc, brooklyn]
+  seattle: [seattle, redmond, bellevue]
+  toronto: [toronto, vancouver]
+  sydney: [sydney, melbourne]
+
+# Country and region fallbacks, only used when no city above matched. Keeping them apart is
+# what makes "Pune, India" bucket to pune instead of india.
+regions:
+  india: [india, bharat]
+  usa: [united states, usa, us]
+  canada: [canada]
+  australia: [australia]
+
+international_eligibility:
+  domestic_buckets: [chennai, bengaluru, hyderabad, pune, mumbai, delhi, kolkata, ahmedabad, kochi, india]
+  domestic_markers: [india, bharat, chennai, bengaluru, bangalore, hyderabad, pune, mumbai,
+                     delhi, noida, gurgaon, gurugram, kolkata, ahmedabad, kochi, coimbatore]
+  worldwide_location:
+    - '\b(?:worldwide|anywhere in the world|global)\b'
+  remote_support:
+    - '\bwork(?:ing)? (?:remotely )?from anywhere in the world\b'
+    - '\b(?:fully )?remote\s*[-:(,]?\s*(?:worldwide|globally|global)\b'
+    - '\b(?:work|working|performed|based)\s+(?:remotely\s+)?(?:from|in)\s+india\b'
+    - '\bremote(?:ly)?\s+(?:from|within|in)\s+india\b'
+  international_exclusions:
+    - '\b(?:must|need to|required to)\s+(?:already |currently )?(?:reside|live|be based)\b[^.\n]{0,45}\b(?:us|usa|united states|uk|united kingdom|canada|eu|europe|australia)\b'
+    - '\b(?:must|need to|required to)\b[^.\n]{0,50}\b(?:already|currently)\b[^.\n]{0,40}\b(?:authorized|authorised|right to work)\b'
+    - '\b(?:us|u\.s\.|american|canadian|british|eu|australian)\s+(?:citizens?|citizenship|residents?)\s+(?:only|required)\b'
+    - '\b(?:engineers|developers|candidates|applicants)\s+from\s+(?:the\s+)?(?:us|usa|united states|uk|canada|eu|europe|australia)\b'
+  remote_exclusions:
+    - '\bnot\s+(?:a\s+)?(?:fully\s+)?remote\s+(?:position|role|job)\b'
+    - '\bremote\s+(?:work|working)\s+(?:is\s+)?(?:not|unavailable)\b'
+    - '\b(?:on[- ]?site|in[- ]?office)\s+(?:only|required)\b'
+    - '\b(?:only open to|restricted to|limited to|must (?:be|reside|live|work)|required to (?:reside|live|work))\b[^.\n]{0,80}\b(?:us|usa|united states|canada|uk|united kingdom|eu|europe|australia|new zealand)\b'
+    - '\b(?:us|usa|uk|eu|europe|canada|australia)[- ]only\b'
+    - '\b(?:not|excluding|except)\s+(?:available (?:in|from)|open to|candidates (?:in|from))?\s*india\b'
+    - '\b(?:must|need to|required to)\b[^.\n]{0,60}\b(?:authorized|authorised|authorization|authorisation|right to work)\b[^.\n]{0,40}\b(?:us|usa|united states|canada|uk|eu|australia)\b'
+    - '\b(?:work|working) from anywhere\b[^.\n]{0,80}\b(?:days|weeks|months)\b'
+  visa_support:
+    - '\bvisa sponsorship\s*(?:(?:is|will be)\s+)?(?:available|provided|offered|supported|for you|where necessary|: yes)\b'
+    - '\b(?:offer|provide|support)\b[^.\n?]{0,45}\bvisa sponsorship\b'
+    - '\b(?:can|will|do) sponsor\s+(?:(?:your|work|working|employment)\s+)?visas?\b'
+    - '\bvisa (?:and|&) relocation (?:support|assistance|package)\b'
+  visa_exclusions:
+    - '\b(?:no|without)\s+(?:visa |immigration |employment )?sponsorship\b'
+    - '\b(?:cannot|can not|can''t|do not|does not|will not|won''t|unable to|not able to|not eligible (?:to|for))\b[^.\n]{0,60}\b(?:sponsor|sponsorship|visas?)\b'
+    - '\bvisa sponsorship\b[^.\n]{0,35}\b(?:not|unavailable|: no)\b'
+    - '\b(?:arrange|obtain)\b[^.\n]{0,25}\bown visa\b'
+  relocation_support:
+    - '\brelocation\s+(?:(?:and|&) onboarding\s+)?(?:assistance|support|package|packages|allowance|expenses)\b'
+    - '\b(?:cover|pay|reimburse)\b[^.\n]{0,30}\b(?:relocation|moving) (?:costs|expenses)\b'
+  relocation_exclusions:
+    - '\b(?:no|without)\s+relocation\b'
+    - '\brelocation\b[^.\n]{0,45}\b(?:not|unavailable|: no)\b'
+    - '\b(?:do not|does not|will not|cannot|can''t|unable to)\b[^.\n]{0,40}\brelocation\b'

@@ -1,0 +1,21 @@
+# secrets and personal data
+.env
+config/answers.yaml
+config/profile.yaml
+.claude/settings.local.json
+
+# runtime state
+data/
+logs/
+backups/
+
+# environments and caches
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_int_figma",
+  "gmail_id": "m_t_int_figma",
+  "from": "Maya at Figma <maya@figma.com>",
+  "from_name": "Maya at Figma",
+  "from_domain": "figma.com",
+  "to": "candidate@example.com",
+  "date": "2026-09-07T08:15:00Z",
+  "subject": "Figma - Software Engineer interview availability",
+  "snippet": "Hi Alex, thanks again for applying. We would like to invite you to interview for the Software Engineer role. Could you share your availability for a 30 minute phone screen this week? You can also pick a slot directly: https://calendly.com/figma-recruiting/phone-screen\n\nBest, Maya",
+  "body_text": "Hi Alex, thanks again for applying. We would like to invite you to interview for the Software Engineer role. Could you share your availability for a 30 minute phone screen this week? You can also pick a slot directly: https://calendly.com/figma-recruiting/phone-screen\n\nBest, Maya",
+  "links": [],
+  "query_tag": "interview"
+}

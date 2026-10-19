@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_assess_cb",
+  "gmail_id": "m_t_assess_cb",
+  "from": "Coinbase Recruiting <no-reply@hackerrankforwork.com>",
+  "from_name": "Coinbase Recruiting",
+  "from_domain": "hackerrankforwork.com",
+  "to": "candidate@example.com",
+  "date": "2026-09-07T12:00:00Z",
+  "subject": "Coinbase: Online Assessment Invitation",
+  "snippet": "Hi Alex, as the next step for the Software Engineer, Backend position at Coinbase, please complete the online assessment on HackerRank within 7 days. The coding challenge takes about 90 minutes.",
+  "body_text": "Hi Alex, as the next step for the Software Engineer, Backend position at Coinbase, please complete the online assessment on HackerRank within 7 days. The coding challenge takes about 90 minutes.",
+  "links": [],
+  "query_tag": "assessment"
+}

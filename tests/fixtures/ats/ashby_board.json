@@ -1,0 +1,102 @@
+{
+  "apiVersion": "1",
+  "jobs": [
+    {
+      "id": "d3bc1ced-3ce4-4086-a050-555055dbb1ff",
+      "title": "Senior / Staff Fullstack Engineer",
+      "department": "Product",
+      "team": "Engineering",
+      "employmentType": "FullTime",
+      "location": "Europe",
+      "shouldDisplayCompensationOnJobPostings": false,
+      "secondaryLocations": [],
+      "publishedAt": "2021-04-27T20:13:45.158+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Remote",
+      "address": {
+        "postalAddress": {
+          "addressCountry": "European Union"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/linear/d3bc1ced-3ce4-4086-a050-555055dbb1ff",
+      "applyUrl": "https://jobs.ashbyhq.com/linear/d3bc1ced-3ce4-4086-a050-555055dbb1ff/application",
+      "descriptionHtml": "<p style=\"min-height:1.5em\">At Linear, we're building the product development system for teams and agents. AI is fundamentally changing how software gets built, and we’re shaping the tools this new era requires. </p><p style=\"min-height:1.5em\">Founded in 2019, Linear has become the platform of choice for more than 40,000 companies (including OpenAI, Coinbase, and Ramp) to plan, build, and ship their products. Today, our team is distributed across North America, Europe, and Australia, and we’re continuing to grow internationally. What unites us is relentless focus, fast execution, and a deep care for software craftsmanship. </p>",
+      "descriptionPlain": "At Linear, we're building the product development system for teams and agents. AI is fundamentally changing how software gets built, and we’re shaping the tools this new era requires. \n\nFounded in 2019, Linear has become the platform of choice for more than 40,000 companies (including OpenAI, Coinba",
+      "compensation": {
+        "compensationTierSummary": null,
+        "scrapeableCompensationSalarySummary": null,
+        "compensationTiers": [],
+        "summaryComponents": []
+      }
+    },
+    {
+      "id": "d37b3d76-3080-47f9-8a19-60505573112c",
+      "title": "Solutions Engineer, Europe",
+      "department": "GTM",
+      "team": "Sales",
+      "employmentType": "FullTime",
+      "location": "London",
+      "shouldDisplayCompensationOnJobPostings": false,
+      "secondaryLocations": [],
+      "publishedAt": "2026-04-08T14:58:35.814+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Hybrid",
+      "address": {
+        "postalAddress": {
+          "addressCountry": "United Kingdom",
+          "addressLocality": "London"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/linear/d37b3d76-3080-47f9-8a19-60505573112c",
+      "applyUrl": "https://jobs.ashbyhq.com/linear/d37b3d76-3080-47f9-8a19-60505573112c/application",
+      "descriptionHtml": "<p style=\"min-height:1.5em\">At Linear, we're building the product development system for teams and agents. AI is fundamentally changing how software gets built, and we’re shaping the tools this new era requires.</p><p style=\"min-height:1.5em\">Founded in 2019, Linear has become the platform of choice for more than 40,000 companies (including OpenAI, Coinbase, and Ramp) to plan, build, and ship their products. Today, our team is distributed across North America, Europe, and Australia, and we’re continuing to grow internationally. What unites us is relentless focus, fast execution, and a deep care for software craftsmanship.</p>",
+      "descriptionPlain": "At Linear, we're building the product development system for teams and agents. AI is fundamentally changing how software gets built, and we’re shaping the tools this new era requires.\n\nFounded in 2019, Linear has become the platform of choice for more than 40,000 companies (including OpenAI, Coinbas",
+      "compensation": {
+        "compensationTierSummary": null,
+        "scrapeableCompensationSalarySummary": null,
+        "compensationTiers": [],
+        "summaryComponents": []
+      }
+    },
+    {
+      "id": "1d652292-04d9-405c-8101-578efd020e94",
+      "title": "Developer Relations",
+      "department": "GTM",
+      "team": "Marketing",
+      "employmentType": "FullTime",
+      "location": "North America",
+      "shouldDisplayCompensationOnJobPostings": false,
+      "secondaryLocations": [
+        {
+          "location": "Europe",
+          "address": {
+            "postalAddress": {
+              "addressCountry": "European Union"
+            }
+          }
+        }
+      ],
+      "publishedAt": "2026-04-24T03:30:24.628+00:00",
+      "isListed": true,
+      "isRemote": true,
+      "workplaceType": "Remote",
+      "address": {
+        "postalAddress": {
+          "addressCountry": "United States"
+        }
+      },
+      "jobUrl": "https://jobs.ashbyhq.com/linear/1d652292-04d9-405c-8101-578efd020e94",
+      "applyUrl": "https://jobs.ashbyhq.com/linear/1d652292-04d9-405c-8101-578efd020e94/application",
+      "descriptionHtml": "<p style=\"min-height:1.5em\">At Linear, we're building the product development system for teams and agents. AI is fundamentally changing how software gets built, and we’re shaping the tools this new era requires. </p><p style=\"min-height:1.5em\">Founded in 2019, Linear has become the platform of choice for more than 40,000 companies (including OpenAI, Coinbase, and Ramp) to plan, build, and ship their products. Today, our team is distributed across North America, Europe, and Australia, and we’re continuing to grow internationally. What unites us is relentless focus, fast execution, and a deep care for software craftsmanship.</p>",
+      "descriptionPlain": "At Linear, we're building the product development system for teams and agents. AI is fundamentally changing how software gets built, and we’re shaping the tools this new era requires. \n\nFounded in 2019, Linear has become the platform of choice for more than 40,000 companies (including OpenAI, Coinba",
+      "compensation": {
+        "compensationTierSummary": null,
+        "scrapeableCompensationSalarySummary": null,
+        "compensationTiers": [],
+        "summaryComponents": []
+      }
+    }
+  ]
+}

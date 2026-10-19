@@ -1,0 +1,96 @@
+# Runtime settings. Paths are relative to the project root unless absolute.
+# Any paths.* key can be overridden with JOBHUNT_<KEY> in .env (e.g. JOBHUNT_RESUME_PDF).
+# Any paths.* key can be overridden with JOBHUNT_<KEY> in .env (e.g. JOBHUNT_RESUME_PDF).
+paths:
+  data_dir: data
+  logs_dir: logs
+  db_path: data/jobs.db
+  inbox_dir: data/inbox
+  mail_inbox_dir: data/mail_inbox
+  scoring_dir: data/scoring
+  applications_dir: data/applications
+  outreach_dir: data/outreach
+  dashboard_path: data/dashboard.html
+  backup_dir: backups
+  review_queue: data/review_queue.md
+  resume_facts: data/resume_facts.md
+  resume_pdf: data/resume/resume.pdf
+  resume_tex: data/resume/resume.tex
+  accomplishments_md: data/resume/accomplishments.md
+
+http:
+  timeout_seconds: 20
+  retries: 2
+  backoff_seconds: 1.5
+  user_agent: "jobhunt/0.1 (personal job search)"
+
+scan:
+  hydrate: true
+  hydrate_max_per_run: 300     # per pass; scan repeats until nothing is left unhydrated
+  posted_within_days: 45
+  max_workers: 8          # sources fetched at once; database writes stay single threaded
+
+normalize:
+  keep_query: [gh_jid, jobid, job_id, id, jk, jid]   # jk = Indeed, jid = ZipRecruiter
+  company_suffixes:
+    [inc, llc, ltd, limited, pvt, private, corp, corporation, co, company, technologies,
+     technology, tech, labs, software, solutions, india, group, plc, gmbh, bv, sa, ag, holdings]
+  company_drop_anywhere: [careers, jobs]
+
+# Higher wins when two sources describe the same job.
+source_priority:
+  default: 10
+  greenhouse: 30
+  lever: 30
+  ashby: 30
+  smartrecruiters: 30
+  workday: 30
+  eightfold: 30
+  successfactors: 30
+  hn: 20
+  remotive: 20
+  wwr: 20
+  tal: 20
+  jobfound: 15
+  linkedin_email: 10
+  naukri_email: 10
+  instahyre_email: 10
+  cutshort_email: 10
+  wellfound_email: 10
+  indeed_email: 10
+  foundit_email: 10
+  hirist_email: 10
+  ziprecruiter_email: 10
+  wttj_email: 10
+
+follow_up:
+  days_after_apply: 10
+  ghost_days: 21
+
+apply:
+  daily_cap: 10
+  workday_daily_cap: 3
+  min_score: 70
+  dedupe_days: 90
+  dedupe_title_ratio: 90
+  captcha_wait_seconds: 180
+  login_wait_seconds: 240
+  confirm_timeout_seconds: 45
+  review_poll_ms: 250
+  headless: false
+  browser_channel: chrome
+  py_profile_dir: data/browser/py-profile
+  viewport: {width: 1280, height: 900}
+
+dashboard:
+  title: JobHunt
+  description_chars: 400
+  port: 8765
+  refresh_seconds: 5
+  page_size: 24
+
+logging:
+  level: INFO
+  file: logs/jobhunt.log
+  max_bytes: 2000000
+  backup_count: 3

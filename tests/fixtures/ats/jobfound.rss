@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Jobfound - Latest Job Opportunities</title>
+    <link>https://jobfound.org</link>
+    <description>Discover your ideal job at Jobfound. Find remote jobs, fresher positions, Amazon jobs, and opportunities across USA, UK, and worldwide. Updated daily with the latest job openings.</description>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Sep 2026 19:35:25 GMT</lastBuildDate>
+    <atom:link href="https://jobfound.org/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://jobfound.org/logo.png</url>
+      <title>Jobfound</title>
+      <link>https://jobfound.org</link>
+    </image>
+    <copyright>Copyright 2026 Jobfound. All rights reserved.</copyright>
+    <category>Jobs</category>
+    <category>Careers</category>
+    <category>Remote Work</category>
+
+    
+    <item>
+      <title>Data Analyst Intern</title>
+      <link>https://jobfound.org/job/swift-is-hiring-for-data-analyst-intern-dehradun-india-8-september-2026</link>
+      <description>About the JobWe are looking for a Data Analyst Intern who is eager to learn, comfortable with problem-solving, and passionate about building reliable data insights and dashboards. Your primary focus will be on dashboarding in Looker Studio, writing SQL queries to extract and transform data, and developing Python scripts for data analysis. You&apos;ll support our analytics team in translating data into actionable insights that drive business decisions.What You&apos;ll DoCreate and maintain interactive dash</description>
+      <pubDate>Tue, 08 Sep 2026 19:26:32 GMT</pubDate>
+      <guid isPermaLink="false">6aa06169000999b57ae5</guid>
+      <category>Jobs</category>
+    </item>
+    <item>
+      <title>SDE Intern</title>
+      <link>https://jobfound.org/job/hiver-is-hiring-for-sde-intern-bangalore-hybrid-india-8-september-2026</link>
+      <description>About us:Hiver is a modern, AI-driven customer service platform used by companies across healthcare, finance, logistics, education, and technology. We help teams deliver fast, human support across email, chat, phone, WhatsApp, and more — without the complexity of legacy helpdesks.We’re a challenger brand in a category dominated by over-engineered tools. We build software that is simple, powerful, and genuinely helpful, and we operate internally with that same philosophy. If you want meaningful o</description>
+      <pubDate>Tue, 08 Sep 2026 19:25:40 GMT</pubDate>
+      <guid isPermaLink="false">6aa061350007fce878c4</guid>
+      <category>Jobs</category>
+    </item>
+    <item>
+      <title>AI/ML Research Intern</title>
+      <link>https://jobfound.org/job/superkalam-is-hiring-for-ai-ml-research-intern-bengaluru-remote-india-8-september-2026</link>
+      <description>AI/ML research internship @superkalam If you are a SUPER pumped AI/ML engineer with high energy and good ownership and communication, then this is for you. Location: Remote/Bengaluru 🔵 Note: This is a full-time internship, ideal for students entering in their final year. Flexibility is there only if you have a some classes per week. If your college schedule is not convenient, come in touch next semester. What we are looking for? Prior Internship in AI/ML or quality projects done using Python/No</description>
+      <pubDate>Tue, 08 Sep 2026 17:13:31 GMT</pubDate>
+      <guid isPermaLink="false">6aa0423b0014d24fa439</guid>
+      <category>Jobs</category>
+    </item>
+  </channel>
+</rss>

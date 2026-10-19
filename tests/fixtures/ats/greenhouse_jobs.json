@@ -1,0 +1,148 @@
+{
+  "jobs": [
+    {
+      "absolute_url": "https://job-boards.greenhouse.io/postman/jobs/7979886003",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "internal_job_id": 5879429003,
+      "location": {
+        "name": "New York, New York, United States"
+      },
+      "metadata": null,
+      "id": 7979886003,
+      "updated_at": "2026-08-31T12:17:49-04:00",
+      "requisition_id": "2156",
+      "title": "Account Development Representative",
+      "company_name": "Postman",
+      "first_published": "2026-08-31T12:14:49-04:00",
+      "language": "en",
+      "application_deadline": null,
+      "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;Who Are We?&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Postman is the world’s leading API platform, used by more than 45 million+ developers and 500,000 organizations, including 98% of the Fortune 500. Postman is helping developers and professionals across the globe build the API-first world by simplifying each step of the API lifecycle and streamlining collaboration—enabling users to create better APIs, faster.&lt;/p&gt;",
+      "departments": [
+        {
+          "id": 4045833003,
+          "name": "Sales",
+          "child_ids": [],
+          "parent_id": 4047977003
+        }
+      ],
+      "offices": [
+        {
+          "id": 4038752003,
+          "name": "New York, New York",
+          "location": "New York, New York, United States",
+          "child_ids": [],
+          "parent_id": 4033416003
+        }
+      ],
+      "ai_disclaimer": null,
+      "include_ai_disclaimer": null,
+      "ai_opt_out_request_url": null
+    },
+    {
+      "absolute_url": "https://job-boards.greenhouse.io/postman/jobs/7529471003",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "internal_job_id": 5679115003,
+      "location": {
+        "name": "Remote, Denmark"
+      },
+      "metadata": null,
+      "id": 7529471003,
+      "updated_at": "2026-08-17T18:15:55-04:00",
+      "requisition_id": "1824",
+      "title": "Corporate Solutions Engineer, Nordics",
+      "company_name": "Postman",
+      "first_published": "2025-12-02T06:35:03-05:00",
+      "language": "en",
+      "application_deadline": null,
+      "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;Who Are We?&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Postman is the world’s leading API platform, used by more than 45 million+ developers and 500,000 organizations, including 98% of the Fortune 500. Postman is helping developers and professionals across the globe build the API-first world by simplifying each step of the API lifecycle and streamlining collaboration—enabling users to create better APIs, faster.&lt;/p&gt;",
+      "departments": [
+        {
+          "id": 4045833003,
+          "name": "Sales",
+          "child_ids": [],
+          "parent_id": 4047977003
+        }
+      ],
+      "offices": [
+        {
+          "id": 4033412003,
+          "name": "Remote, Denmark",
+          "location": null,
+          "child_ids": [],
+          "parent_id": 4033402003
+        }
+      ],
+      "ai_disclaimer": null,
+      "include_ai_disclaimer": null,
+      "ai_opt_out_request_url": null
+    },
+    {
+      "absolute_url": "https://job-boards.greenhouse.io/postman/jobs/7823417003",
+      "data_compliance": [
+        {
+          "type": "gdpr",
+          "requires_consent": false,
+          "requires_processing_consent": false,
+          "requires_retention_consent": false,
+          "retention_period": null,
+          "demographic_data_consent_applies": false
+        }
+      ],
+      "internal_job_id": 5803801003,
+      "location": {
+        "name": "Berkeley, California, United States; San Francisco, California, United States"
+      },
+      "metadata": null,
+      "id": 7823417003,
+      "updated_at": "2026-08-17T18:15:55-04:00",
+      "requisition_id": "2134",
+      "title": "AI Engineer, Internship - Summer 2026 - Applications Open Now",
+      "company_name": "Postman",
+      "first_published": "2026-08-01T10:52:20-04:00",
+      "language": "en",
+      "application_deadline": null,
+      "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;Who Are We?&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Postman is the world’s leading API platform, used by more than 45 million+ developers and 500,000 organizations, including 98% of the Fortune 500. Postman is helping developers and professionals across the globe build the API-first world by simplifying each step of the API lifecycle and streamlining collaboration—enabling users to create better APIs, faster.&lt;/p&gt;",
+      "departments": [
+        {
+          "id": 4125444003,
+          "name": "AI",
+          "child_ids": [],
+          "parent_id": 4139544003
+        }
+      ],
+      "offices": [
+        {
+          "id": 4038748003,
+          "name": "Berkeley, California ",
+          "location": "Berkeley, California, United States",
+          "child_ids": [],
+          "parent_id": 4033416003
+        }
+      ],
+      "ai_disclaimer": null,
+      "include_ai_disclaimer": null,
+      "ai_opt_out_request_url": null
+    }
+  ],
+  "meta": {
+    "total": 3
+  }
+}

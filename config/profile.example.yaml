@@ -1,0 +1,150 @@
+# Candidate profile used by the deterministic prefilter and shown to the LLM scorer.
+# Copy to config/profile.yaml (gitignored) and fill in. Run `uv run jobhunt prefilter --rescan` after editing.
+candidate:
+  name: Your Name                # first word signs outreach messages
+  one_liner: One sentence about what you build today, used in referral messages.
+  current_title: Software Engineer
+  current_company: Your Company
+  years_experience: 3
+  target_level: Software Engineer II
+  location: City, Country
+  notice_period_days: 60
+  work_authorization:
+    india: authorised
+    needs_sponsorship_elsewhere: true
+  links:
+    linkedin: https://www.linkedin.com/in/your-handle/
+    github: https://github.com/your-handle
+    portfolio: https://your-site.example/
+
+targets:
+  target_titles:
+    - software engineer
+    - software engineer ii
+    - software engineer 2
+    - software development engineer
+    - sde 2
+    - sde ii
+    - backend engineer
+    - backend developer
+    - .net developer
+    - dotnet developer
+    - c# developer
+    - platform engineer
+    - full stack engineer
+    - full stack developer
+    - member of technical staff
+  exclude_titles:
+    - senior
+    - staff
+    - principal
+    - lead
+    - manager
+    - director
+    - head
+    - vp
+    - intern
+    - internship
+    - junior
+    - graduate
+    - entry level
+    - architect
+    - frontend
+    - front end
+    - ios
+    - android
+    - mobile
+    - data scientist
+    - data engineer
+    - machine learning
+    - qa
+    - sdet
+    - test
+    - support
+    - sales
+    - solutions engineer
+    # Platforms outside his stack
+    - salesforce
+    - sap
+    - abap
+    - embedded
+    - firmware
+  # A title built around one of these languages is filtered even when the description
+  # mentions C#/.NET somewhere. "Java Full Stack Developer" is out; "Java/.NET Developer"
+  # stays in and the must_have_any gate below decides.
+  exclude_title_languages: [java, python, golang, go, node, nodejs, node.js, javascript,
+                            typescript, react, angular, vue, ruby, rails, php, scala,
+                            kotlin, rust, swift, flutter, c++, elixir, perl]
+  seniority_max_years_required: 5
+  locations: [chennai, hyderabad, bengaluru, delhi, remote]
+  remote_ok: true
+  relocate_ok: true
+  international_remote_or_relocation: true
+  # relocate_ok is true, so these pass with a "relocatable to X" reason. Pune is a
+  # major .NET hub; "india" covers postings that name no city at all.
+  relocatable_locations: [pune, mumbai, india]
+  # These identify country-restricted remote roles. The international policy additionally
+  # requires explicit India/worldwide eligibility or visa and relocation support; APAC is not proof.
+  remote_regions_excluded: [us, usa, u.s., united states, north america, americas, canada,
+                            latam, eu, europe, european, emea, uk, united kingdom, australia,
+                            # hub cities: "remote" anchored to these still needs local work rights
+                            san francisco, bay area, new york, seattle, austin, boston, chicago,
+                            los angeles, denver, toronto, vancouver, london, berlin, amsterdam,
+                            dublin, paris, sydney, singapore, tokyo]
+  # Non-remote roles in a city we do not recognise are filtered when the text names one
+  # of these countries (a "City, ST" US state suffix is detected separately).
+  foreign_markers: [united states, usa, canada, mexico, brazil, argentina, colombia, chile,
+                    united kingdom, ireland, france, spain, portugal, italy, germany, austria,
+                    switzerland, netherlands, belgium, sweden, norway, denmark, finland,
+                    poland, czech, romania, hungary, greece, israel, turkey, egypt, nigeria,
+                    kenya, south africa, mauritius, japan, china, taiwan, hong kong,
+                    south korea, korea, philippines, vietnam, thailand, malaysia, indonesia,
+                    new zealand]
+
+skills:
+  must_have_any: ["c#", ".net"]
+  core:
+    - "c#"
+    - ".net"
+    - asp.net core
+    - mongodb
+    - kafka
+    - microservices
+    - rest apis
+    - docker
+    - kubernetes
+    - aws
+    - distributed systems
+    - event-driven
+  nice_to_have:
+    - python
+    - typescript
+    - angular
+    - terraform
+    - argocd
+    - github actions
+    - mysql
+    - quartz
+    - linux
+    - multi-tenancy
+    - ci/cd
+    - c++
+  deal_breakers:
+    - security clearance
+    - clearance required
+    - us citizens only
+    - must be a us citizen
+    - commission only
+    - unpaid
+
+comp:
+  floor_inr_lpa: null
+  expected_fixed_lpa: {min: 0, max: 0}   # fixed annual pay you expect, in lakhs
+  basis: fixed_annual
+  variable_and_equity: additional
+  currency_hint_keywords: [lpa, inr, "₹", usd, "$", eur, "€", gbp, "£"]
+
+scoring:
+  shortlist_min_score: 70
+  batch_size: 25
+  description_max_chars: 6000

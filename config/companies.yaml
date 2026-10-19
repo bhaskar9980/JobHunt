@@ -1,0 +1,1022 @@
+# Company watchlist. Each entry is fetched directly from its ATS public API on every scan.
+# ats: greenhouse | lever | ashby | smartrecruiters | workday | eightfold
+# token: Greenhouse board token / Lever site / Ashby job-board name /
+#        SmartRecruiters companyIdentifier / Eightfold ?domain= value
+# host:  Eightfold career-site host, e.g. apply.careers.microsoft.com
+# location: Eightfold location filter, e.g. India
+# aliases: other names the company appears under (LinkedIn export, alert emails), lower-case
+# domains: sender domains for inbox matching
+# Boards below were verified live on 2026-09-08. Add your own; unknown tokens fail softly and are logged.
+dotnet_search_terms: &dotnet_search_terms ["C#", ".NET", "ASP.NET"]
+last_expansion_verified: "2026-09-10"
+
+companies:
+  # Eightfold (PCSX) API: /api/pcsx/search?domain=&query=&location=&start=
+  # Microsoft moved off jobs.careers.microsoft.com; that host is a JS shell with no data.
+  - name: Microsoft
+    ats: eightfold
+    token: microsoft.com
+    host: apply.careers.microsoft.com
+    location: null
+    search_terms: *dotnet_search_terms
+    aliases: [msft, microsoft india, microsoft corporation]
+    domains: [microsoft.com]
+  - name: Postman
+    ats: greenhouse
+    token: postman
+    domains: [postman.com]
+  - name: Stripe
+    ats: greenhouse
+    token: stripe
+    domains: [stripe.com]
+  - name: Airbnb
+    ats: greenhouse
+    token: airbnb
+    domains: [airbnb.com]
+  - name: Coinbase
+    ats: greenhouse
+    token: coinbase
+    domains: [coinbase.com]
+  - name: Databricks
+    ats: greenhouse
+    token: databricks
+    domains: [databricks.com]
+  - name: Figma
+    ats: greenhouse
+    token: figma
+    domains: [figma.com]
+  - name: Dropbox
+    ats: greenhouse
+    token: dropbox
+    domains: [dropbox.com]
+  - name: Twilio
+    ats: greenhouse
+    token: twilio
+    domains: [twilio.com]
+  - name: Cloudflare
+    ats: greenhouse
+    token: cloudflare
+    domains: [cloudflare.com]
+  - name: CRED
+    ats: lever
+    token: cred
+    domains: [cred.club]
+  - name: Spotify
+    ats: lever
+    token: spotify
+    domains: [spotify.com]
+  - name: Palantir
+    ats: lever
+    token: palantir
+    domains: [palantir.com]
+  - name: Linear
+    ats: ashby
+    token: linear
+    domains: [linear.app]
+  - name: Ramp
+    ats: ashby
+    token: ramp
+    domains: [ramp.com]
+  - name: Supabase
+    ats: ashby
+    token: supabase
+    domains: [supabase.com, supabase.io]
+  - name: Replit
+    ats: ashby
+    token: replit
+    domains: [replit.com]
+  - name: Cursor
+    ats: ashby
+    token: cursor
+    aliases: [anysphere]
+    domains: [cursor.com, anysphere.inc]
+  - name: OpenAI
+    ats: ashby
+    token: openai
+    domains: [openai.com]
+  - name: Freshworks
+    ats: smartrecruiters
+    token: freshworks
+    domains: [freshworks.com]
+  - name: Salesforce
+    ats: workday
+    tenant: salesforce
+    wd: wd12
+    site: External_Career_Site
+    search_terms: *dotnet_search_terms
+    domains: [salesforce.com]
+
+  # --- C# / .NET employers with India hiring (boards verified 9 Sep 2026) ---
+  - name: Commvault
+    ats: greenhouse
+    token: commvault
+    domains: [commvault.com]
+  - name: ConnectWise
+    ats: greenhouse
+    token: connectwise
+    domains: [connectwise.com]
+  - name: Druva
+    ats: greenhouse
+    token: druva
+    domains: [druva.com]
+  - name: Endava
+    ats: smartrecruiters
+    token: endava
+    domains: [endava.com]
+  - name: Five9
+    ats: greenhouse
+    token: five9
+    domains: [five9.com]
+  - name: HighRadius
+    ats: greenhouse
+    token: highradius
+    domains: [highradius.com]
+  - name: Kaseya
+    ats: greenhouse
+    token: kaseya
+    domains: [kaseya.com]
+  - name: NICE
+    ats: greenhouse
+    token: nice
+    domains: [nice.com]
+  - name: Pure Storage
+    ats: greenhouse
+    token: purestorage
+    domains: [purestorage.com]
+  - name: ServiceNow
+    ats: smartrecruiters
+    token: servicenow
+    domains: [servicenow.com]
+  - name: SolarWinds
+    ats: greenhouse
+    token: solarwinds
+    domains: [solarwinds.com]
+  - name: Sophos
+    ats: lever
+    token: sophos
+    domains: [sophos.com]
+  - name: Tekion
+    ats: ashby
+    token: tekion
+    domains: [tekion.com]
+  - name: Zeta
+    ats: lever
+    token: zeta
+    domains: [zeta.tech]
+
+  # --- Fleet telematics, ELD and logistics software, the FleetHours domain ---
+  - name: Alvys
+    ats: greenhouse
+    token: alvys
+    domains: [alvys.com]
+  - name: Coupa
+    ats: lever
+    token: coupa
+    domains: [coupa.com]
+  - name: Flexport
+    ats: greenhouse
+    token: flexport
+    domains: [flexport.com]
+  - name: FourKites
+    ats: greenhouse
+    token: fourkites
+    domains: [fourkites.com]
+  - name: Geotab
+    ats: greenhouse
+    token: geotab
+    domains: [geotab.com]
+  - name: Isaac Instruments
+    ats: smartrecruiters
+    token: isaacinstruments
+    domains: [isaacinstruments.com]
+  - name: Netradyne
+    ats: greenhouse
+    token: netradyne
+    domains: [netradyne.com]
+  - name: project44
+    ats: greenhouse
+    token: project44
+    domains: [project44.com]
+  - name: Roadie
+    ats: greenhouse
+    token: roadie
+    domains: [roadie.com]
+  - name: Samsara
+    ats: greenhouse
+    token: samsara
+    domains: [samsara.com]
+  - name: Shippeo
+    ats: smartrecruiters
+    token: shippeo
+    domains: [shippeo.com]
+  - name: Turvo
+    ats: lever
+    token: turvo
+    domains: [turvo.com]
+  - name: Uber Freight
+    ats: greenhouse
+    token: uberfreight
+    domains: [uberfreight.com]
+  # --- Workday boards, C#/.NET employers (tenant/site verified 9 Sep 2026) ---
+  # Workday ranks by relevance and its search is loose, so the phrase below is what keeps a
+  # fetch small and India-first. Measured 9 Sep 2026: Mastercard 1067 hits for "C# .NET"
+  # against 138 for this phrase, with Pune SE I and SE II roles at the top.
+  - name: Athenahealth
+    ats: workday
+    tenant: athenahealth
+    wd: wd1
+    site: External
+    search_terms: *dotnet_search_terms
+    domains: [athenahealth.com]
+  - name: Autodesk
+    ats: workday
+    tenant: autodesk
+    wd: wd1
+    site: Ext
+    search_terms: *dotnet_search_terms
+    domains: [autodesk.com]
+  - name: Barclays
+    ats: workday
+    tenant: barclays
+    wd: wd3
+    site: External_Career_Site_Barclays
+    search_terms: *dotnet_search_terms
+    domains: [barclays.com]
+  - name: Broadcom
+    ats: workday
+    tenant: broadcom
+    wd: wd1
+    site: External_Career
+    search_terms: *dotnet_search_terms
+    domains: [broadcom.com]
+  - name: Broadridge
+    ats: workday
+    tenant: broadridge
+    wd: wd5
+    site: Careers
+    search_terms: *dotnet_search_terms
+    domains: [broadridge.com]
+  - name: Clarivate
+    ats: workday
+    tenant: clarivate
+    wd: wd3
+    site: Clarivate_Careers
+    search_terms: *dotnet_search_terms
+    domains: [clarivate.com]
+  - name: Deutsche Bank
+    ats: workday
+    tenant: db
+    wd: wd3
+    site: DBWebsite
+    search_terms: *dotnet_search_terms
+    domains: [db.com]
+  - name: Epicor
+    ats: workday
+    tenant: epicorsoftware
+    wd: wd5
+    site: epicorjobs
+    search_terms: *dotnet_search_terms
+    domains: [epicor.com]
+  - name: FIS
+    ats: workday
+    tenant: fis
+    wd: wd5
+    site: SearchJobs
+    search_terms: *dotnet_search_terms
+    domains: [fisglobal.com]
+  - name: Fiserv
+    ats: workday
+    tenant: fiserv
+    wd: wd5
+    site: EXT
+    search_terms: *dotnet_search_terms
+    domains: [fiserv.com]
+  - name: KLA
+    ats: workday
+    tenant: kla
+    wd: wd1
+    site: Search
+    search_terms: *dotnet_search_terms
+    domains: [kla.com]
+  - name: LSEG
+    ats: workday
+    tenant: lseg
+    wd: wd3
+    site: Careers
+    search_terms: *dotnet_search_terms
+    domains: [lseg.com]
+  - name: Mastercard
+    ats: workday
+    tenant: mastercard
+    wd: wd1
+    site: CorporateCareers
+    search_terms: *dotnet_search_terms
+    domains: [mastercard.com]
+  - name: Micron
+    ats: workday
+    tenant: micron
+    wd: wd1
+    site: External
+    search_terms: *dotnet_search_terms
+    domains: [micron.com]
+  - name: Morgan Stanley
+    ats: workday
+    tenant: ms
+    wd: wd5
+    site: External
+    search_terms: *dotnet_search_terms
+    domains: [morganstanley.com]
+  - name: Nasdaq
+    ats: workday
+    tenant: nasdaq
+    wd: wd1
+    site: Global_External_Site
+    search_terms: *dotnet_search_terms
+    domains: [nasdaq.com]
+  - name: Northern Trust
+    ats: workday
+    tenant: ntrs
+    wd: wd1
+    site: northerntrust
+    search_terms: *dotnet_search_terms
+    domains: [northerntrust.com]
+  - name: PTC
+    ats: workday
+    tenant: ptc
+    wd: wd1
+    site: PTC
+    search_terms: *dotnet_search_terms
+    domains: [ptc.com]
+  - name: RELX
+    ats: workday
+    tenant: relx
+    wd: wd3
+    site: relx
+    search_terms: *dotnet_search_terms
+    domains: [relx.com]
+  - name: Rockwell Automation
+    ats: workday
+    tenant: rockwellautomation
+    wd: wd1
+    site: External_Rockwell_Automation
+    search_terms: *dotnet_search_terms
+    domains: [rockwellautomation.com]
+  - name: SS&C Technologies
+    ats: workday
+    tenant: ssctech
+    wd: wd1
+    site: SSCTechnologies
+    search_terms: *dotnet_search_terms
+    domains: [ssctech.com]
+  - name: State Street
+    ats: workday
+    tenant: statestreet
+    wd: wd1
+    site: Global
+    search_terms: *dotnet_search_terms
+    domains: [statestreet.com]
+  - name: Thomson Reuters
+    ats: workday
+    tenant: thomsonreuters
+    wd: wd5
+    site: External_Career_Site
+    search_terms: *dotnet_search_terms
+    domains: [thomsonreuters.com]
+  - name: Visa
+    ats: workday
+    tenant: visa
+    wd: wd5
+    site: Visa
+    search_terms: *dotnet_search_terms
+    domains: [visa.com]
+  - name: Waystar
+    ats: workday
+    tenant: waystar
+    wd: wd1
+    site: Waystar
+    search_terms: *dotnet_search_terms
+    domains: [waystar.com]
+  - name: Wells Fargo
+    ats: workday
+    tenant: wf
+    wd: wd1
+    site: WellsFargoJobs
+    search_terms: *dotnet_search_terms
+    domains: [wellsfargo.com]
+  - name: Wolters Kluwer
+    ats: workday
+    tenant: wk
+    wd: wd3
+    site: External
+    search_terms: *dotnet_search_terms
+    domains: [wolterskluwer.com]
+
+  # --- Workday boards, fleet, transport and logistics ---
+  - name: Blue Yonder
+    ats: workday
+    tenant: jda
+    wd: wd5
+    site: JDA_Careers
+    search_terms: *dotnet_search_terms
+    domains: [blueyonder.com]
+  - name: Bridgestone
+    ats: workday
+    tenant: bridgestone
+    wd: wd5
+    site: External
+    search_terms: *dotnet_search_terms
+    domains: [bridgestone.com]
+  - name: CH Robinson
+    ats: workday
+    tenant: chrobinson
+    wd: wd5
+    site: chrobinson
+    search_terms: *dotnet_search_terms
+    domains: [chrobinson.com]
+  - name: EROAD
+    ats: workday
+    tenant: eroadgroup
+    wd: wd3
+    site: EROAD
+    search_terms: *dotnet_search_terms
+    domains: [eroad.com]
+  - name: JB Hunt
+    ats: workday
+    tenant: jbhunt
+    wd: wd501
+    site: Careers
+    search_terms: *dotnet_search_terms
+    domains: [jbhunt.com]
+  - name: Lytx
+    ats: workday
+    tenant: lytx
+    wd: wd1
+    site: Lytx
+    search_terms: *dotnet_search_terms
+    domains: [lytx.com]
+  - name: Maersk
+    ats: workday
+    tenant: maersk
+    wd: wd3
+    site: Maersk_Careers
+    search_terms: *dotnet_search_terms
+    domains: [maersk.com]
+  - name: Manhattan Associates
+    ats: workday
+    tenant: manh
+    wd: wd5
+    site: External
+    search_terms: *dotnet_search_terms
+    domains: [manh.com]
+  - name: Michelin
+    ats: workday
+    tenant: michelinhr
+    wd: wd3
+    site: Michelin
+    search_terms: *dotnet_search_terms
+    domains: [michelin.com]
+  - name: Ryder
+    ats: workday
+    tenant: ryder
+    wd: wd5
+    site: RyderCareers
+    search_terms: *dotnet_search_terms
+    domains: [ryder.com]
+  - name: Solera
+    ats: workday
+    tenant: solera
+    wd: wd5
+    site: Global_Career_Site
+    search_terms: *dotnet_search_terms
+    domains: [solera.com]
+  - name: Trimble
+    ats: workday
+    tenant: trimble
+    wd: wd1
+    site: TrimbleCareers
+    search_terms: *dotnet_search_terms
+    domains: [trimble.com]
+  # --- Fleet and logistics boards found in a follow-up sweep, 9 Sep 2026 ---
+  # Motive and Fleetio have small boards and no India roles today; kept because they are
+  # squarely in the FleetHours domain and boards change week to week.
+  - name: Motive
+    ats: greenhouse
+    token: motive
+    aliases: [keeptruckin, gomotive]
+    domains: [gomotive.com, keeptruckin.com]
+  - name: Fleetio
+    ats: greenhouse
+    token: fleetio
+    domains: [fleetio.com]
+  - name: Shipsy
+    ats: smartrecruiters
+    token: shipsy
+    domains: [shipsy.io]
+  - name: LogiNext
+    ats: smartrecruiters
+    token: loginext
+    domains: [loginextsolutions.com]
+
+# Used by the referral matcher to map LinkedIn "Company" values onto one canonical employer.
+
+  # ---------------------------------------------------------------- added 2026-09-09
+  # S&P 100, product software and the Chennai / Hyderabad / Bangalore GCCs. Every board below
+  # answered live with real postings on 2026-09-09. Eightfold and Workday entries carry a
+  # search_text because those tenants list thousands of roles across all functions.
+
+  # Eightfold (PCSX). India role counts at discovery are in the comments.
+  - name: Nvidia
+    ats: eightfold
+    token: nvidia.com
+    host: jobs.nvidia.com
+    location: null
+    search_terms: *dotnet_search_terms          # 241 India roles
+    aliases: [nvidia corporation]
+    domains: [nvidia.com]
+  - name: Qualcomm
+    ats: eightfold
+    token: qualcomm.com
+    host: careers.qualcomm.com
+    location: null
+    search_terms: *dotnet_search_terms          # 555 India roles
+    aliases: [qualcomm india, qualcomm technologies]
+    domains: [qualcomm.com]
+  - name: Ericsson
+    ats: eightfold
+    token: ericsson.com
+    host: jobs.ericsson.com
+    location: null
+    search_terms: *dotnet_search_terms          # 136 India roles
+    aliases: [ericsson india]
+    domains: [ericsson.com]
+  - name: Amdocs
+    ats: eightfold
+    token: amdocs.com
+    host: jobs.amdocs.com
+    location: null
+    search_terms: *dotnet_search_terms
+    domains: [amdocs.com]
+  - name: Eaton
+    ats: eightfold
+    token: eaton.com
+    host: eaton.eightfold.ai
+    location: null
+    search_terms: *dotnet_search_terms          # 58 India roles
+    aliases: [eaton corporation, eaton india]
+    domains: [eaton.com]
+  - name: Bristol Myers Squibb
+    ats: eightfold
+    token: bms.com
+    host: jobs.bms.com
+    location: null
+    search_terms: *dotnet_search_terms
+    aliases: [bms, bristol-myers squibb]
+    domains: [bms.com]
+
+  # Workday
+  - name: Accenture
+    ats: workday
+    tenant: accenture
+    wd: wd103
+    site: AccentureCareers
+    # That tenant's search ignores the query (any text returns ~2000 reqs) and sends no
+    # locationsText, so only this exact phrase narrows it to genuinely .NET-titled roles.
+    search_text: "Dot Net Developer"
+    aliases: [accenture india, accenture solutions]
+    domains: [accenture.com]
+  - name: Citi
+    ats: workday
+    tenant: citi
+    wd: wd5
+    site: "2"
+    search_terms: *dotnet_search_terms
+    aliases: [citigroup, citibank, citicorp]
+    domains: [citi.com]
+  - name: Cigna
+    ats: workday
+    tenant: cigna
+    wd: wd5
+    site: cignacareers
+    search_terms: *dotnet_search_terms
+    aliases: [evernorth, cigna healthcare]
+    domains: [cigna.com]
+  - name: Elevance Health
+    ats: workday
+    tenant: elevancehealth
+    wd: wd1
+    site: ANT
+    search_terms: *dotnet_search_terms
+    aliases: [carelon, anthem, elevance]
+    domains: [elevancehealth.com]
+  - name: AIG
+    ats: workday
+    tenant: aig
+    wd: wd1
+    site: aig
+    search_terms: *dotnet_search_terms
+    aliases: [american international group]
+    domains: [aig.com]
+  - name: Allstate
+    ats: workday
+    tenant: allstate
+    wd: wd5
+    site: allstate_careers
+    search_terms: *dotnet_search_terms
+    aliases: [allstate india, allstate solutions]
+    domains: [allstate.com]
+  - name: S&P Global
+    ats: workday
+    tenant: spgi
+    wd: wd5
+    site: SPGI_Careers
+    search_terms: *dotnet_search_terms
+    aliases: [sp global, standard and poors, s&p]
+    domains: [spglobal.com]
+  - name: Johnson Controls
+    ats: workday
+    tenant: jci
+    wd: wd5
+    site: JCI
+    search_terms: *dotnet_search_terms
+    aliases: [jci, johnson controls india]
+    domains: [johnsoncontrols.com]
+  - name: AVEVA
+    ats: workday
+    tenant: aveva
+    wd: wd3
+    site: AVEVA_careers
+    search_terms: *dotnet_search_terms
+    aliases: [aveva group, osisoft]
+    domains: [aveva.com]
+  - name: Sprinklr
+    ats: workday
+    tenant: sprinklr
+    wd: wd1
+    site: careers
+    search_terms: *dotnet_search_terms
+    domains: [sprinklr.com]
+  - name: Temenos
+    ats: workday
+    tenant: temenos
+    wd: wd103
+    site: Temenoscareers
+    search_terms: *dotnet_search_terms
+    domains: [temenos.com]
+  - name: Finastra
+    ats: workday
+    tenant: finastra
+    wd: wd3
+    site: FINC
+    search_terms: *dotnet_search_terms
+    aliases: [misys, dh corporation]
+    domains: [finastra.com]
+  - name: Kyndryl
+    ats: workday
+    tenant: kyndryl
+    wd: wd5
+    site: KyndrylProfessionalCareers
+    search_terms: *dotnet_search_terms
+    aliases: [kyndryl india]
+    domains: [kyndryl.com]
+  - name: Genpact
+    ats: workday
+    tenant: genpact
+    wd: wd108
+    site: External_Careers
+    search_terms: *dotnet_search_terms
+    domains: [genpact.com]
+  - name: Medtronic
+    ats: workday
+    tenant: medtronic
+    wd: wd1
+    site: MedtronicCareers
+    search_terms: *dotnet_search_terms
+    aliases: [medtronic engineering]
+    domains: [medtronic.com]
+  - name: Abbott
+    ats: workday
+    tenant: abbott
+    wd: wd5
+    site: abbottcareers
+    search_terms: *dotnet_search_terms
+    aliases: [abbott laboratories]
+    domains: [abbott.com]
+  - name: Amgen
+    ats: workday
+    tenant: amgen
+    wd: wd1
+    site: Careers
+    search_terms: *dotnet_search_terms
+    domains: [amgen.com]
+  - name: Boeing
+    ats: workday
+    tenant: boeing
+    wd: wd1
+    site: EXTERNAL_CAREERS
+    search_terms: *dotnet_search_terms
+    aliases: [boeing india, bieat]
+    domains: [boeing.com]
+  - name: GE Vernova
+    ats: workday
+    tenant: gevernova
+    wd: wd5
+    site: Vernova_ExternalSite
+    search_terms: *dotnet_search_terms
+    aliases: [ge vernova, general electric vernova]
+    domains: [gevernova.com]
+  - name: Target
+    ats: workday
+    tenant: target
+    wd: wd5
+    site: targetcareers
+    search_terms: *dotnet_search_terms
+    aliases: [target corporation, target in india, tii]
+    domains: [target.com]
+  - name: Nike
+    ats: workday
+    tenant: nike
+    wd: wd1
+    site: nke
+    search_terms: *dotnet_search_terms
+    domains: [nike.com]
+  - name: Comcast
+    ats: workday
+    tenant: comcast
+    wd: wd115
+    site: Comcast_Careers
+    search_terms: *dotnet_search_terms
+    aliases: [sky, nbcuniversal]
+    domains: [comcast.com]
+  - name: AT&T
+    ats: workday
+    tenant: att
+    wd: wd1
+    site: ATTGeneral
+    search_terms: *dotnet_search_terms
+    aliases: [att, at and t]
+    domains: [att.com]
+
+  # Greenhouse, Lever, SmartRecruiters
+  - name: TCS
+    ats: greenhouse
+    token: tcs
+    aliases: [tata consultancy services, tcs digital]
+    domains: [tcs.com]
+  - name: ThoughtWorks
+    ats: greenhouse
+    token: thoughtworks
+    aliases: [thoughtworks india]
+    domains: [thoughtworks.com]
+  - name: Rubrik
+    ats: greenhouse
+    token: rubrik
+    domains: [rubrik.com]
+  - name: Zeta Global
+    ats: greenhouse
+    token: zetaglobal
+    aliases: [zeta global holdings]
+    domains: [zetaglobal.com]
+  - name: Disney
+    ats: greenhouse
+    token: disney
+    aliases: [walt disney, disney star, hotstar]
+    domains: [disney.com]
+  - name: MetLife
+    ats: lever
+    token: metlife
+    aliases: [metlife india, misgic]
+    domains: [metlife.com]
+  - name: Bosch
+    ats: smartrecruiters
+    token: BoschGroup
+    aliases: [robert bosch, bosch global software technologies, bgsw, rbei]
+    domains: [bosch.com, bosch.in]
+
+  # SuccessFactors job feeds (RSS, description inline so nothing needs hydration). The feed is a
+  # whole-tenant dump with no server-side query, so search_text filters it here; the comments
+  # give the feed size and how many items mentioned C#/.NET when verified on 2026-09-09.
+  - name: HCLTech
+    ats: successfactors
+    host: careers.hcltech.com
+    feed: /jobfeed.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 11317 items, 269 mention .NET
+    aliases: [hcl technologies, hcl, hcl tech]
+    domains: [hcltech.com, hcl.com]
+  - name: Capgemini
+    ats: successfactors
+    host: careers.capgemini.com
+    feed: /jobfeed.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 6427 items, 249 mention .NET
+    aliases: [capgemini india, capgemini engineering, altran]
+    domains: [capgemini.com]
+  - name: EY
+    ats: successfactors
+    host: careers.ey.com
+    feed: /jobfeed.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 8174 items, 200 mention .NET
+    aliases: [ernst and young, ernst & young, ey gds]
+    domains: [ey.com]
+  - name: Wipro
+    ats: successfactors
+    host: careers.wipro.com
+    feed: /jobfeed.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 4752 items, 93 mention .NET
+    aliases: [wipro limited, wipro technologies]
+    domains: [wipro.com]
+  - name: Birlasoft
+    ats: successfactors
+    host: jobs.birlasoft.com
+    feed: /jobfeed.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 615 items, 29 mention .NET
+    aliases: [kpit technologies, birlasoft india]
+    domains: [birlasoft.com]
+  - name: Bentley Systems
+    ats: successfactors
+    host: jobs.bentley.com
+    feed: /sitemap.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 98 items, 21 mention .NET
+    aliases: [bentley, bentley systems india]
+    domains: [bentley.com]
+  - name: ExxonMobil
+    ats: successfactors
+    host: jobs.exxonmobil.com
+    feed: /sitemap.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 637 items, 27 mention .NET
+    aliases: [exxon, exxon mobil]
+    domains: [exxonmobil.com]
+  - name: SAP
+    ats: successfactors
+    host: jobs.sap.com
+    feed: /sitemap.xml
+    search_text: "c#, .net, dotnet, asp.net"      # 1004 items, 12 mention .NET
+    aliases: [sap labs, sap se, sap india]
+    domains: [sap.com]
+
+  - name: OpenTable
+    ats: greenhouse
+    token: opentable
+    verified_api: https://boards-api.greenhouse.io/v1/boards/opentable/jobs
+  - name: Mitratech
+    ats: greenhouse
+    token: mitratech
+    verified_api: https://boards-api.greenhouse.io/v1/boards/mitratech/jobs
+  - name: Hone Health
+    ats: greenhouse
+    token: honehealth
+    verified_api: https://boards-api.greenhouse.io/v1/boards/honehealth/jobs
+  - name: Appnovation
+    ats: greenhouse
+    token: appnovation
+    verified_api: https://boards-api.greenhouse.io/v1/boards/appnovation/jobs
+  - name: Rockstar Games
+    ats: greenhouse
+    token: rockstargames
+    verified_api: https://boards-api.greenhouse.io/v1/boards/rockstargames/jobs
+  - name: Black Duck
+    ats: greenhouse
+    token: blackduck
+    verified_api: https://boards-api.greenhouse.io/v1/boards/blackduck/jobs
+  - name: Bloomerang
+    ats: greenhouse
+    token: bloomerang
+    verified_api: https://boards-api.greenhouse.io/v1/boards/bloomerang/jobs
+  - name: Veeam Software
+    ats: greenhouse
+    token: veeamsoftware
+    verified_api: https://boards-api.greenhouse.io/v1/boards/veeamsoftware/jobs
+  - name: JetBrains
+    ats: greenhouse
+    token: jetbrains
+    verified_api: https://boards-api.greenhouse.io/v1/boards/jetbrains/jobs
+  - name: Access Softek
+    ats: lever
+    token: accesssoftek
+    verified_api: https://api.lever.co/v0/postings/accesssoftek
+  - name: Enable
+    ats: lever
+    token: enable
+    verified_api: https://api.lever.co/v0/postings/enable
+  - name: 3Pillar Global
+    ats: lever
+    token: 3pillarglobal
+    verified_api: https://api.lever.co/v0/postings/3pillarglobal
+  - name: Versapay
+    ats: lever
+    token: versapay
+    verified_api: https://api.lever.co/v0/postings/versapay
+  - name: CI&T
+    ats: lever
+    token: ciandt
+    verified_api: https://api.lever.co/v0/postings/ciandt
+  - name: Moonpig
+    ats: lever
+    token: moonpig
+    verified_api: https://api.lever.co/v0/postings/moonpig
+  - name: Semperis
+    ats: ashby
+    token: semperis
+    verified_api: https://api.ashbyhq.com/posting-api/job-board/semperis
+  - name: Delinea
+    ats: ashby
+    token: delinea
+    verified_api: https://api.ashbyhq.com/posting-api/job-board/delinea
+  - name: SOVRA
+    ats: ashby
+    token: sovra
+    verified_api: https://api.ashbyhq.com/posting-api/job-board/sovra
+  - name: HyperHug
+    ats: ashby
+    token: hyperhug
+    verified_api: https://api.ashbyhq.com/posting-api/job-board/hyperhug
+  - name: Tilt
+    ats: ashby
+    token: tilthq
+    verified_api: https://api.ashbyhq.com/posting-api/job-board/tilthq
+  - name: Redgate Software
+    ats: ashby
+    token: red-gate
+    verified_api: https://api.ashbyhq.com/posting-api/job-board/red-gate
+  - name: UiPath
+    ats: ashby
+    token: uipath
+    verified_api: https://api.ashbyhq.com/posting-api/job-board/uipath
+  - name: IQVIA
+    ats: workday
+    tenant: iqvia
+    wd: wd1
+    site: IQVIA
+    search_terms: *dotnet_search_terms
+    verified_api: https://iqvia.wd1.myworkdayjobs.com/wday/cxs/iqvia/IQVIA/jobs
+  - name: Royal Bank of Canada
+    ats: workday
+    tenant: rbc
+    wd: wd3
+    site: RBCGLOBAL1
+    search_terms: *dotnet_search_terms
+    aliases: [rbc]
+    verified_api: https://rbc.wd3.myworkdayjobs.com/wday/cxs/rbc/RBCGLOBAL1/jobs
+  - name: KION Group
+    ats: workday
+    tenant: kiongroup
+    wd: wd3
+    site: KIONGroup
+    search_terms: *dotnet_search_terms
+    aliases: [dematic]
+    verified_api: https://kiongroup.wd3.myworkdayjobs.com/wday/cxs/kiongroup/KIONGroup/jobs
+  - name: Commonwealth Bank
+    ats: workday
+    tenant: cba
+    wd: wd3
+    site: commbank_careers
+    search_terms: *dotnet_search_terms
+    aliases: [commbank, cba]
+    verified_api: https://cba.wd3.myworkdayjobs.com/wday/cxs/cba/commbank_careers/jobs
+  - name: Philips
+    ats: workday
+    tenant: philips
+    wd: wd3
+    site: jobs-and-careers
+    search_terms: *dotnet_search_terms
+    verified_api: https://philips.wd3.myworkdayjobs.com/wday/cxs/philips/jobs-and-careers/jobs
+  - name: ResMed
+    ats: workday
+    tenant: resmed
+    wd: wd3
+    site: ResMed_External_Careers
+    search_terms: *dotnet_search_terms
+    verified_api: https://resmed.wd3.myworkdayjobs.com/wday/cxs/resmed/ResMed_External_Careers/jobs
+  - name: Infios
+    ats: workday
+    tenant: infios
+    wd: wd502
+    site: infios
+    search_terms: *dotnet_search_terms
+    verified_api: https://infios.wd502.myworkdayjobs.com/wday/cxs/infios/infios/jobs
+  - name: Acumatica
+    ats: smartrecruiters
+    token: Acumatica
+    verified_api: https://api.smartrecruiters.com/v1/companies/Acumatica/postings
+  - name: McDonald's Corporation
+    ats: smartrecruiters
+    token: McDonaldsCorporation
+    verified_api: https://api.smartrecruiters.com/v1/companies/McDonaldsCorporation/postings
+  - name: Entain
+    ats: smartrecruiters
+    token: Entain
+    verified_api: https://api.smartrecruiters.com/v1/companies/entain/postings
+  - name: Apexon
+    ats: smartrecruiters
+    token: Apexon1
+    verified_api: https://api.smartrecruiters.com/v1/companies/Apexon1/postings
+  - name: Eurofins
+    ats: smartrecruiters
+    token: Eurofins
+    verified_api: https://api.smartrecruiters.com/v1/companies/Eurofins/postings
+
+aliases:
+  platform science: [trimble transport, trimble transportation, trimble t&l, trimble transport and logistics]
+  solera: [omnitracs, solera holdings]
+  blue yonder: [jda, jda software]
+  motive: [keeptruckin, gomotive]
+  wolters kluwer: [wk]
+  morgan stanley: [ms]

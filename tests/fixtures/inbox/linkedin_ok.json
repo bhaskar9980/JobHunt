@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "email": {
+    "gmail_id": "18f3c2a1b2c3d4e5",
+    "thread_id": "18f3c2a1b2c3d4e5",
+    "from": "jobalerts-noreply@linkedin.com",
+    "subject": "Software Engineer II: Acme and 1 more",
+    "received_at": "2026-09-08T02:41:00Z",
+    "alert_source": "linkedin"
+  },
+  "jobs": [
+    {
+      "title": "Software Engineer II",
+      "company": "Acme, Inc.",
+      "location": "Bengaluru, Karnataka, India (Hybrid)",
+      "url": "https://www.linkedin.com/jobs/view/software-engineer-ii-at-acme-4012345678/?trackingId=abc&refId=xyz",
+      "posted_text": "2 days ago",
+      "salary_text": null,
+      "snippet": "Build .NET microservices on MongoDB and Kafka for a payroll platform."
+    },
+    {
+      "title": "Backend Engineer (Remote)",
+      "company": "Globex",
+      "location": "India",
+      "url": "https://www.linkedin.com/jobs/view/4098765432/",
+      "posted_text": "1 day ago",
+      "salary_text": "INR 25-35 LPA",
+      "snippet": "Python and Kafka."
+    },
+    {
+      "title": "No URL card",
+      "company": "Nowhere",
+      "location": "Chennai",
+      "url": null,
+      "posted_text": null,
+      "salary_text": null,
+      "snippet": null
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+# URL patterns (regex, case-insensitive) used to detect which ATS an apply URL belongs to.
+# Order matters: first match wins. Falls back to the job's ats_type column.
+patterns:
+  greenhouse:
+    - 'boards\.greenhouse\.io/'
+    - 'job-boards\.greenhouse\.io/'
+    - 'job-boards\.eu\.greenhouse\.io/'
+    - '[?&]gh_jid='
+  lever:
+    - 'jobs\.lever\.co/'
+    - 'jobs\.eu\.lever\.co/'
+  ashby:
+    - 'jobs\.ashbyhq\.com/'
+  workday:
+    - 'myworkdayjobs\.com/'
+    - 'myworkdaysite\.com/'
+  smartrecruiters:
+    - 'jobs\.smartrecruiters\.com/'
+    - 'careers\.smartrecruiters\.com/'
+  eightfold:
+    - 'apply\.careers\.microsoft\.com/'
+    - '/careers/job/\d{10,}'
+  successfactors:
+    - 'successfactors\.(?:com|eu)'
+    - '/job/[^/?#]+/\d{6,}/?$'
+  linkedin:
+    - 'linkedin\.com/jobs/'
+  naukri:
+    - 'naukri\.com/'
+  instahyre:
+    - 'instahyre\.com/'
+  cutshort:
+    - 'cutshort\.io/'
+  wellfound:
+    - 'wellfound\.com/'
+  indeed:
+    - 'indeed\.com/'
+  foundit:
+    - 'foundit\.in/'
+    - 'monsterindia\.com/'
+  hirist:
+    - 'hirist\.(?:tech|com)/'
+  ziprecruiter:
+    - 'ziprecruiter\.com/'
+  wttj:
+    - 'welcometothejungle\.com/'
+    - 'otta\.com/'
+  tal:
+    - 'jobsinthewild\.tal\.af/'
+    - 'linkedin\.com/posts/'
+
+# Which detected ATS values have a deterministic Python filler.
+python_fillers: [greenhouse, lever, ashby]
+review_hosts:
+  greenhouse: [boards.greenhouse.io, job-boards.greenhouse.io, job-boards.eu.greenhouse.io]
+  lever: [jobs.lever.co, jobs.eu.lever.co]
+  ashby: [jobs.ashbyhq.com]
+# Which need the Claude + Playwright MCP assisted path (headed, one at a time).
+# smartrecruiters is assisted because its oneclick apply UI sits behind bot detection that
+# never resolves under automation (checked 10 Sep 2026); eightfold and successfactors are
+# assisted until someone captures their forms from a signed-in session.
+# workday has a filler and a `pages:` config, but its Next and Submit controls share one
+# data-automation-id, so page stepping is only safe once advance() refuses submit controls and
+# the multi-page answer handling is verified against a real form. Assisted until then.
+assisted: [workday, eightfold, successfactors, smartrecruiters, naukri, instahyre,
+           cutshort, wellfound,
+           indeed, foundit, hirist, ziprecruiter, wttj]
+# Never automated. Opened in the user's own browser with the answer sheet.
+# tal = Tal's "jobs in the wild": the posting is a LinkedIn post, so you message the poster.
+manual: [linkedin, tal]

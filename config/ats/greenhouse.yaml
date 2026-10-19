@@ -1,0 +1,63 @@
+# Greenhouse job boards: legacy boards.greenhouse.io and the React job-boards.greenhouse.io host.
+# Every selector the Greenhouse filler uses lives here; the Python only knows the keys.
+
+open:
+  # Legacy boards hide the form behind an "Apply for this job" anchor; React boards render inline.
+  reveal: ["a#apply_button", "a[href$='#app']", "button:has-text('Apply for this job')"]
+  # The last entry catches employers who render the Greenhouse-backed form in their own markup
+  # (Kaseya): no #application_form root, but Greenhouse's field names. Requiring both the name
+  # and the resume input keeps it from matching a newsletter or search form on the same page.
+  form_root:
+    - "form#application-form"
+    - "form#application_form"
+    - "#application_form"
+    - "form:has(input[name='first_name']):has(input[name='resume'])"
+  # Some employers host the posting on their own careers site and embed Greenhouse's form in an
+  # iframe, so the form markup is not in that document. Follow the frame's source instead.
+  embed_iframe: ["#grnhse_iframe", "iframe[src*='greenhouse.io/embed']"]
+  timeout_ms: 15000
+
+# Lower-cased body-text fragments that mean the candidate already applied.
+already_applied:
+  - "you have already applied"
+  - "already submitted an application"
+
+extract:
+  heading_selector: "h2, h3, legend"
+  field_selector: "input, textarea, select, [role='combobox']"
+  # Container that wraps one question; its label is used when the input's own label is weak
+  # (Greenhouse labels the resume file input "Attach").
+  question_container: ".field-wrapper"
+  question_label: ".upload-label, label"
+  yesno_container: ""
+
+# react-select comboboxes render their options only while the menu is open.
+combobox:
+  container: ".select"
+  toggle_selector: "button[aria-label='Toggle flyout']"
+  option_selector: "[role='option'], .select__option"
+  type_delay_ms: 40
+  options_timeout_ms: 1500
+
+# input name/id -> profile key (see jobhunt.apply.fillers.common.profile_value).
+system_fields:
+  first_name: first_name
+  last_name: last_name
+  email: email
+  country: phone_country
+  phone: phone_national
+  resume: resume
+
+# Label regexes (case-insensitive) that also mark a field as system-filled from the profile.
+system_label_patterns:
+  - {profile: linkedin, regex: "linkedin"}
+  - {profile: github, regex: "github"}
+  - {profile: portfolio, regex: "portfolio|personal website|^website"}
+  - {profile: location, regex: "^(current )?location$|^city$"}
+
+submit:
+  selector: "form#application-form button[type='submit'], #submit_app, input#submit_app"
+
+confirm:
+  url_patterns: ["/confirmation"]
+  text_patterns: ["thank you for applying", "application has been submitted"]

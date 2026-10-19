@@ -1,0 +1,229 @@
+# Inbox sync rules. The /jobs-sync skill renders `queries`, writes one JSON per Gmail thread to
+# data/mail_inbox/, and `uv run jobhunt mail ingest` classifies, matches and moves statuses.
+# Everything here is deterministic; Claude only fetches the emails.
+
+thresholds:
+  auto: 0.80      # confidence at or above this (with an unambiguous job match) applies itself
+  review: 0.50    # between review and auto goes to needs_review.json; below is unclassified
+body_max_chars: 4000
+default_lookback_days: 7
+max_lookback_days: 30
+
+# Gmail search strings. `{newer_than}` is replaced with the lookback in days.
+queries:
+  confirmation: >-
+    newer_than:{newer_than}d
+    (subject:("thank you for applying" OR "thanks for applying" OR "application received"
+    OR "we received your application" OR "your application to" OR "application confirmation")
+    OR from:(greenhouse.io OR hire.lever.co OR ashbyhq.com OR myworkday.com
+    OR myworkdayjobs.com OR smartrecruiters.com OR icims.com OR workable.com))
+  rejection: >-
+    newer_than:{newer_than}d
+    ("unfortunately" OR "not moving forward" OR "other candidates" OR "regret to inform"
+    OR "not selected" OR "decided not to proceed" OR "update on your application")
+  interview: >-
+    newer_than:{newer_than}d
+    ("interview" OR "phone screen" OR "schedule a call" OR "your availability"
+    OR calendly.com OR goodtime.io)
+  assessment: >-
+    newer_than:{newer_than}d
+    ("online assessment" OR "coding challenge" OR "take-home" OR hackerrank OR codility
+    OR codesignal OR hackerearth)
+  offer: >-
+    newer_than:{newer_than}d
+    ("offer letter" OR "pleased to offer" OR "offer of employment" OR "extend an offer")
+  recruiter_outreach: >-
+    newer_than:{newer_than}d
+    ("came across your profile" OR "would you be open" OR "open to new opportunities"
+    OR "quick chat" OR "reaching out" OR "talent partner")
+
+# Weighted phrases per class. Confidence = clamp(sum of matched weights + subject bonus
+# + ATS-domain boost - negative penalty, 0, 1). Phrases are matched case-insensitively
+# against subject + body.
+subject_bonus: 0.15
+ats_boost: 0.20
+tie_margin: 0.10
+precedence: [offer, rejection, interview, assessment, confirmation, recruiter_outreach]
+
+classes:
+  confirmation:
+    ats_boost: true
+    phrases:
+      "thank you for applying": 0.6
+      "thanks for applying": 0.6
+      "thank you for your application": 0.6
+      "application received": 0.6
+      "we received your application": 0.6
+      "we have received your application": 0.6
+      "we've received your application": 0.6
+      "your application has been received": 0.6
+      "successfully submitted": 0.5
+      "application confirmation": 0.5
+      "thank you for your interest": 0.2
+      "your application to": 0.2
+      "we will review": 0.2
+      "will be in touch": 0.15
+      "if your background": 0.15
+  rejection:
+    ats_boost: true
+    phrases:
+      "decided to move forward with other candidates": 0.7
+      "move forward with other applicants": 0.7
+      "not moving forward": 0.6
+      "not be moving forward": 0.6
+      "will not be proceeding": 0.6
+      "decided not to proceed": 0.6
+      "decided not to move forward": 0.6
+      "regret to inform": 0.6
+      "pursue other candidates": 0.6
+      "unfortunately": 0.5
+      "not selected": 0.5
+      "not a match at this time": 0.5
+      "after careful consideration": 0.4
+      "other candidates": 0.4
+      "keep your resume on file": 0.3
+      "keep your details on file": 0.3
+      "future opportunities": 0.2
+      "wish you the best": 0.2
+      "wish you all the best": 0.2
+  interview:
+    ats_boost: true
+    phrases:
+      "invite you to interview": 0.6
+      "interview": 0.5
+      "phone screen": 0.5
+      "technical interview": 0.5
+      "next round": 0.4
+      "schedule a call": 0.4
+      "schedule a time": 0.4
+      "schedule some time": 0.4
+      "calendly.com": 0.4
+      "goodtime": 0.4
+      "your availability": 0.3
+      "meet the team": 0.3
+      "would like to speak": 0.3
+      "video call": 0.3
+      "google meet": 0.2
+      "zoom": 0.2
+  assessment:
+    ats_boost: true
+    phrases:
+      "online assessment": 0.6
+      "coding challenge": 0.6
+      "coding test": 0.6
+      "hackerrank": 0.6
+      "codility": 0.6
+      "codesignal": 0.6
+      "hackerearth": 0.6
+      "take-home": 0.5
+      "take home": 0.5
+      "assessment": 0.4
+      "complete the test": 0.4
+      "karat": 0.3
+  offer:
+    ats_boost: true
+    phrases:
+      "offer letter": 0.8
+      "pleased to offer": 0.8
+      "excited to offer": 0.8
+      "extend an offer": 0.8
+      "offer of employment": 0.8
+      "your offer": 0.4
+      "compensation details": 0.3
+      "joining date": 0.3
+      "start date": 0.2
+  recruiter_outreach:
+    ats_boost: false
+    phrases:
+      "came across your profile": 0.6
+      "would you be open": 0.5
+      "open to new opportunities": 0.5
+      "open to exploring": 0.5
+      "i'm a recruiter": 0.5
+      "i am a recruiter": 0.5
+      "hiring for": 0.4
+      "reaching out": 0.4
+      "talent partner": 0.4
+      "exciting opportunity": 0.4
+      "i'm hiring": 0.4
+      "quick chat": 0.3
+      "your background": 0.3
+      "your experience with": 0.2
+
+# Sender domains that identify an ATS. They earn the ats_boost for classes flagged above and
+# tell the matcher not to treat the sender domain as the company.
+ats_domains:
+  - greenhouse.io
+  - greenhouse-mail.io
+  - lever.co
+  - hire.lever.co
+  - ashbyhq.com
+  - myworkday.com
+  - myworkdayjobs.com
+  - smartrecruiters.com
+  - icims.com
+  - workable.com
+  - bamboohr.com
+  - jobvite.com
+  - hackerrankforwork.com
+  - hackerrank.com
+  - codility.com
+  - codesignal.com
+
+# Subtracted from every class. Catches alerts, digests and newsletters.
+negative_markers:
+  "newsletter": 0.5
+  "digest": 0.4
+  "jobs for you": 0.6
+  "new jobs": 0.5
+  "job alert": 0.6
+  "recommended jobs": 0.6
+  "jobs you may be interested": 0.6
+  "view all jobs": 0.4
+  "apply now": 0.3
+  "unsubscribe": 0.15
+negative_senders:
+  "jobalerts-noreply@linkedin.com": 0.8
+  "jobs-noreply@linkedin.com": 0.8
+  "jobs-listings@linkedin.com": 0.8
+  "info@naukri.com": 0.8
+  "alerts@instahyre.com": 0.8
+  "noreply@cutshort.io": 0.8
+  "team@wellfound.com": 0.8
+  "no-reply@indeed.com": 0.8
+  # Bare domains match the sender domain and its subdomains: job-alert mail is never a
+  # confirmation, rejection or interview, whatever its subject says.
+  "indeed.com": 0.8
+  "foundit.in": 0.8
+  "monsterindia.com": 0.8
+  "hirist.tech": 0.8
+  "ziprecruiter.com": 0.8
+  "welcometothejungle.com": 0.8
+  "otta.com": 0.8
+  "instahyre.com": 0.8
+  "cutshort.io": 0.8
+  "wellfound.com": 0.8
+  "naukri.com": 0.8
+  "jobfound.org": 0.8
+
+# Subject templates the matcher uses to pull the company (and sometimes the title) out of a
+# subject line. Lower-case; first match wins. {company} and {title} stop at - : | ( [.
+subject_templates:
+  - "thank you for applying to {company}"
+  - "thanks for applying to {company}"
+  - "thank you for your application to {company}"
+  - "thank you for your interest in {company}"
+  - "update on your application to {company}"
+  - "your application to {company}"
+  - "your application at {company}"
+  - "your application with {company}"
+  - "your application for {title} at {company}"
+  - "application for {title} at {company}"
+  - "interview with {company}"
+  - "your offer from {company}"
+  - "offer from {company}"
+  - "update from {company}"
+  - "{title} at {company}"
+  - "{company} interview"
+  - "{company} - {title}"
+  - "{company}: {title}"

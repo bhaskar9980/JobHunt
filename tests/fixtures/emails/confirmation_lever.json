@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_conf_lever",
+  "gmail_id": "m_t_conf_lever",
+  "from": "Spotify <no-reply@hire.lever.co>",
+  "from_name": "Spotify",
+  "from_domain": "hire.lever.co",
+  "to": "candidate@example.com",
+  "date": "2026-09-05T10:00:00Z",
+  "subject": "Thank you for your application to Spotify",
+  "snippet": "Thanks for applying to Spotify! We received your application for Backend Engineer, Platform. Our team will review your application and get back to you.",
+  "body_text": "Thanks for applying to Spotify! We received your application for Backend Engineer, Platform. Our team will review your application and get back to you.",
+  "links": [],
+  "query_tag": "confirmation"
+}

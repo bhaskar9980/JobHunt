@@ -1,0 +1,10 @@
+﻿Notes:
+"When exporting your connection data, you may notice that some of the email addresses are missing. You will only see email addresses for connections who have allowed their connections to see or download their email address using this setting https://www.linkedin.com/psettings/privacy/email. You can learn more here https://www.linkedin.com/help/linkedin/answer/261"
+
+First Name,Last Name,URL,Email Address,Company,Position,Connected On
+Priya,Natarajan,https://www.linkedin.com/in/priya-natarajan-1a2b,,Postman,Senior Software Engineer,08 Mar 2024
+Arjun,Mehta,https://www.linkedin.com/in/arjunmehta,arjun@example.com,Postman,Technical Recruiter,15 Jan 2026
+Kavya,Iyer,https://www.linkedin.com/in/kavya-iyer,,"Stripe, Inc.",Engineering Manager,20 Nov 2021
+Rohit,Sharma,https://www.linkedin.com/in/rohit-sharma-dev,,Trimble Transport,Software Engineer II,02 Jun 2023
+Neha,Verma,https://www.linkedin.com/in/neha-verma,,,Product Designer,11 Aug 2025
+,,https://www.linkedin.com/in/ghost,,Postman,Engineer,01 Jan 2020

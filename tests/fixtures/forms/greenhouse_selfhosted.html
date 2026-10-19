@@ -1,0 +1,77 @@
+<!doctype html>
+<!-- An employer that renders the Greenhouse-backed form on its own careers site: no iframe and
+     no #application_form root, but Greenhouse's own field names. Trimmed from the Kaseya
+     posting at kaseya.com/careers/jobs/id/<req>/?gh_jid=<req>, captured 10 Sep 2026. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Software Engineer I in Pune, India at Example Corp</title></head>
+<body>
+  <header><nav><a href="/careers">Careers</a></nav></header>
+
+  <!-- A decoy form first: the root selector must not settle for a newsletter signup. -->
+  <form class="footer-subscribe" method="post" action="/subscribe">
+    <label for="sub_email">Email</label>
+    <input type="email" id="sub_email" name="email" required>
+    <button type="submit">Subscribe</button>
+  </form>
+
+  <main>
+    <h1>Software Engineer I</h1>
+    <p>Example Corp &middot; Pune, India</p>
+
+    <form class="flex flex-col gap-4" method="post" action="/careers/jobs/id/6146541004/">
+      <div class="flex flex-col gap-1">
+        <label for="input_first_name">First Name</label>
+        <input type="text" id="input_first_name" name="first_name" required>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_last_name">Last Name</label>
+        <input type="text" id="input_last_name" name="last_name" required>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_email">Email</label>
+        <input type="email" id="input_email" name="email" required>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_phone">Phone</label>
+        <input type="tel" id="input_phone" name="phone" required>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_resume">Resume/CV</label>
+        <input type="file" id="input_resume" name="resume" required>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_cover_letter">Cover Letter</label>
+        <input type="file" id="input_cover_letter" name="cover_letter">
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_question_19467876004">Who is your current or most recent employer?</label>
+        <input type="text" id="input_question_19467876004" name="question_19467876004" required>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_question_19467879004">LinkedIn Profile (N/A if not available)</label>
+        <input type="text" id="input_question_19467879004" name="question_19467879004" required>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_question_19467873004">Are you legally eligible to work in the country of the role?</label>
+        <select id="input_question_19467873004" name="question_19467873004" required>
+          <option value="">Select...</option>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="input_question_19467882004">What is your current notice period?</label>
+        <select id="input_question_19467882004" name="question_19467882004" required>
+          <option value="">Select...</option>
+          <option value="a">Immediate</option>
+          <option value="b">30 days</option>
+          <option value="c">60 days</option>
+          <option value="d">90 days</option>
+        </select>
+      </div>
+      <input type="hidden" name="csrf_token" value="not-a-question">
+      <button type="submit">Submit Application</button>
+    </form>
+  </main>
+</body>
+</html>

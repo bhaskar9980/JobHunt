@@ -1,0 +1,34 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Wizard whose Next becomes Submit</title>
+<!--
+  Workday's real shape: ONE control carries both roles. It reads "Next" on every page except
+  the last, where the same data-automation-id reads "Submit" and really sends the application.
+  A page-stepper that only matches the selector would submit here.
+-->
+<body>
+<div id="wizard">
+  <section data-automation-id="contactInformationPage">
+    <label>First Name <input data-automation-id="legalNameSection_firstName" name="first_name" required></label>
+  </section>
+  <section data-automation-id="reviewPage" hidden>
+    <p>Review your application</p>
+  </section>
+  <button data-automation-id="bottom-navigation-next-button" id="nav">Next</button>
+</div>
+<script>
+  const pages = [...document.querySelectorAll('#wizard section')];
+  const nav = document.getElementById('nav');
+  let at = 0;
+  nav.addEventListener('click', () => {
+    if (nav.innerText.trim() === 'Submit') {
+      document.body.setAttribute('data-submitted', 'yes');
+      return;
+    }
+    pages[at].hidden = true;
+    at += 1;
+    pages[at].hidden = false;
+    if (at === pages.length - 1) nav.textContent = 'Submit';
+  });
+</script>
+</body>

@@ -1,0 +1,41 @@
+# Rules for tailored text (cover letters, "why us" answers). Mirrors the resume repo's CLAUDE.md.
+cover_letter:
+  min_words: 120
+  max_words: 250
+  banned_characters: ["—", "–"]      # em dash, en dash: read as AI-generated
+  banned_phrases:                               # FleetHours is pre-release: no adoption claims
+    - shipped fleethours
+    - fleethours customers
+    - fleethours is used by
+    - in production
+    - production traffic
+    - adopted by
+    - thousands of drivers
+    - formerly trimble
+  british_spellings:                            # american -> british
+    organization: organisation
+    organizations: organisations
+    optimize: optimise
+    optimized: optimised
+    optimizing: optimising
+    behavior: behaviour
+    color: colour
+    analyze: analyse
+    analyzed: analysed
+    favorite: favourite
+    prioritize: prioritise
+    prioritized: prioritised
+    labor: labour
+    modeling: modelling
+    center: centre
+  numbers_must_come_from_facts: true
+
+resume_facts:
+  max_accomplishment_lines: 300
+
+# `uv run jobhunt tailor pdf <job>` renders cover_letter.md to a one-page PDF for ATSs that
+# only accept a file (Greenhouse). JOBHUNT_PDFLATEX in .env overrides the path below.
+cover_letter_pdf:
+  # pdflatex: C:/path/to/MiKTeX/miktex/bin/x64/pdflatex.exe   # optional; else JOBHUNT_PDFLATEX in .env, else PATH
+  font_size: 11pt
+  margin: 1in

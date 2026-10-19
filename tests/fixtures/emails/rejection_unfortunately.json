@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_rej_gh",
+  "gmail_id": "m_t_rej_gh",
+  "from": "Postman <no-reply@greenhouse.io>",
+  "from_name": "Postman",
+  "from_domain": "greenhouse.io",
+  "to": "candidate@example.com",
+  "date": "2026-09-06T09:00:00Z",
+  "subject": "Update on your application to Postman",
+  "snippet": "Hi Alex,\n\nThank you for your interest in the Software Engineer II role at Postman and for taking the time to apply. Unfortunately, we have decided not to move forward with your application at this time. We will keep your resume on file and encourage you to apply for future opportunities.\n\nWe wish",
+  "body_text": "Hi Alex,\n\nThank you for your interest in the Software Engineer II role at Postman and for taking the time to apply. Unfortunately, we have decided not to move forward with your application at this time. We will keep your resume on file and encourage you to apply for future opportunities.\n\nWe wish you the best in your search.",
+  "links": [],
+  "query_tag": "rejection"
+}

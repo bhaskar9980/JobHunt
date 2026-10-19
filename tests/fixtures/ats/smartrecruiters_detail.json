@@ -1,0 +1,79 @@
+{
+  "id": "744000147982299",
+  "name": "Channel Partner Manager - France & Nordics",
+  "uuid": "53cc3abe-6535-431d-95db-90fd9d346612",
+  "refNumber": "REF8769I",
+  "company": {
+    "name": "Freshworks",
+    "identifier": "Freshworks"
+  },
+  "releasedDate": "2026-09-07T19:21:18.720Z",
+  "location": {
+    "city": "Paris",
+    "region": "IDF",
+    "country": "fr",
+    "remote": false,
+    "hybrid": true,
+    "hybridDescription": "Work from home on Tuesdays & Fridays.",
+    "fullLocation": "Paris, IDF, France"
+  },
+  "function": {
+    "id": "sales",
+    "label": "Sales"
+  },
+  "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+  },
+  "experienceLevel": {
+    "id": "mid_senior_level",
+    "label": "Mid-Senior Level"
+  },
+  "customField": [
+    {
+      "fieldId": "618bba30fa9dfa25d877c58b",
+      "fieldLabel": "Brands",
+      "valueId": "default",
+      "valueLabel": "Freshworks"
+    },
+    {
+      "fieldId": "COUNTRY",
+      "fieldLabel": "Country/Region",
+      "valueId": "fr",
+      "valueLabel": "France"
+    }
+  ],
+  "language": {
+    "code": "en-GB",
+    "label": "English (UK)",
+    "labelNative": "English (UK)"
+  },
+  "applyUrl": "https://jobs.smartrecruiters.com/Freshworks/744000147982299-channel-partner-manager-france-nordics?oga=true",
+  "postingUrl": "https://jobs.smartrecruiters.com/Freshworks/744000147982299-channel-partner-manager-france-nordics",
+  "active": true,
+  "visibility": "PUBLIC",
+  "industry": {
+    "id": "it_and_services",
+    "label": "Information Technology And Services"
+  },
+  "jobAd": {
+    "sections": {
+      "companyDescription": {
+        "title": "Company Description",
+        "text": "<p>Organizations everywhere struggle under the crushing costs and complexities of “solutions” that promise to simplify their lives. To create a better experience for their customers and employees. To help them grow. Software is a choice that can make or break a business. Create better or worse experiences. Propel or th"
+      },
+      "jobDescription": {
+        "title": "Job Description",
+        "text": "<p>This is a pivotal individual contributor role at the heart of Freshworks' channel growth strategy. As a Channel Manager, you will own the full lifecycle of our CX partner business across France and the Nordics — from managing strategic partners in the region, signing new partners, through to driving active pipeline,"
+      },
+      "qualifications": {
+        "title": "Qualifications",
+        "text": "<p><strong>Required</strong></p><ul><li><p>7+ years' experience in Sales,&#xa0; channel, or partner management within a SaaS or enterprise software environment</p></li><li><p><strong>Fluent in French and English, written and spoken</strong></p></li><li><p>Demonstrable track record of working with partners in the French"
+      },
+      "additionalInformation": {
+        "title": "Additional Information",
+        "text": "<p><strong>The role is based in the Paris office with a hybrid setup (3 days in the office: Mondays, Wednesdays &amp; Thursdays).</strong><br>\n<br>\nAt Freshworks, we are creating a global workplace that enables everyone to find their true potential, purpose, and passion irrespective of their background, gender, race, s"
+      }
+    }
+  }
+}

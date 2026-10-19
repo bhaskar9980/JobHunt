@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_conf_wd",
+  "gmail_id": "m_t_conf_wd",
+  "from": "Salesforce Careers <salesforce@myworkday.com>",
+  "from_name": "Salesforce Careers",
+  "from_domain": "myworkday.com",
+  "to": "candidate@example.com",
+  "date": "2026-09-05T10:00:00Z",
+  "subject": "Thank you for applying to Salesforce",
+  "snippet": "Thank you for your interest in Salesforce. We have received your application for Software Engineer (JR123456). Our recruiting team will review your application and contact you if there is a match.",
+  "body_text": "Thank you for your interest in Salesforce. We have received your application for Software Engineer (JR123456). Our recruiting team will review your application and contact you if there is a match.",
+  "links": [],
+  "query_tag": "confirmation"
+}

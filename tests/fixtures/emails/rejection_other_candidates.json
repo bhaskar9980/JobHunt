@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_rej_stripe",
+  "gmail_id": "m_t_rej_stripe",
+  "from": "Stripe Recruiting <recruiting@stripe.com>",
+  "from_name": "Stripe Recruiting",
+  "from_domain": "stripe.com",
+  "to": "candidate@example.com",
+  "date": "2026-09-06T11:30:00Z",
+  "subject": "Your application to Stripe",
+  "snippet": "Hello Alex, thank you for applying to Stripe and for your patience. After careful consideration, we have decided to move forward with other candidates whose experience more closely matches our needs. We appreciate your interest and wish you all the best.",
+  "body_text": "Hello Alex, thank you for applying to Stripe and for your patience. After careful consideration, we have decided to move forward with other candidates whose experience more closely matches our needs. We appreciate your interest and wish you all the best.",
+  "links": [],
+  "query_tag": "rejection"
+}

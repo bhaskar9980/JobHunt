@@ -1,0 +1,50 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Wizard test form</title>
+<!--
+  A three-page application wizard shaped like Workday: one page visible at a time, a Next
+  button that swaps pages, and a Submit button that only exists on the final page. Used to
+  test the runner's page walk offline. No network, no real employer.
+-->
+<body>
+<div id="wizard">
+  <section data-automation-id="contactInformationPage">
+    <label>First Name <input data-automation-id="legalNameSection_firstName" name="first_name" required></label>
+    <label>Last Name <input data-automation-id="legalNameSection_lastName" name="last_name" required></label>
+    <label>Email <input type="email" name="email" required></label>
+  </section>
+  <section data-automation-id="myExperiencePage" hidden>
+    <label>LinkedIn <input data-automation-id="linkedinQuestion" name="linkedin"></label>
+    <label>Years of C# experience <input name="years_csharp" required></label>
+  </section>
+  <section data-automation-id="voluntaryDisclosuresPage" hidden>
+    <label>Gender
+      <select data-automation-id="gender" name="gender">
+        <option value="">Select One</option>
+        <option>Male</option>
+        <option>I do not wish to answer</option>
+      </select>
+    </label>
+    <label><input type="checkbox" data-automation-id="agreementCheckbox" name="agree"> I agree</label>
+  </section>
+  <button data-automation-id="bottom-navigation-next-button" id="next">Next</button>
+  <button data-automation-id="bottom-navigation-submit-button" id="submit" hidden>Submit</button>
+</div>
+<script>
+  const pages = [...document.querySelectorAll('#wizard section')];
+  let at = 0;
+  document.getElementById('next').addEventListener('click', () => {
+    if (at >= pages.length - 1) return;
+    pages[at].hidden = true;
+    at += 1;
+    pages[at].hidden = false;
+    if (at === pages.length - 1) {
+      document.getElementById('next').hidden = true;
+      document.getElementById('submit').hidden = false;
+    }
+  });
+  document.getElementById('submit').addEventListener('click', () => {
+    document.body.setAttribute('data-submitted', 'yes');
+  });
+</script>
+</body>

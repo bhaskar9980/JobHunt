@@ -1,0 +1,77 @@
+{
+  "status": 200,
+  "error": {
+    "message": "",
+    "body": ""
+  },
+  "data": {
+    "positions": [
+      {
+        "id": 1970393556911611,
+        "displayJobId": "200041076",
+        "name": "Software Engineer II",
+        "locations": [
+          "India, Karnataka, Bangalore"
+        ],
+        "standardizedLocations": [
+          "Bengaluru, KA, IN"
+        ],
+        "postedTs": 1788863962,
+        "solrScore": null,
+        "stars": 0,
+        "department": "Software Engineering",
+        "creationTs": 1782116342,
+        "isHot": 0,
+        "workLocationOption": "onsite",
+        "locationFlexibility": null,
+        "atsJobId": "200041076",
+        "positionUrl": "/careers/job/1970393556911611"
+      },
+      {
+        "id": 1970393556937574,
+        "displayJobId": "200043634",
+        "name": "Software Engineer",
+        "locations": [
+          "India, Telangana, Hyderabad"
+        ],
+        "standardizedLocations": [
+          "Hyderabad, TS, IN"
+        ],
+        "postedTs": 1788500904,
+        "solrScore": null,
+        "stars": 0,
+        "department": "Software Engineering",
+        "creationTs": 1784009416,
+        "isHot": 0,
+        "workLocationOption": "onsite",
+        "locationFlexibility": null,
+        "atsJobId": "200043634",
+        "positionUrl": "/careers/job/1970393556937574"
+      },
+      {
+        "id": 1970393556990582,
+        "displayJobId": "200054093",
+        "name": "Senior Software Engineer",
+        "locations": [
+          "India, Telangana, Hyderabad"
+        ],
+        "standardizedLocations": [
+          "Hyderabad, TS, IN"
+        ],
+        "postedTs": 1788867084,
+        "solrScore": null,
+        "stars": 0,
+        "department": "Software Engineering",
+        "creationTs": 1788840766,
+        "isHot": 0,
+        "workLocationOption": "onsite",
+        "locationFlexibility": null,
+        "atsJobId": "200054093",
+        "positionUrl": "/careers/job/1970393556990582"
+      }
+    ],
+    "count": 143,
+    "sortBy": "relevance"
+  },
+  "metadata": null
+}

@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>{{ title }}</title>
+<!-- The same mark as the header brand: the compass glyph on the accent square. Inline so
+     the tab has an icon with no external request, from the server or the static file. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233557d6'/%3E%3Cg transform='translate(6 6) scale(0.8333)' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 3 21l9-5 9 5-9-18Z M12 3v13'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  :root { color-scheme:light; --bg:#f6f7f9; --surface:#ffffff; --surface2:#f1f3f6; --ink:#1f2633; --muted:#6b7484; --line:#e4e7ec; --line-strong:#c9cfd9; --accent:#3557d6; --accent-strong:#2a46b3; --on-accent:#ffffff; --tint:#edf1fd; --good:#1b7f5f; --good-bg:#e6f5ee; --warn:#9a6300; --warn-bg:#fff5db; --bad:#b83a4a; --bad-bg:#fdeef0; --shadow:0 10px 30px #1a233414; --radius:10px; }
+  :root[data-theme="dark"] { color-scheme:dark; --bg:#0f141c; --surface:#171d27; --surface2:#1e2633; --ink:#e7ecf3; --muted:#9aa6b8; --line:#2a3342; --line-strong:#3a4557; --accent:#8ea4ff; --accent-strong:#a9b9ff; --on-accent:#0f141c; --tint:#242d44; --good:#6fd1ad; --good-bg:#173a30; --warn:#e9c069; --warn-bg:#3f3420; --bad:#f08e9b; --bad-bg:#442833; --shadow:0 10px 30px #0006; }
+  * { box-sizing:border-box; }
+  html:has(dialog:modal) { overflow:hidden; }
+  body { margin:0; color:var(--ink); background:var(--bg); font:14px/1.5 "Segoe UI",system-ui,sans-serif; }
+  button,input,select,textarea { font:inherit; }
+  button,a,input,select,textarea { -webkit-tap-highlight-color:transparent; }
+  button { cursor:pointer; }
+  button:disabled { cursor:not-allowed; opacity:.45; }
+  button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+  [hidden] { display:none!important; }
+  .icon { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+  /* Buttons: hover changes the background only. A filled button keeps its text colour, so the
+     label never matches its own background (the old rule painted both the accent colour). */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:34px; padding:6px 12px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); font-weight:550; font-size:12.5px; text-decoration:none; transition:background .12s,border-color .12s; }
+  .btn:hover:not(:disabled) { background:var(--surface2); border-color:var(--line-strong); color:var(--ink); text-decoration:none; }
+  .btn.primary { background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+  .btn.primary:hover:not(:disabled) { background:var(--accent-strong); border-color:var(--accent-strong); color:var(--on-accent); }
+  .btn.ghost { background:transparent; border-color:transparent; color:var(--muted); }
+  .btn.ghost:hover:not(:disabled) { background:var(--surface2); border-color:transparent; color:var(--ink); }
+  .btn.danger { color:var(--bad); }
+  .btn.active { background:var(--tint); border-color:transparent; color:var(--accent); }
+  .icon-btn { padding:6px; min-width:34px; }
+  .topbar { position:sticky; top:0; z-index:20; background:var(--surface); border-bottom:1px solid var(--line); }
+  .topbar-inner { max-width:1180px; margin:0 auto; padding:0 24px; display:flex; align-items:center; gap:16px; min-height:56px; }
+  .brand { display:flex; align-items:center; gap:9px; font-weight:700; font-size:16px; letter-spacing:-.2px; white-space:nowrap; }
+  .brand-mark { width:26px; height:26px; display:grid; place-items:center; border-radius:7px; background:var(--accent); color:var(--on-accent); }
+  .nav { display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav button { border:0; background:transparent; color:var(--muted); display:flex; align-items:center; gap:7px; padding:7px 12px; border-radius:8px; font-weight:550; white-space:nowrap; }
+  .nav button:hover { color:var(--ink); background:var(--surface2); }
+  .nav button.active { color:var(--accent); background:var(--tint); }
+  .nav-count { font-size:11px; line-height:18px; padding:0 7px; border-radius:999px; background:var(--surface2); color:var(--muted); }
+  .nav button.active .nav-count { background:var(--surface); color:var(--accent); }
+  .top-actions,.inline,.actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .top-actions { margin-left:auto; flex-wrap:nowrap; }
+  .live-status { display:flex; gap:6px; align-items:center; font-size:11.5px; color:var(--muted); white-space:nowrap; }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--muted); }
+  .live-status.online .dot { background:var(--good); box-shadow:0 0 0 3px var(--good-bg); }
+  .live-status.offline .dot { background:var(--bad); }
+  .workspace { max-width:1180px; margin:0 auto; padding:26px 24px 110px; }
+  .page-head { display:flex; align-items:baseline; gap:14px; margin-bottom:18px; flex-wrap:wrap; }
+  h1 { font-size:22px; letter-spacing:-.4px; line-height:1.3; margin:0; font-weight:700; }
+  .page-head p { margin:0; color:var(--muted); font-size:13px; }
+  .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:24px; }
+  .metric { padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+  .metric-label { color:var(--muted); font-size:12px; }
+  .metric-value { font-size:26px; font-weight:700; letter-spacing:-.5px; line-height:1.2; margin-top:2px; font-variant-numeric:tabular-nums; }
+  .panel { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+  .workflow { padding:16px 20px; margin-bottom:18px; }
+  .panel-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .panel-heading h2 { font-size:13px; margin:0; font-weight:650; }
+  .workflow-message { font-size:12px; color:var(--muted); }
+  .steps { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); margin-top:14px; gap:8px; }
+  .step { font-size:11px; color:var(--muted); display:flex; align-items:center; gap:6px; }
+  .step-number { flex-shrink:0; width:22px; height:22px; border:1px solid var(--line); border-radius:50%; display:grid; place-items:center; font-size:10px; font-weight:650; }
+  .step.running { color:var(--accent); font-weight:650; }.step.running .step-number { border-color:var(--accent); box-shadow:0 0 0 3px var(--tint); }
+  .step.done { color:var(--good); }.step.done .step-number { background:var(--good-bg); border-color:transparent; }
+  .step.failed { color:var(--bad); }.step.failed .step-number { background:var(--bad-bg); border-color:transparent; }
+  .step.skipped { opacity:.65; }.step.skipped .step-number { border-style:dashed; }
+  .notice { border:1px solid var(--line); border-left:3px solid var(--warn); background:var(--warn-bg); padding:11px 14px; border-radius:8px; margin-bottom:16px; font-size:12.5px; }
+  .notice.error { border-left-color:var(--bad); background:var(--bad-bg); }
+  code { font-family:Consolas,monospace; font-size:12px; background:var(--surface2); padding:3px 7px; border:1px solid var(--line); border-radius:5px; overflow-wrap:anywhere; }
+  .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 12px; }
+  .section-heading h2 { margin:0; font-size:15px; font-weight:650; }
+  .section-note { color:var(--muted); font-size:12.5px; margin:0 0 14px; }
+  .tabs { display:flex; gap:2px; border-bottom:1px solid var(--line); margin-bottom:14px; overflow-x:auto; scrollbar-width:none; }
+  .tabs::-webkit-scrollbar { display:none; }
+  .tab { border:0; border-bottom:2px solid transparent; margin-bottom:-1px; background:transparent; padding:8px 12px; font-size:13px; color:var(--muted); font-weight:550; white-space:nowrap; }
+  .tab:hover { color:var(--ink); }
+  .tab.active { color:var(--ink); border-bottom-color:var(--accent); }
+  .tab span { margin-left:6px; font-size:11px; color:var(--muted); background:var(--surface2); border-radius:999px; padding:0 6px; }
+  .filters { display:flex; align-items:center; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .search-wrap { display:flex; align-items:center; gap:8px; flex:1; min-width:200px; min-height:34px; padding:0 10px; color:var(--muted); border:1px solid var(--line); border-radius:8px; background:var(--surface); }
+  .search-wrap:focus-within { border-color:var(--accent); }
+  .search-wrap input { border:0; width:100%; background:transparent; color:var(--ink); padding:6px 0; }
+  .search-wrap input:focus-visible { outline:none; }
+  select,input[type="date"],input[type="datetime-local"],textarea { border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); padding:7px 10px; font-size:12.5px; }
+  select { min-height:34px; }
+  .filters select { max-width:170px; }.filters .check { font-size:12.5px; color:var(--muted); display:flex; gap:6px; align-items:center; white-space:nowrap; }
+  input[type="checkbox"] { accent-color:var(--accent); width:15px; height:15px; cursor:pointer; margin:0; }
+  .list-heading { display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:12px; margin-bottom:10px; gap:12px; }
+  .select-label { display:flex; align-items:center; gap:7px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; }
+  .job-card { padding:16px; display:flex; flex-direction:column; gap:10px; transition:border-color .12s; }
+  .job-card:hover { border-color:var(--line-strong); }
+  .job-card.selected { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+  .card-head { display:flex; gap:10px; align-items:flex-start; }
+  .card-head > div { flex:1; min-width:0; }
+  .card-company { font-size:12px; color:var(--muted); }
+  .card-title { border:0; padding:0; background:none; color:var(--ink); font-size:14px; font-weight:650; line-height:1.4; text-align:left; display:block; }
+  .card-title:hover { color:var(--accent); }
+  .card-check { margin-top:3px; }
+  .card-meta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:12px; color:var(--muted); }
+  .tag { display:inline-flex; align-items:center; background:var(--surface2); color:var(--muted); padding:2px 7px; border-radius:5px; font-size:11px; }
+  .badge { display:inline-flex; align-items:center; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; background:var(--tint); color:var(--accent); }
+  .badge.good { background:var(--good-bg); color:var(--good); }.badge.warn { background:var(--warn-bg); color:var(--warn); }.badge.bad { background:var(--bad-bg); color:var(--bad); }
+  .match { margin-left:auto; font-weight:650; color:var(--good); font-variant-numeric:tabular-nums; }
+  .card-reason { color:var(--muted); font-size:12.5px; margin:0; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .card-reason.flag { color:var(--warn); }
+  .card-actions { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-top:auto; padding-top:10px; border-top:1px solid var(--line); }
+  .card-actions .btn { min-height:30px; padding:4px 10px; font-size:12px; }
+  .card-actions .details { margin-left:auto; }
+  .empty { text-align:center; padding:40px 24px; border:1px dashed var(--line); border-radius:var(--radius); color:var(--muted); background:var(--surface); }
+  .empty h3 { color:var(--ink); font-size:15px; margin:0 0 4px; }.empty p { font-size:12.5px; margin:0 auto 14px; max-width:380px; }
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); }
+  table { border-collapse:collapse; width:100%; min-width:760px; } th,td { padding:11px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle; }
+  th { font-size:11px; letter-spacing:.3px; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  td { font-size:12.5px; } tbody tr:hover { background:var(--surface2); } tbody tr:last-child td { border-bottom:0; }
+  .pagination { display:flex; justify-content:flex-end; align-items:center; gap:10px; color:var(--muted); font-size:12px; margin-top:16px; }
+  .board { display:flex; gap:12px; overflow-x:auto; padding-bottom:14px; }
+  .board-column { flex:0 0 220px; background:var(--surface2); border:1px solid var(--line); border-radius:var(--radius); padding:12px; min-height:220px; }
+  .board-column.drop-ready { border-color:var(--accent); background:var(--tint); }
+  .board-column h3 { display:flex; justify-content:space-between; text-transform:capitalize; margin:0 0 12px; font-size:12.5px; }.board-column h3 span { color:var(--muted); font-weight:500; }
+  .board-card { width:100%; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); text-align:left; padding:11px 12px; margin-bottom:8px; }
+  .board-card strong { display:block; font-size:11.5px; color:var(--muted); margin-bottom:3px; font-weight:550; }.board-card p { font-size:12.5px; margin:0 0 8px; font-weight:600; }.board-card:hover { border-color:var(--accent); }
+  .board-card[draggable="true"] { cursor:grab; }
+  .board-card.dragging { opacity:.45; }
+  .board-empty { text-align:center; color:var(--muted); font-size:11.5px; padding:24px 0; }
+  .health-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }.health-card { padding:18px 20px; }.health-card h3 { margin:0 0 10px; font-size:13.5px; }
+  .health-row { display:flex; justify-content:space-between; gap:12px; font-size:12.5px; padding:9px 0; border-bottom:1px solid var(--line); }.health-row:last-child { border-bottom:0; }.health-row span:first-child { color:var(--muted); }
+  .health-error { border-top:1px solid var(--line); padding:10px 0; font-size:12.5px; }.health-error p { color:var(--bad); font-size:11.5px; margin:4px 0; overflow-wrap:anywhere; }
+  .batch { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; padding:10px 14px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); z-index:30; }
+  .batch strong { font-size:12.5px; margin-right:6px; white-space:nowrap; }
+  dialog { color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px; max-width:460px; width:calc(100% - 30px); box-shadow:var(--shadow); overscroll-behavior:contain; }
+  dialog::backdrop { background:#101b3259; backdrop-filter:blur(2px); }
+  dialog h2 { font-size:17px; margin:0 0 8px; } dialog p { color:var(--muted); font-size:13px; }.dialog-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:18px; }
+  #detail { margin:0 0 0 auto; height:100dvh; max-height:100dvh; width:min(640px,95vw); max-width:none; border-radius:0; border-width:0 0 0 1px; padding:0; }
+  .drawer-header { padding:20px 24px 14px; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:2; background:var(--surface); }
+  .drawer-top { display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:11px; margin-bottom:10px; }
+  .drawer-header h2 { font-size:19px; letter-spacing:-.3px; line-height:1.3; margin:0 0 4px; }.drawer-sub { color:var(--muted); font-size:12.5px; }
+  .drawer-body { padding:20px 24px; }.drawer-body h3 { font-size:12px; letter-spacing:.3px; text-transform:uppercase; color:var(--muted); margin:22px 0 8px; font-weight:600; }.drawer-body h3:first-child { margin-top:0; }
+  .next-step { font-size:12.5px; color:var(--muted); margin:10px 0 0; }
+  .description { white-space:pre-wrap; font-size:12.5px; line-height:1.7; overflow-wrap:anywhere; border:1px solid var(--line); background:var(--surface2); border-radius:8px; padding:12px 14px; }
+  .reason-list { padding-left:18px; font-size:12.5px; color:var(--muted); margin:0; }.reason-list li { margin:4px 0; }.reason-list.flags { color:var(--warn); }
+  .contact { padding:12px; border:1px solid var(--line); border-radius:8px; margin:8px 0; }.contact strong { font-size:12.5px; }.contact p { margin:4px 0 8px; font-size:12px; color:var(--muted); }
+  .timeline { padding-left:12px; border-left:2px solid var(--line); }.event { margin:0 0 12px; font-size:12.5px; }.event small { display:block; color:var(--muted); font-size:11px; }.event p { margin:2px 0; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .drawer-form { padding:0 24px 20px; }.drawer-form label { display:block; font-size:12.5px; font-weight:600; margin-bottom:6px; }.drawer-form textarea { width:100%; min-height:80px; resize:vertical; margin-bottom:6px; }.drawer-form small { display:block; color:var(--muted); font-size:11px; margin-bottom:10px; }
+  .drawer-form .inline select { flex:1; }.drawer-form + .drawer-form { border-top:1px solid var(--line); padding-top:18px; }
+  .record-form label { display:block; margin:12px 0 5px; font-size:12.5px; font-weight:600; }
+  .record-form input:not([type="checkbox"]), .record-form select, .record-form textarea { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink); }
+  .record-form textarea { min-height:80px; resize:vertical; }
+  .record-form .check-line { display:flex; gap:9px; align-items:flex-start; font-weight:400; }
+  .record-form .check-line input { flex-shrink:0; margin-top:4px; }
+  #handoff-text { width:100%; min-height:150px; resize:vertical; margin:10px 0; }
+  #handoff-status, #record-error { font-size:12.5px; color:var(--muted); }
+  #record-error { color:var(--bad); }
+  #record-dialog, #handoff-dialog { max-height:90dvh; overflow-y:auto; }
+  #toast { position:fixed; bottom:22px; right:22px; background:var(--ink); color:var(--surface); border-radius:9px; padding:12px 16px; box-shadow:var(--shadow); max-width:420px; font-size:12.5px; z-index:100; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  @media(max-width:960px) { .metrics { grid-template-columns:repeat(2,1fr); }.health-grid { grid-template-columns:1fr; }.steps { grid-template-columns:repeat(4,1fr); gap:10px; } }
+  @media(max-width:760px) { .topbar-inner { flex-wrap:wrap; padding:8px 14px; gap:8px; min-height:0; }.nav { order:3; width:100%; }.workspace { padding:18px 14px 110px; }.metric-value { font-size:22px; }.steps { grid-template-columns:repeat(3,1fr); }.cards { grid-template-columns:1fr; }.batch { width:calc(100% - 24px); flex-wrap:wrap; }#toast { right:12px; bottom:90px; max-width:calc(100% - 24px); }.filters select { max-width:100%; flex:1; }.drawer-header { padding:16px; }.drawer-body { padding:16px; }.drawer-form { padding:0 16px 16px; } }
+  @media(prefers-reduced-motion:reduce) { * { transition:none!important; scroll-behavior:auto!important; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="brand-mark" data-icon="compass"></span>{{ title }}</div>
+    <nav class="nav" aria-label="Dashboard sections">
+      <button data-view="today">Today<span class="nav-count" id="today-count">0</span></button>
+      <button data-view="jobs">All jobs<span class="nav-count" id="jobs-count">0</span></button>
+      <button data-view="pipeline">Pipeline</button>
+      <button data-view="health">Health</button>
+    </nav>
+    <div class="top-actions">
+      <span id="connection" class="live-status" role="status"><span class="dot"></span><span id="connection-text">Connecting</span></span>
+      <button class="btn" id="refresh"><i data-icon="refresh"></i>Refresh</button>
+      <button class="btn icon-btn" id="theme" aria-label="Toggle dark mode" title="Toggle dark mode"><i data-icon="moon"></i></button>
+    </div>
+  </div>
+</header>
+<main class="workspace">
+  <div class="page-head"><h1 id="view-title">Today</h1><p id="view-subtitle"></p></div>
+  <div id="connection-error" class="notice error" role="alert" hidden></div>
+  <section class="metrics" id="metrics" aria-label="Your job search at a glance"></section>
+  <section id="list-section">
+    <div class="section-heading"><h2 id="list-title">Action queue</h2><div class="inline" role="group" aria-label="Job layout"><button class="btn icon-btn ghost" data-layout="cards" aria-label="Card view" title="Card view"><i data-icon="grid"></i></button><button class="btn icon-btn ghost" data-layout="table" aria-label="Table view" title="Table view"><i data-icon="list"></i></button></div></div>
+    <div id="queue-tabs" class="tabs" role="tablist" aria-label="Action queue"></div>
+    <div class="filters">
+      <label class="search-wrap"><i data-icon="search"></i><span class="sr-only">Search jobs</span><input id="q" type="search" placeholder="Search company, role or location" autocomplete="off"></label>
+      <label class="sr-only" for="location-filter">Location</label><select id="location-filter"><option value="">All locations</option></select>
+      <label class="sr-only" for="st">Status</label><select id="st"><option value="">All statuses</option></select>
+      <label class="sr-only" for="min-score">Minimum score</label><select id="min-score"><option value="0">Any score</option><option value="60">Score 60+</option><option value="70">Score 70+</option><option value="80">Score 80+</option><option value="90">Score 90+</option></select>
+      <label class="sr-only" for="sort">Sort jobs</label><select id="sort"><option value="score">Best match first</option><option value="recent">Recently discovered</option><option value="company">Company A–Z</option></select>
+      <label class="check"><input type="checkbox" id="remote-only"> Remote only</label>
+      <button class="btn ghost" id="clear-filters">Reset</button>
+    </div>
+    <div class="list-heading"><label class="select-label"><input id="select-page" type="checkbox" aria-label="Select actionable jobs on this page"><span>Select page</span></label><span id="result-count"></span></div>
+    <div id="decide" aria-live="polite"></div>
+    <div class="pagination"><span id="page-info"></span><button class="btn" id="previous">Previous</button><button class="btn" id="next">Next</button></div>
+  </section>
+  <section id="pipeline-section" hidden><p class="section-note" id="board-help">Drag a card to record a confirmed update, or open it for the status controls. Moves never submit applications.</p><div id="board" class="board"></div></section>
+  <section id="health-section" hidden>
+    <section class="panel workflow" id="workflow"><div class="panel-heading"><h2>Morning run</h2><span class="workflow-message" id="workflow-message">Run /jobs-day in Claude Code to begin.</span></div><div id="steps" class="steps"></div></section>
+    <div id="health-notice" class="notice" hidden></div>
+    <div id="health-grid" class="health-grid"></div>
+  </section>
+</main>
+<div id="batch" class="batch" hidden><strong id="selected-count"></strong><button class="btn primary" data-batch="approve">Approve selected</button><button class="btn" data-batch="skip">Skip</button><button class="btn icon-btn ghost" id="clear-selection" aria-label="Clear selection"><i data-icon="close"></i></button></div>
+<dialog id="detail" aria-labelledby="detail-title"><div class="drawer-header"><div class="drawer-top"><span id="detail-id">JOB DETAIL</span><button class="btn icon-btn ghost" id="close-detail" aria-label="Close job details"><i data-icon="close"></i></button></div><h2 id="detail-title">Loading job</h2><div class="drawer-sub" id="detail-subtitle"></div></div><div class="drawer-body" id="detail-main"></div><form class="drawer-form" id="note-form"><label for="note-text">Keep a note</label><textarea id="note-text" maxlength="2000" placeholder="A conversation, a question, or something to remember…"></textarea><small>Notes are saved to this job's local history.</small><button class="btn primary" type="submit">Save note</button></form><form class="drawer-form" id="status-form" hidden><label for="status-select">Record verified progress</label><div class="inline"><select id="status-select" aria-label="New application status"></select></div><textarea id="status-note" maxlength="2000" placeholder="What confirmed this change?" style="margin-top:9px"></textarea><small>This records an update only. It never submits an application.</small><button class="btn" type="submit">Record status</button></form></dialog>
+<dialog id="confirm-dialog" aria-labelledby="confirm-title"><form id="confirm-form"><h2 id="confirm-title"></h2><p id="confirm-message"></p><div class="dialog-actions"><button type="button" class="btn" id="cancel-confirm">Cancel</button><button type="submit" class="btn primary" id="confirm-button">Confirm</button></div></form></dialog>
+<dialog id="record-dialog" aria-labelledby="record-title"><form id="record-form" class="record-form">
+  <h2 id="record-title"></h2><p id="record-context"></p><p id="record-explanation"></p>
+  <div id="record-date-field"><label for="record-at">When did it happen?</label><input id="record-at" type="datetime-local" required></div>
+  <div id="record-channel-field"><label for="record-channel">Channel</label><select id="record-channel"></select></div>
+  <div id="record-contact-field"><label for="record-contact">Who did you ask?</label><select id="record-contact"></select><label for="record-contact-name">Name, if not listed</label><input id="record-contact-name" maxlength="150" autocomplete="off"></div>
+  <div id="record-reference-field"><label for="record-reference">Confirmation link or reference (optional)</label><input id="record-reference" maxlength="2048" autocomplete="off"></div>
+  <label for="record-note">What confirmed this?</label><textarea id="record-note" maxlength="2000" required placeholder="For example: I saw the confirmation page, or I sent the message on LinkedIn."></textarea>
+  <label class="check-line"><input id="record-confirm" type="checkbox" required><span id="record-confirm-label"></span></label>
+  <p id="record-error" role="alert"></p>
+  <div class="dialog-actions"><button type="button" class="btn" id="record-cancel">Cancel</button><button type="submit" class="btn primary" id="record-save">Save record</button></div>
+</form></dialog>
+<dialog id="handoff-dialog" aria-labelledby="handoff-title"><h2 id="handoff-title">Continue in your Claude Code session</h2><p>This page does not launch Claude or execute commands. Copy this prompt and paste it into your Claude Code terminal.</p><label class="sr-only" for="handoff-text">Prompt to copy</label><textarea id="handoff-text" readonly></textarea><p id="handoff-status" role="status" aria-live="polite"></p><div class="dialog-actions"><button class="btn" id="handoff-close">Close</button><button class="btn primary" id="handoff-copy">Copy prompt</button></div></dialog>
+<div id="toast" role="status" hidden></div>
+<script id="jobs-data" type="application/json">{{ {'rows': rows, 'kpis': kpis, 'funnel': funnel, 'kanban': kanban, 'follow_ups': follow_ups, 'generated_at': generated_at} | tojson }}</script>
+<script id="live-cfg" type="application/json">{{ {'live': live|default(false), 'options': live_cfg|default({})} | tojson }}</script>
+<script>
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const cfg = JSON.parse($('live-cfg').textContent);
+  const REFRESH_MS = (cfg.options.refresh_seconds || 5) * 1000;
+  const PAGE_SIZE = cfg.options.page_size || 24;
+  const BATCH_LIMIT = cfg.options.batch_limit || 50;
+  const AUTH_KEY = 'jobhunt-access', PREF_KEY = 'jobhunt-view', THEME_KEY = 'jobhunt-theme';
+  const ACCESS_HINT = 'This tab’s access has expired. Run "uv run jobhunt serve" in the JobHunt terminal to open an authenticated tab.';
+  const PRE_REVIEW = ['discovered','filtered','scored','shortlisted','approved'];
+  const GROUP_LABELS = {to_review:'Needs review',to_prepare:'Approved',ready_to_apply:'Prepared for assistant',referral_recommended:'Referral recommended',awaiting_referral:'Awaiting referral',referral_deadline:'Referral deadline passed',unanswered_questions:'Optional preparation',blocked:'Assistant blocked',eligibility_review:'Eligibility not verified',referral_received:'Referral received',referral_declined:'Referral declined'};
+  const TABS = [['review','Review',['to_review']],['ready','Approved',['ready_to_apply','to_prepare']],['referrals','Referrals',['referral_recommended','awaiting_referral','referral_deadline']],['input','Verification & preparation',['eligibility_review','blocked','unanswered_questions']]];
+  const DEFAULT_STAGES = [['health','Setup'],['sync','Inbox'],['scan','Find & score'],['review','Review'],['applications','Applications'],['referrals','Referrals'],['finish','Summary']];
+  const ICONS = {compass:'M12 3 3 21l9-5 9 5-9-18Z M12 3v13',search:'M10.5 3a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15 M16 16l5 5',refresh:'M20 7V3l-3 3a8 8 0 1 0 2 12 M20 7h-5',moon:'M20 15A8 8 0 0 1 9 4a8 8 0 1 0 11 11Z',grid:'M3 3h7v7H3Z M14 3h7v7h-7Z M3 14h7v7H3Z M14 14h7v7h-7Z',list:'M8 5h13 M8 12h13 M8 19h13 M3 5h1 M3 12h1 M3 19h1',close:'M6 6l12 12 M18 6 6 18',check:'m5 12 4 4L19 6'};
+  const esc = value => String(value == null ? '' : value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const icon = name => '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS[name]+'"/></svg>';
+  const human = value => String(value || '').replace(/_/g,' ');
+  function readStore(storage,key,fallback) { try { return JSON.parse(storage.getItem(key)) || fallback; } catch (_) { return fallback; } }
+  function saveStore(storage,key,value) { try { storage.setItem(key,JSON.stringify(value)); } catch (_) {} }
+  let state = JSON.parse($('jobs-data').textContent), prefs = readStore(localStorage,PREF_KEY,{});
+  let view = cfg.live ? (prefs.view || 'today') : 'jobs', tab = prefs.tab || 'review', layout = prefs.layout || 'cards';
+  let pageNumber=1, shown=[], filtered=[], busy=false, online=!cfg.live, refreshing=false, timer=null, lastSuccess=null, filtersRestored=false;
+  let detailId=null, detailData=null, detailContacts=[], detailVersion=0, detailLoading=false, pendingAction=null;
+  let recordContext=null, recording=false, draggedId=null, refreshQueued=false;
+  const POST_APPLICATION=['applied','screening','interview','offer','rejected','withdrawn','ghosted'];
+  const selected=new Set(), noteDrafts=new Map(), statusDrafts=new Map();
+  const hash = new URLSearchParams(location.hash.slice(1)), query = new URLSearchParams(location.search);
+  let token = hash.get('t') || query.get('t') || readStore(sessionStorage,AUTH_KEY,'');
+  let fillCloseArmed=null, fillTimer=null;
+  const fillRequestIds=new Map();
+  if (token) { saveStore(sessionStorage,AUTH_KEY,token); if (hash.has('t') || query.has('t')) history.replaceState(null,'',location.pathname); }
+  function safeUrl(value) { try { const u=new URL(value); return ['http:','https:'].includes(u.protocol) ? u.href : ''; } catch (_) { return ''; } }
+  function link(value,label) { const url=safeUrl(value); return url ? '<a class="btn" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>' : ''; }
+  function localDate(d) { return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function stamp(value) { const d=new Date(value); return value && !isNaN(d) ? d.toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : 'Not yet'; }
+  function badge(value,kind='') { const text=human(value); return '<span class="badge '+kind+'">'+esc(text.charAt(0).toUpperCase()+text.slice(1))+'</span>'; }
+  function rowFor(id) { const row=(state.rows || []).find(r=>r.id===Number(id)); if(row) return row; const review=((state.plan||{}).needs_input?.eligibility_review||[]).find(r=>r.job_id===Number(id)); return review ? {...review,id:review.job_id,group:'eligibility_review'} : undefined; }
+  function canAct(row,action) {
+    if (!cfg.live || !token || !online || !row || ['pending','unknown'].includes(row.submission_state)) return false;
+    if (row.snooze_until && new Date(row.snooze_until)>new Date()) return false;
+    if (row.route==='referral_pending') return false;
+    return action==='approve' ? ['discovered','scored','shortlisted'].includes(row.status) : action==='skip' && PRE_REVIEW.includes(row.status);
+  }
+  function selectable(row) { return canAct(row,'skip'); }
+  function empty(title,text,button=false) { return '<div class="empty"><h3>'+esc(title)+'</h3><p>'+esc(text)+'</p>'+(button?'<button class="btn" data-view="jobs">Browse all jobs</button>':'')+'</div>'; }
+  function groupItems(key) {
+    const p=state.plan||{}, items=(p[key] || (p.needs_input||{})[key] || []);
+    return items.map(i=>({...rowFor(i.job_id),...i,id:i.job_id,group:key}));
+  }
+  function tabItems(key) {
+    const planned=new Map(Object.keys(GROUP_LABELS).flatMap(groupItems).map(r=>[r.id,r]));
+    if(key==='ready') return (state.rows||[]).filter(r=>r.status==='approved').map(r=>({...r,...planned.get(r.id)}));
+    if(key==='review') return (state.rows||[]).filter(r=>r.status==='shortlisted' && (!r.snooze_until || new Date(r.snooze_until)<=new Date()) && planned.get(r.id)?.route!=='referral_pending').map(r=>({...r,...planned.get(r.id)}));
+    const items=(TABS.find(t=>t[0]===key)||TABS[0])[2].flatMap(groupItems);
+    if(key==='referrals') {
+      const requests=(state.tracking||{}).referrals||[];
+      for(const request of requests) {
+        const related=requests.filter(r=>r.job_id===request.job_id);
+        const group=related.some(r=>r.referral_outcome==='completed')?'referral_received':related.some(r=>r.referral_outcome==='pending')?'awaiting_referral':'referral_declined';
+        items.push({...rowFor(request.job_id),id:request.job_id,company:request.job_company,title:request.job_title,group,referral_summary:related.map(r=>r.contact_name+': '+human(r.referral_outcome)).join(' · ')});
+      }
+    }
+    return [...new Map(items.map(r=>[r.id,r])).values()];
+  }
+  function currentItems() { return view==='today' ? tabItems(tab) : (state.rows||[]); }
+  function persist() { prefs={view,tab,layout,q:$('q').value,location:filtersRestored?$('location-filter').value:(prefs.location||''),status:filtersRestored?$('st').value:(prefs.status||''),min:$('min-score').value,sort:$('sort').value,remote:$('remote-only').checked}; saveStore(localStorage,PREF_KEY,prefs); }
+  function matches(row) {
+    const search=[$('q').value.trim().toLowerCase(),$('location-filter').value,$('st').value];
+    return (!search[0] || [row.company,row.title,row.location].join(' ').toLowerCase().includes(search[0])) &&
+      (!search[1] || row.location===search[1]) && (!search[2] || row.status===search[2]) &&
+      (Number($('min-score').value)===0 || (row.score!=null && row.score>=Number($('min-score').value))) && (!$('remote-only').checked || row.is_remote);
+  }
+  function sortRows(a,b) {
+    const sort=$('sort').value;
+    if (sort==='company') return String(a.company).localeCompare(String(b.company));
+    if (sort==='recent') return String(b.discovered_at||'').localeCompare(String(a.discovered_at||''));
+    return (b.score==null?-1:b.score)-(a.score==null?-1:a.score) || b.id-a.id;
+  }
+  function actionButton(row,action,label) {
+    if(!canAct(row,action)) return '';
+    return '<button class="btn '+(action==='approve'?'primary':'ghost')+'" data-action="'+action+'" data-id="'+row.id+'" '+(busy?'disabled':'')+'>'+label+'</button>';
+  }
+  function stepHelp(row) {
+    if(row.group==='eligibility_review' || row.status==='filtered') return 'Not shortlisted. Verify India-eligible remote work or both visa sponsorship and relocation support on the official posting.';
+    if(['pending','unknown'].includes(row.submission_state)) return 'Submission outcome unresolved. Verify it before trying again; record it here if confirmed.';
+    if(POST_APPLICATION.includes(row.status)) return 'Application recorded. Open details to update verified progress.';
+    if(row.snooze_until && new Date(row.snooze_until)>new Date()) return 'On hold until '+stamp(row.snooze_until)+'. You can still record an action you already completed.';
+    if(row.status==='approved' && row.score==null) return 'Approved for manual tracking. This job is not scored for automation; you can still apply manually.';
+    if(row.status==='approved') return 'Approved. Apply manually and record it here, or optionally prepare with Claude.';
+    if(row.status==='discovered' || row.status==='scored') return 'Manual approval is available. Automatic submission still requires scoring and preparation.';
+    return 'Approve to keep this opportunity, or record an application or referral you already completed.';
+  }
+  function appliedButton(row,full) {
+    // Approving and recording an application are sequential steps, so a card shows one at a
+    // time: Approve first, then I applied. The detail drawer keeps both for manual records.
+    if(!cfg.live || !token || !online) return '';
+    if(POST_APPLICATION.includes(row.status) || !(full || row.status==='approved')) return '';
+    return '<button class="btn '+(row.status==='approved'?'primary':'')+'" data-record="application" data-job="'+row.id+'" '+(busy?'disabled':'')+'>I applied</button>';
+  }
+  function referralButton(row) {
+    if(!cfg.live || !token || !online) return '';
+    return '<button class="btn ghost" data-record="referral" data-job="'+row.id+'" '+(busy?'disabled':'')+'>Referral requested</button>';
+  }
+  // One order everywhere: the step forward, then the record of a step already taken, then the
+  // way out. Undecided reads Approve then Skip; approved reads I applied then Skip.
+  function decisionButtons(row,full=false) {
+    return actionButton(row,'approve','Approve')+appliedButton(row,full)+actionButton(row,'skip','Skip')+(full?referralButton(row):'');
+  }
+  function card(row) {
+    const label=GROUP_LABELS[row.group] || human(row.status);
+    const why=(row.why||[]).slice(0,2).join(' · ') || row.description || 'Awaiting a complete match review.';
+    const reason=row.referral_summary || (row.route && row.route!=='apply' ? row.route_reason : why);
+    const check=selectable(row)?'<input class="card-check" type="checkbox" data-select="'+row.id+'" aria-label="Select '+esc(row.company)+' job '+row.id+'" '+(selected.has(row.id)?'checked':'')+'>':'';
+    const flag=(row.red_flags||[]).length?'<p class="card-reason flag">'+esc(row.red_flags[0])+'</p>':'';
+    return '<article class="panel job-card '+(selected.has(row.id)?'selected':'')+'"><div class="card-head"><div><div class="card-company">'+esc(row.company)+'</div><button class="card-title" data-detail="'+row.id+'">'+esc(row.title)+'</button></div>'+check+'</div><div class="card-meta"><span>'+esc(row.location||'Location unstated')+'</span>'+badge(label,row.group==='blocked'?'bad':row.group==='ready_to_apply'?'good':'')+'<span class="match">'+(row.score==null?'Not scored':esc(row.score)+' / 100')+'</span></div><p class="card-reason">'+esc(String(reason||'').slice(0,210))+'</p>'+flag+'<div class="card-actions">'+decisionButtons(row)+'<button class="btn ghost details" data-detail="'+row.id+'">Details</button></div></article>';
+  }
+  function table(rows) {
+    return '<div class="table-wrap"><table id="jobs"><thead><tr><th></th><th>Company / role</th><th>Location</th><th>Match</th><th>Status</th><th>Discovered</th><th></th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+(selectable(r)?'<input type="checkbox" data-select="'+r.id+'" aria-label="Select job '+r.id+'" '+(selected.has(r.id)?'checked':'')+'>':'')+'</td><td><strong>'+esc(r.company)+'</strong><button class="card-title" data-detail="'+r.id+'">'+esc(r.title)+'</button></td><td>'+esc(r.location||'Unstated')+'</td><td>'+(r.score==null?'—':r.score)+'</td><td>'+badge(GROUP_LABELS[r.group]||r.status)+'</td><td>'+stamp(r.discovered_at)+'</td><td><button class="btn" data-detail="'+r.id+'">Details</button></td></tr>').join('')+'</tbody></table></div>';
+  }
+  function renderList() {
+    const candidates=currentItems().filter(matches).sort(sortRows); filtered=candidates;
+    const pages=Math.max(1,Math.ceil(candidates.length/PAGE_SIZE)); pageNumber=Math.min(pageNumber,pages);
+    shown=candidates.slice((pageNumber-1)*PAGE_SIZE,pageNumber*PAGE_SIZE);
+    $('result-count').textContent=candidates.length+' matching '+(candidates.length===1?'job':'jobs');
+    $('page-info').textContent='Page '+pageNumber+' of '+pages;
+    $('previous').disabled=pageNumber<=1; $('next').disabled=pageNumber>=pages;
+    $('decide').innerHTML=shown.length ? (layout==='cards'?'<div class="cards">'+shown.map(card).join('')+'</div>':table(shown)) : empty(view==='today'?'A clear queue':'No jobs match these filters',view==='today'?'Nothing is waiting for a decision. New matches appear here after the next scan.':'Try a different search or reset the filters.',view==='today');
+    document.querySelectorAll('[data-layout]').forEach(b=>b.classList.toggle('active',b.dataset.layout===layout));
+    const eligible=shown.filter(selectable); $('select-page').disabled=!eligible.length || busy;
+    $('select-page').checked=eligible.length>0 && eligible.every(r=>selected.has(r.id));
+    $('select-page').indeterminate=eligible.some(r=>selected.has(r.id)) && !$('select-page').checked;
+    renderBatch(); persist();
+  }
+  function renderBatch() {
+    $('batch').hidden=!selected.size; $('selected-count').textContent=selected.size+' selected';
+    document.querySelectorAll('[data-batch]').forEach(b=>b.disabled=busy || ![...selected].every(id=>canAct(rowFor(id),b.dataset.batch)));
+  }
+  function renderTabs() {
+    $('queue-tabs').innerHTML=TABS.map(t=>'<button class="tab '+(tab===t[0]?'active':'')+'" data-tab="'+t[0]+'" role="tab" aria-selected="'+(tab===t[0])+'">'+t[1]+'<span>'+tabItems(t[0]).length+'</span></button>').join('');
+  }
+  function renderMetrics() {
+    const f=state.funnel||{}, tracking=state.tracking||{};
+    const metrics=[['review','To review',tabItems('review').length],['approved','Approved',f.approved||0],['active','Active applications',tracking.active_applications??((f.applied||0)+(f.screening||0)+(f.interview||0)+(f.offer||0))],['followups','Follow-ups due',tracking.follow_up_due_count??(state.follow_ups||[]).length]];
+    $('metrics').innerHTML=metrics.map(m=>'<div class="metric" data-metric="'+m[0]+'"><div class="metric-label">'+m[1]+'</div><div class="metric-value">'+m[2]+'</div></div>').join('');
+    $('today-count').textContent=new Set(TABS.flatMap(t=>tabItems(t[0])).map(r=>r.id)).size; $('jobs-count').textContent=(state.rows||[]).length;
+  }
+  function renderWorkflow() {
+    const w=state.workflow||{}, stages=w.stages||DEFAULT_STAGES.map(s=>({id:s[0],label:s[1]}));
+    $('steps').innerHTML=stages.map((s,i)=>{ const step=(w.steps||{})[s.id]||{}; return '<div class="step '+esc(step.state||'')+'" title="'+esc(step.message||human(step.state)||'Not started')+'"><span class="step-number">'+(step.state==='done'?icon('check'):step.state==='skipped'?'–':i+1)+'</span>'+esc(s.label)+'</div>'; }).join('');
+    $('workflow-message').textContent=w.message || (w.status==='done'?'Run complete. Your tracker is up to date.':w.status==='failed'?'This run needs attention. Check failed stages.':'Run /jobs-day in Claude Code to begin.');
+  }
+  function renderBoard() {
+    $('board').innerHTML=(state.kanban||[]).map(col=>'<div class="board-column" data-stage="'+esc(col.status)+'"><h3>'+esc(col.status)+' <span>'+col.count+'</span></h3>'+((col.cards||[]).map(r=>'<button class="board-card" data-detail="'+r.id+'" data-drag-job="'+r.id+'" draggable="'+(cfg.live && online && !busy && (rowFor(r.id)?.allowed_moves||[]).length>0)+'" aria-describedby="board-help"><strong>'+esc(r.company)+'</strong><p>'+esc(r.title)+'</p><span class="tag">'+esc(r.location)+'</span> <span class="match">'+(r.score==null?'':r.score)+'</span></button>').join('') || '<div class="board-empty">No jobs at this stage</div>')+(col.count>(col.cards||[]).length?'<div class="board-empty">Showing the top '+col.cards.length+' of '+col.count+'</div>':'')+'</div>').join('');
+  }
+  function followupMarkup() {
+    const items=(state.tracking||{}).follow_ups || (state.follow_ups||[]);
+    return items.map(r=>'<div class="health-row"><div>'+badge(r.kind==='referral'?'Referral follow-up':'Application follow-up')+(r.job_id?'<button class="card-title" data-detail="'+r.job_id+'">'+esc(r.company||r.job_company)+' · '+esc(r.title||r.job_title)+'</button>':'')+(r.contact_name?'<span class="card-company">'+esc(r.contact_name)+'</span>':'')+'</div><span>'+stamp(r.due_at||r.next_follow_up_at||r.last_activity_at)+'</span></div>').join('') || '<p class="card-reason">No follow-ups due yet. Reminders appear after an application or referral is recorded and its due date arrives.</p>';
+  }
+  function healthRow(label,value) { return '<div class="health-row"><span>'+esc(label)+'</span><span>'+esc(value)+'</span></div>'; }
+  function renderHealth() {
+    const h=(state.plan||{}).health||{}, p=(state.plan||{}).progress||{}, failures=h.sources_failed||[];
+    const scheduled=h.last_scheduled_run||{};
+    $('health-grid').innerHTML='<div class="panel health-card"><h3>Discovery & inbox</h3>'+healthRow('Last scan',stamp(h.last_scan_at))+healthRow('Scan freshness',h.scan_stale?'Refresh recommended':'Recent')+healthRow('Sources without recorded errors',h.sources_ok||0)+healthRow('Sources with errors',failures.length)+healthRow('Last inbox sync',stamp(h.last_mail_sync_at))+failures.map(f=>'<div class="health-error"><strong>'+esc(f.company||f.source)+'</strong><p>'+esc(f.error)+'</p></div>').join('')+'</div><div class="panel health-card"><h3>Follow-through</h3>'+healthRow('Submitted today',(p.submitted_today||[]).length)+healthRow('Referral requests awaiting replies',(p.outreach_awaiting_reply||[]).length)+healthRow('Referrals received',p.referrals_received||0)+healthRow('Mail needing review',((state.plan||{}).needs_input?.mail_review||[]).length)+healthRow('Last scheduled run',scheduled.started_at?stamp(scheduled.started_at):'Not recorded')+healthRow('Scheduler outcome',scheduled.error|| (scheduled.ok===true?'Completed':scheduled.ok===false?'Needs attention':'Not recorded'))+'</div><div class="panel health-card"><h3>Follow-ups due</h3>'+followupMarkup()+'</div>';
+    const warnings=[];
+    if(failures.length) warnings.push(failures.length+' source'+(failures.length===1?'':'s')+' reported an error on the last scan.');
+    if(h.scan_stale) warnings.push('The last scan is missing or stale.');
+    if((h.sources_running||[]).length) warnings.push(h.sources_running.length+' source runs have no completed result yet.');
+    const reviewMail=((state.plan||{}).needs_input||{}).mail_review||[];
+    if(reviewMail.length) warnings.push(reviewMail.length+' email decision'+(reviewMail.length===1?'':'s')+' need review in Claude.');
+    $('health-notice').hidden=!warnings.length; $('health-notice').textContent=warnings.join(' ');
+  }
+  function populateFilters() {
+    const currentLocation=filtersRestored?$('location-filter').value:(prefs.location||''), currentStatus=filtersRestored?$('st').value:(prefs.status||'');
+    const locations=[...new Set((state.rows||[]).map(r=>r.location).filter(Boolean))].sort();
+    $('location-filter').innerHTML='<option value="">All locations</option>'+locations.map(l=>'<option value="'+esc(l)+'">'+esc(l)+'</option>').join('');
+    if(locations.includes(currentLocation)) $('location-filter').value=currentLocation;
+    const statuses=[...new Set((state.rows||[]).map(r=>r.status).filter(Boolean))];
+    $('st').innerHTML='<option value="">All statuses</option>'+statuses.map(s=>'<option value="'+esc(s)+'">'+esc(human(s))+' ('+state.funnel[s]+')</option>').join('');
+    if(statuses.includes(currentStatus)) $('st').value=currentStatus;
+    if(state.plan || !cfg.live) filtersRestored=true;
+  }
+  function setView(next) {
+    view=['today','jobs','pipeline','health'].includes(next)?next:'today'; pageNumber=1;
+    document.querySelectorAll('.nav [data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
+    const headings={today:['Today','Shortlisted roles waiting for your decision.'],jobs:['All jobs','Every tracked role. Filter, sort, or open one for details.'],pipeline:['Pipeline','Every open role, from first review to final decision.'],health:['Run health','What the last run did, and what needs another look.']};
+    $('view-title').textContent=headings[view][0]; $('view-subtitle').textContent=headings[view][1];
+    $('list-section').hidden=!['today','jobs'].includes(view); $('pipeline-section').hidden=view!=='pipeline'; $('health-section').hidden=view!=='health';
+    $('queue-tabs').hidden=view!=='today'; $('list-title').textContent=view==='today'?'Action queue':'All tracked jobs';
+    $('workflow').hidden=!cfg.live; renderList(); persist();
+  }
+  function render() {
+    for(const id of selected) if(!selectable(rowFor(id))) selected.delete(id);
+    renderMetrics(); renderWorkflow(); renderTabs(); populateFilters(); renderList(); renderBoard(); renderHealth();
+  }
+  async function api(path, options={}) {
+    const response=await fetch(path,{...options,headers:{'Content-Type':'application/json','X-JobHunt-Token':token},cache:'no-store'});
+    const data=await response.json();
+    if(!response.ok) { const error=new Error(data.error || 'Request failed'); error.status=response.status; throw error; }
+    return data;
+  }
+  function say(message) { const dialogs=[...document.querySelectorAll('dialog[open]')]; (dialogs.at(-1)||document.body).appendChild($('toast')); $('toast').textContent=message; $('toast').hidden=false; clearTimeout(say.timer); say.timer=setTimeout(()=>$('toast').hidden=true,4500); }
+  async function refresh() {
+    if(!cfg.live || !token) return;
+    if(refreshing || busy || draggedId!==null) { refreshQueued=true; return; }
+    refreshQueued=false; clearTimeout(timer); refreshing=true; $('refresh').disabled=true;
+    try {
+      state=await api('/api/state'); online=true; lastSuccess=new Date();
+      $('connection-error').hidden=true;
+      if(draggedId===null) { render(); if(detailId && !detailLoading) loadDetail(detailId,true); }
+      else refreshQueued=true;
+    } catch(error) {
+      online=false; $('connection-error').hidden=false;
+      $('connection-error').textContent='Updates paused. '+error.message+' Your last view and unsaved notes have been kept.';
+      if(error.status===403) { token=''; saveStore(sessionStorage,AUTH_KEY,''); $('connection-error').textContent=ACCESS_HINT; }
+      renderList();
+    } finally {
+      refreshing=false; $('refresh').disabled=false;
+      $('connection').className='live-status '+(online?'online':'offline');
+      $('connection-text').textContent=online?'Live · '+lastSuccess.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}):'Disconnected';
+      timer=setTimeout(()=>{ if(!document.hidden) refresh(); else timer=setTimeout(refresh,REFRESH_MS); },REFRESH_MS);
+      if(refreshQueued && !busy && draggedId===null) queueMicrotask(refresh);
+    }
+  }
+  function openAction(action,ids) {
+    const rows=ids.map(rowFor).filter(Boolean);
+    if(!rows.length || rows.some(r=>!canAct(r,action))) return say('Refresh and select jobs eligible for this decision.');
+    if(rows.length>BATCH_LIMIT) return say('Choose at most '+BATCH_LIMIT+' jobs per batch.');
+    pendingAction={action,rows};
+    const count=rows.length, names=rows.slice(0,4).map(r=>r.company).join(', ')+(count>4?' and '+(count-4)+' more':'');
+    $('confirm-title').textContent=(action==='approve'?'Approve':'Skip')+(count===1?' this job?':' '+count+' jobs?');
+    $('confirm-message').textContent=names+'. '+(action==='approve'?'This saves your decision. It does not submit an application or prepare a form; apply manually or continue with Claude.':'Skipped jobs leave the review queue. Existing applications are not affected.');
+    $('confirm-button').textContent=(action==='approve'?'Approve':'Skip')+(count===1?' job':' jobs');
+    $('confirm-dialog').showModal();
+  }
+  async function submitAction(event) {
+    event.preventDefault(); if(!pendingAction || busy) return;
+    busy=true; $('confirm-button').disabled=true;
+    const {action,rows}=pendingAction;
+    const jobs=rows.map(r=>({job_id:r.id,expected_status:r.status,expected_updated_at:r.updated_at}));
+    try {
+      const result=await api('/api/decisions',{method:'POST',body:JSON.stringify({action,jobs})});
+      const success=result.results.filter(r=>r.ok), failed=result.results.filter(r=>!r.ok);
+      success.forEach(r=>selected.delete(r.job_id));
+      say(success.length+' updated'+(failed.length?'; '+failed.length+' need attention: '+failed[0].error:'. No applications submitted.'));
+      $('confirm-dialog').close(); pendingAction=null;
+    } catch(error) { say(error.message); }
+    finally { busy=false; $('confirm-button').disabled=false; await refresh(); }
+  }
+  function listHtml(values,cls='') { return '<ul class="reason-list '+cls+'">'+(values||[]).map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>'; }
+  function detailMarkup(job,contacts) {
+    const reasons=job.score_reasons||{}, stateName=job.pipeline_status;
+    const prompts=stateName==='approved'?'Prepare job #'+job.id+' and review the answers with me. Do not submit until I confirm.':'Review job #'+job.id+' with me before preparing or submitting it.';
+    const row={...job,status:stateName};
+    let body='<div class="actions">'+badge(stateName)+link(job.apply_url||job.url,'Open posting')+decisionButtons(row,true)+'</div>';
+    body+='<p class="next-step">'+esc(stepHelp(row))+'</p>';
+    body+=fillBlock(job);
+    if(job.application) body+='<h3>Application record</h3><p class="card-reason">Applied '+stamp(job.application.submitted_at||job.application.applied_at)+' · '+esc(human(job.application.submitted_via||'recorded'))+'</p>'+(job.application.confirmation_ref?'<div class="description">'+esc(job.application.confirmation_ref)+'</div>':'');
+    if(['applied','screening'].includes(stateName) && job.follow_up_at) body+='<p class="card-reason">Next application follow-up: '+stamp(job.follow_up_at)+'. It is not due immediately after applying.</p>';
+    body+='<h3>Claude preparation</h3><p class="card-reason">Optional. Paste this prompt into your Claude Code session to prepare the application.</p><button class="btn" data-copy="'+esc(prompts)+'">Copy preparation prompt</button>';
+    body+='<h3>Your referral requests</h3>'+referralHistory(job);
+    body+='<h3>Why this role</h3>'+(reasons.reasons?.length?listHtml(reasons.reasons):'<p class="card-reason">This job has not received a detailed fit review yet.</p>');
+    if(reasons.red_flags?.length) body+='<h3>Things to check</h3>'+listHtml(reasons.red_flags,'flags');
+    if(job.salary_text) body+='<h3>Compensation as posted</h3><p class="card-reason">'+esc(job.salary_text)+'</p>';
+    body+='<h3>Job description</h3><div class="description">'+esc(job.description_md||'No complete description has been fetched yet.')+'</div>';
+    body+='<h3>Referral connections</h3>'+contactsMarkup(job,contacts);
+    body+='<h3>Sources</h3><div class="actions">'+(job.sources||[]).map(s=>link(s.url,human(s.source))).join('')+'</div>';
+    body+='<h3>History</h3><div class="timeline">'+(job.events||[]).slice().reverse().map(e=>'<div class="event"><small>'+stamp(e.at)+' · '+esc(human(e.event_type))+'</small><p>'+esc(e.note||(e.to_status?human(e.from_status)+' → '+human(e.to_status):'Update recorded'))+'</p></div>').join('')+'</div>';
+    return body;
+  }
+  // Review filling never clicks Submit. The managed browser stays open for the human.
+  // Closing that browser takes confirmation; stale session controls cannot affect a new run.
+  function fillBlock(job) {
+    return cfg.live && token ? '<section id="fill-panel">'+fillContents(job)+'</section>' : '';
+  }
+  function fillContents(job) {
+    const ready=job.fill_readiness||{}, run=job.fill_run;
+    let html='<h3>Fill for review</h3>';
+    if(run) {
+      html+='<p id="fill-status" role="status">'+esc(human(run.state))+': '+esc(run.message)+'</p>';
+      html+='<p class="card-reason">'+esc(run.filled||0)+' fields filled. Application status is unchanged until you record a verified submission.</p>';
+      if(run.questions?.length) html+=listHtml(run.questions,'flags');
+      if(!run.finished_at) {
+        const attrs=' data-run="'+esc(run.run_id)+'" '+(busy?'disabled':'');
+        if(['waiting_for_login','waiting_for_captcha'].includes(run.state)) html+='<button class="btn primary" data-fill-resume="'+job.id+'"'+attrs+'>Continue filling</button> ';
+        if(run.state!=='stopping') {
+          const armed=fillCloseArmed===run.run_id;
+          html+='<button class="btn" data-fill-close="'+job.id+'"'+attrs+'>'+(armed?'Yes, close fill window':'Close fill window')+'</button>';
+          if(armed) html+=' <button class="btn ghost" data-fill-keep="'+job.id+'">Keep open</button><p class="card-reason">Closing may discard unsaved employer-side edits. It does not record an application.</p>';
+        }
+        return html;
+      }
+    }
+    if(!ready.ok) return html+'<p class="card-reason">'+esc(ready.reason||'Not available for this job.')+'</p>';
+    html+='<p class="next-step">Opens a separate Chrome window and fills verified saved details and your resume. The employer may autosave drafts or uploads. Unknown answers stay blank. You review, edit and click Submit on the employer site yourself.</p>';
+    return html+'<button class="btn primary" data-fill="'+job.id+'" '+(busy||!online?'disabled':'')+'>Fill for review</button>';
+  }
+  function paintFill() {
+    const target=$('fill-panel');
+    if(target && detailData && detailData.id===detailId) target.innerHTML=fillContents(detailData);
+  }
+  async function startFill(jobId) {
+    if(busy) return;
+    const requestId=fillRequestIds.get(jobId)||crypto.randomUUID();
+    fillRequestIds.set(jobId,requestId); busy=true; paintFill();
+    try {
+      const data=await api('/api/fill-review',{method:'POST',body:JSON.stringify({job_id:jobId,request_id:requestId,confirmed:true,revision:cfg.revision})});
+      fillRequestIds.delete(jobId);
+      if(detailData?.id===jobId) detailData.fill_run=data.run;
+      say('Filling for review only. Watch the browser window; you submit there yourself.');
+    } catch(error) { say(error.message); }
+    finally { busy=false; paintFill(); }
+    if(detailId===jobId) pollFill(jobId);
+  }
+  async function controlFill(jobId,runId,action) {
+    if(busy) return;
+    if(action==='close' && fillCloseArmed!==runId) { fillCloseArmed=runId; paintFill(); return; }
+    busy=true; paintFill();
+    try {
+      const data=await api('/api/fill-control',{method:'POST',body:JSON.stringify({job_id:jobId,run_id:runId,action,confirmed:true,revision:cfg.revision})});
+      fillCloseArmed=null;
+      if(detailData?.id===jobId) detailData.fill_run=data.run;
+    } catch(error) { say(error.message); }
+    finally { busy=false; paintFill(); }
+    if(detailId===jobId) pollFill(jobId);
+  }
+  async function pollFill(jobId) {
+    clearTimeout(fillTimer);
+    const version=detailVersion;
+    let data;
+    try { data=await api('/api/fill-status?job_id='+jobId); } catch(error) { return; }
+    if(detailId!==jobId || detailVersion!==version || !$('detail').open) return;
+    if(detailData) detailData.fill_run=data.run;
+    paintFill();
+    if(data.run && !data.run.finished_at) fillTimer=setTimeout(()=>pollFill(jobId),REFRESH_MS);
+  }
+  function referralHistory(job) {
+    return (job.outreach||[]).map(r=>'<div class="contact referral-record" data-outcome="'+esc(r.referral_outcome)+'"><strong>'+esc(r.contact_name)+'</strong> '+badge(r.referral_outcome==='completed'?'Referral received':r.referral_outcome==='declined'?'Declined':r.replied_at?'Reply received; referral pending':'Awaiting referral')+'<p>Requested '+stamp(r.sent_at)+' via '+esc(human(r.channel))+'</p>'+(r.followup_due?'<p>Follow-up due '+stamp(r.followup_due)+'</p>':'')+(r.response?'<p>'+esc(r.response)+'</p>':'')+(r.referral_outcome==='pending'?'<div class="actions">'+[['completed','Referral received'],['declined','Declined'],['reply','Reply only']].map(a=>'<button class="btn" data-record="outcome" data-job="'+job.id+'" data-outreach="'+r.id+'" data-outcome="'+a[0]+'">'+a[1]+'</button>').join('')+'</div>':'')+'</div>').join('') || '<p class="card-reason">No referral request is recorded. Opening LinkedIn does not mean a request was sent.</p>';
+  }
+  function contactsMarkup(job,contacts) {
+    if(!contacts.length) return '<p class="card-reason">No eligible connections found at this company. You can still apply directly.</p>';
+    return contacts.map(c=>'<div class="contact"><strong>'+esc(c.name)+'</strong> <span class="tag">Match '+c.score+'</span><p>'+esc(c.title||'Role not listed')+'</p><p>'+esc((c.reasons||[]).join(' · '))+'</p><div class="actions">'+link(c.linkedin_url,'Open LinkedIn')+'<button class="btn" data-record="referral" data-job="'+job.id+'" data-contact="'+c.contact_id+'">I requested this referral</button><button class="btn" data-copy="'+esc('Draft a referral message for job #'+job.id+' to contact #'+c.contact_id+'. Show it to me for review; do not send it.')+'">Copy request for Claude</button></div></div>').join('');
+  }
+  async function loadDetail(id,quiet=false) {
+    if(!cfg.live) {
+      const row=rowFor(id); if(!row) return;
+      $('detail-title').textContent=row.title; $('detail-subtitle').textContent=row.company;
+      $('detail-main').innerHTML='<p class="card-reason">This is a static snapshot. Open the live dashboard for full details and actions.</p><div class="description">'+esc(row.description)+'</div>'+link(row.apply_url||row.url,'Open posting');
+      $('note-form').hidden=true; $('status-form').hidden=true; $('detail').showModal(); return;
+    }
+    if(!token || !online) return say('Reconnect the dashboard to open job details.');
+    const version=++detailVersion; detailId=Number(id); detailLoading=true;
+    if(!quiet) { detailData=null; $('note-form').hidden=true; $('status-form').hidden=true; $('detail-title').textContent='Loading job'; $('detail-subtitle').textContent=''; $('detail-main').innerHTML=''; $('note-text').value=noteDrafts.get(detailId)||''; $('status-note').value=statusDrafts.get(detailId)||''; if(!$('detail').open) $('detail').showModal(); }
+    try {
+      const [job,ref]=await Promise.all([api('/api/job?job_id='+id),api('/api/referrals?job_id='+id)]);
+      if(version!==detailVersion || detailId!==Number(id)) return;
+      detailData=job; detailContacts=ref.contacts||[]; $('detail-id').textContent='JOB #'+job.id+' · '+human(job.ats_type||'ATS not identified');
+      $('detail-title').textContent=job.title; $('detail-subtitle').textContent=job.company+' · '+(job.location||'Location unstated');
+      const scroll=$('detail').scrollTop; $('detail-main').innerHTML=detailMarkup(job,ref.contacts||[]); $('detail').scrollTop=scroll;
+      if(job.fill_run && !job.fill_run.finished_at) pollFill(Number(id));
+      $('note-form').hidden=false; const old=$('status-select').value;
+      $('status-form').hidden=!job.allowed_statuses.length; $('status-select').innerHTML=job.allowed_statuses.map(s=>'<option value="'+s+'">'+esc(human(s))+'</option>').join('');
+      if(job.allowed_statuses.includes(old)) $('status-select').value=old;
+    } catch(error) { if(version===detailVersion) { $('detail-main').textContent=error.message; say(error.message); } }
+    finally { if(version===detailVersion) detailLoading=false; }
+  }
+  async function saveNote(event) {
+    event.preventDefault(); if(busy || !detailId || !online) return;
+    const id=detailId,text=$('note-text').value.trim(); if(!text) return say('Write a note first.');
+    busy=true; event.submitter.disabled=true;
+    try { await api('/api/note',{method:'POST',body:JSON.stringify({job_id:id,note:text})}); noteDrafts.delete(id); if(detailId===id) $('note-text').value=''; say('Note saved.'); if(detailId===id && $('detail').open) await loadDetail(id,true); }
+    catch(error) { say(error.message); }
+    finally { busy=false; event.submitter.disabled=false; refresh(); }
+  }
+  async function saveStatus(event) {
+    event.preventDefault(); if(busy || !detailData || !online) return;
+    const note=$('status-note').value.trim(); if(!note) return say('Add the evidence for this status change.');
+    busy=true; event.submitter.disabled=true; const id=detailId;
+    try { await api('/api/status',{method:'POST',body:JSON.stringify({job_id:id,status:$('status-select').value,note,expected_status:detailData.pipeline_status,expected_updated_at:detailData.updated_at})}); statusDrafts.delete(id); if(detailId===id) $('status-note').value=''; say('Verified progress recorded.'); if(detailId===id && $('detail').open) await loadDetail(id,true); }
+    catch(error) { say(error.message); }
+    finally { busy=false; event.submitter.disabled=false; refresh(); }
+  }
+  async function copyText(text) {
+    $('handoff-text').value=text; $('handoff-status').textContent='';
+    if(!$('handoff-dialog').open) $('handoff-dialog').showModal();
+    await copyPrompt();
+  }
+  async function copyPrompt() {
+    try { await navigator.clipboard.writeText($('handoff-text').value); $('handoff-status').textContent='Copied. Paste this into your Claude Code terminal; nothing has been executed.'; }
+    catch (_) { $('handoff-text').focus(); $('handoff-text').select(); $('handoff-status').textContent='Clipboard access is unavailable. Copy the selected text manually with Ctrl+C or Command+C, then paste into Claude Code.'; }
+  }
+  function localDateTime(d) { return localDate(d)+'T'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
+  async function openRecord(mode,id,extra={}) {
+    if(busy || recording || !cfg.live || !token || !online) return say('Reconnect before recording an update.');
+    busy=true;
+    try {
+      const job=await api('/api/job?job_id='+id);
+      const refs=mode==='referral'?await api('/api/referrals?job_id='+id):{contacts:[]};
+      recordContext={mode,job,extra}; $('record-form').reset(); $('record-error').textContent='';
+      const application=mode==='application', referral=mode==='referral', progress=mode==='status';
+      $('record-title').textContent=application?'Record completed application':referral?'Record referral request':progress?'Record '+human(extra.target):'Record referral '+human(extra.outcome);
+      $('record-context').textContent='#'+id+' · '+job.company+' · '+job.title+' (currently '+human(job.pipeline_status)+')';
+      $('record-explanation').textContent=application?'Use this after you have submitted the application yourself. It records history only; it does not submit a form.':referral?'Use this after you have sent a referral request. Opening LinkedIn or copying a draft is not a sent request.':'Record only progress that you have verified. This does not contact the employer or send a message.';
+      $('record-at').value=localDateTime(new Date()); $('record-at').required=!progress; $('record-date-field').hidden=progress;
+      $('record-channel-field').hidden=!(application||referral); $('record-reference-field').hidden=!application;
+      $('record-contact-field').hidden=!referral;
+      const channels=application?[['manual','Company career site'],['easy_apply','LinkedIn Easy Apply'],['email','Email application'],['assisted','Assisted application'],['other','Other']]:[['linkedin','LinkedIn'],['email','Email'],['other','Other']];
+      $('record-channel').innerHTML=channels.map(c=>'<option value="'+c[0]+'">'+c[1]+'</option>').join('');
+      const contacts=new Map([...(job.outreach||[]).map(r=>({contact_id:r.contact_id,name:r.contact_name})),...(refs.contacts||[])].map(c=>[String(c.contact_id),c]));
+      $('record-contact').innerHTML='<option value="">Someone else / enter name</option>'+[...contacts.values()].map(c=>'<option value="'+c.contact_id+'">'+esc(c.name)+'</option>').join('');
+      $('record-contact').value=contacts.has(String(extra.contact))?String(extra.contact):'';
+      $('record-contact-name').required=referral&&!$('record-contact').value;
+      $('record-confirm-label').textContent=application?'I have already submitted this application.':referral?'I have already sent this referral request.':'I verified this update and want to save it to the tracker.';
+      $('record-save').textContent=application?'Save application':referral?'Save request':progress?'Save status':'Save outcome';
+      $('record-dialog').showModal();
+    } catch(error) { say(error.message); }
+    finally { busy=false; if(refreshQueued) refresh(); }
+  }
+  async function saveRecord(event) {
+    event.preventDefault(); if(recording || busy || !recordContext || !online) return;
+    const context=recordContext, {mode,job,extra}=context;
+    const payload={job_id:job.id,confirmed:$('record-confirm').checked,note:$('record-note').value.trim(),expected_status:job.pipeline_status,expected_updated_at:job.updated_at};
+    if(mode!=='status') payload.at=new Date($('record-at').value).toISOString();
+    if(mode==='application') { payload.channel=$('record-channel').value; payload.reference=$('record-reference').value; }
+    if(mode==='referral') { payload.channel=$('record-channel').value; payload.contact_id=$('record-contact').value||null; payload.contact_name=$('record-contact-name').value; }
+    if(mode==='status') payload.status=extra.target;
+    if(mode==='outcome') { payload.outreach_id=extra.outreach; payload.outcome=extra.outcome; }
+    recording=true; busy=true; $('record-save').disabled=true; $('record-cancel').disabled=true; $('record-error').textContent='';
+    try {
+      const path={application:'/api/applied',referral:'/api/referral',status:'/api/status',outcome:'/api/referral-outcome'}[mode];
+      const result=await api(path,{method:'POST',body:JSON.stringify(payload)});
+      $('record-dialog').close(); recordContext=null;
+      say(result.already_recorded?'Already recorded; existing history was preserved.':mode==='application'?'Application recorded.':mode==='referral'?'Referral request recorded. No message was sent by the dashboard.':'Verified progress recorded.');
+    } catch(error) {
+      $('record-error').textContent=error.message;
+      if(error.status===409) { const latest=await api('/api/job?job_id='+job.id).catch(()=>null); if(latest) { context.job=latest; $('record-context').textContent='#'+job.id+' · Current status: '+human(latest.pipeline_status)+'. Review before saving again.'; } }
+    } finally { recording=false; busy=false; $('record-save').disabled=false; $('record-cancel').disabled=false; await refresh(); }
+  }
+  function moveJob(id,target) {
+    const row=rowFor(id); if(!row || row.status===target) return;
+    if(!(row.allowed_moves||[]).includes(target)) return say('That move is not available. Open the job for its current status and valid actions.');
+    if(target==='approved') return openAction('approve',[id]);
+    if(target==='applied') return openRecord('application',id);
+    return openRecord('status',id,{target});
+  }
+  function setTheme(theme) { document.documentElement.dataset.theme=theme; saveStore(localStorage,THEME_KEY,theme); $('theme').title=theme==='dark'?'Use light mode':'Use dark mode'; }
+  document.addEventListener('click',event=>{
+    const b=event.target.closest('button'); if(!b || b.disabled) return;
+    if(b.dataset.view) setView(b.dataset.view);
+    if(b.dataset.tab) { tab=b.dataset.tab; pageNumber=1; renderTabs(); renderList(); }
+    if(b.dataset.layout) { layout=b.dataset.layout; renderList(); }
+    if(b.dataset.detail) loadDetail(Number(b.dataset.detail));
+    if(b.dataset.action) openAction(b.dataset.action,[Number(b.dataset.id)]);
+    if(b.dataset.batch) openAction(b.dataset.batch,[...selected]);
+    if(b.dataset.copy) copyText(b.dataset.copy);
+    if(b.dataset.record) openRecord(b.dataset.record,Number(b.dataset.job),{contact:b.dataset.contact,outreach:Number(b.dataset.outreach),outcome:b.dataset.outcome});
+    if(b.dataset.fill) startFill(Number(b.dataset.fill));
+    if(b.dataset.fillResume) controlFill(Number(b.dataset.fillResume),b.dataset.run,'resume');
+    if(b.dataset.fillClose) controlFill(Number(b.dataset.fillClose),b.dataset.run,'close');
+    if(b.dataset.fillKeep) { fillCloseArmed=null; paintFill(); }
+  });
+  document.addEventListener('change',event=>{ if(event.target.dataset.select) { const id=Number(event.target.dataset.select); if(event.target.checked) selected.add(id); else selected.delete(id); renderList(); } });
+  $('select-page').addEventListener('change',event=>{ shown.filter(selectable).forEach(r=>event.target.checked?selected.add(r.id):selected.delete(r.id)); renderList(); });
+  $('q').addEventListener('input',()=>{ pageNumber=1; renderList(); });
+  ['location-filter','st','min-score','sort','remote-only'].forEach(id=>$(id).addEventListener('change',()=>{pageNumber=1;renderList();}));
+  $('clear-filters').onclick=()=>{ $('q').value=''; $('location-filter').value=''; $('st').value=''; $('min-score').value='0'; $('sort').value='score'; $('remote-only').checked=false; prefs={};pageNumber=1;renderList(); };
+  $('previous').onclick=()=>{pageNumber--;renderList();}; $('next').onclick=()=>{pageNumber++;renderList();};
+  $('clear-selection').onclick=()=>{selected.clear();renderList();}; $('refresh').onclick=refresh;
+  $('theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+  $('confirm-form').onsubmit=submitAction; $('cancel-confirm').onclick=()=>$('confirm-dialog').close();
+  $('close-detail').onclick=()=>$('detail').close(); $('detail').addEventListener('close',()=>{detailId=null;detailData=null;detailVersion++;detailLoading=false;fillCloseArmed=null;clearTimeout(fillTimer);});
+  $('note-form').onsubmit=saveNote; $('status-form').onsubmit=saveStatus;
+  $('record-form').onsubmit=saveRecord; $('record-cancel').onclick=()=>$('record-dialog').close();
+  $('record-dialog').addEventListener('cancel',event=>{if(recording) event.preventDefault();});
+  $('record-contact').onchange=()=>{$('record-contact-name').required=!$('record-contact').value;};
+  $('handoff-copy').onclick=copyPrompt; $('handoff-close').onclick=()=>$('handoff-dialog').close();
+  $('board').addEventListener('dragstart',event=>{
+    const card=event.target.closest('[data-drag-job]'); if(!card || busy || !online) { event.preventDefault(); return; }
+    draggedId=Number(card.dataset.dragJob); clearTimeout(timer); card.classList.add('dragging');
+    event.dataTransfer.setData('text/plain',String(draggedId)); event.dataTransfer.effectAllowed='move';
+  });
+  $('board').addEventListener('dragover',event=>{
+    const column=event.target.closest('[data-stage]'); if(!column || draggedId===null) return;
+    event.preventDefault();
+    const allowed=(rowFor(draggedId)?.allowed_moves||[]).includes(column.dataset.stage);
+    event.dataTransfer.dropEffect=allowed?'move':'none';
+    document.querySelectorAll('.drop-ready').forEach(el=>el.classList.remove('drop-ready'));
+    if(allowed) column.classList.add('drop-ready');
+  });
+  $('board').addEventListener('drop',event=>{
+    const column=event.target.closest('[data-stage]'); if(!column || draggedId===null) return;
+    event.preventDefault(); const id=draggedId; draggedId=null;
+    document.querySelectorAll('.drop-ready,.dragging').forEach(el=>el.classList.remove('drop-ready','dragging'));
+    moveJob(id,column.dataset.stage);
+  });
+  $('board').addEventListener('dragend',()=>{
+    draggedId=null; document.querySelectorAll('.drop-ready,.dragging').forEach(el=>el.classList.remove('drop-ready','dragging')); refresh();
+  });
+  $('note-text').oninput=()=>{if(detailId) noteDrafts.set(detailId,$('note-text').value);}; $('status-note').oninput=()=>{if(detailId) statusDrafts.set(detailId,$('status-note').value);};
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden) refresh();});
+  document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));
+  setTheme(readStore(localStorage,THEME_KEY,'light'));
+  $('q').value=prefs.q||''; $('min-score').value=prefs.min||'0'; $('sort').value=prefs.sort||'score'; $('remote-only').checked=!!prefs.remote;
+  render(); setView(view);
+  if(cfg.live) { if(token) refresh(); else { $('connection-text').textContent='Access needed'; $('connection-error').hidden=false; $('connection-error').textContent=ACCESS_HINT; } }
+  else { $('connection-text').textContent='Read-only snapshot · '+stamp(state.generated_at); $('refresh').hidden=true; $('select-page').closest('label').hidden=true; }
+})();
+</script>
+</body>
+</html>

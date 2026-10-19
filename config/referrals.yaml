@@ -1,0 +1,39 @@
+# Referral ranking and outreach settings. Used by `uv run jobhunt refer ...` and /jobs-refer.
+# Contacts come only from the official LinkedIn Connections.csv export; nothing is scraped.
+
+weights:
+  same_team_or_role: 40      # contact title shares a role token with the job title
+  engineer: 30
+  recruiter: 25
+  manager: 20
+  recent_connection: 10      # connected within `connected_within_years`
+  prior_reply: 15            # they replied to an earlier message
+  cooldown_penalty: -100     # asked within `cooldown_days`: do not ask again yet
+
+connected_within_years: 2
+cooldown_days: 60
+max_suggestions: 5
+followup_days: [7, 14]       # first follow-up after 7 days, second after 14, then stop
+
+# Referral first or apply now. A referral is only recommended when the best contact scores
+# at least min_contact_score and the posting is fresh; once asked, the job waits wait_days
+# for a reply and then surfaces as "apply directly". A weak contact never delays a strong
+# application.
+routing:
+  enabled: true
+  min_contact_score: 50
+  wait_days: 5
+  posted_within_days: 21
+
+# Tokens are matched on word boundaries, case-insensitively.
+role_tokens:
+  [backend, back end, platform, .net, dotnet, c#, csharp, python, api, cloud, infrastructure,
+   payments, data, full stack, fullstack, software, distributed, microservices, sre, devops]
+engineer_tokens: [engineer, developer, sde, swe, programmer, architect, technologist]
+# Whole-word matches: list each form you want (recruiter and recruiting, not the stem recruit).
+recruiter_tokens: [recruiter, recruiting, recruitment, talent, sourcing, sourcer, people, hiring]
+manager_tokens: [manager, lead, head, director, vp, cto, founder, principal]
+
+# Filled into {resume_link} and {one_liner} when the draft command gets no --one-liner.
+# The sender's resume link and default one-liner come from config/profile.yaml
+# (candidate.links.portfolio, candidate.one_liner). Set resume_link / default_one_liner here only to override.

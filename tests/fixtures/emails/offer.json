@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "thread_id": "t_offer_linear",
+  "gmail_id": "m_t_offer_linear",
+  "from": "Linear People <people@linear.app>",
+  "from_name": "Linear People",
+  "from_domain": "linear.app",
+  "to": "candidate@example.com",
+  "date": "2026-09-08T06:00:00Z",
+  "subject": "Your offer from Linear",
+  "snippet": "Hi Alex, we are excited to offer you the position of Software Engineer, Backend at Linear. Please find the offer letter attached with compensation details and the proposed joining date. Let us know if you have any questions.",
+  "body_text": "Hi Alex, we are excited to offer you the position of Software Engineer, Backend at Linear. Please find the offer letter attached with compensation details and the proposed joining date. Let us know if you have any questions.",
+  "links": [],
+  "query_tag": "offer"
+}

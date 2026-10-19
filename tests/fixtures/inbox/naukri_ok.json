@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "email": {
+    "gmail_id": "18f3c2a1deadbeef",
+    "thread_id": "18f3c2a1deadbeef",
+    "from": "naukrialerts@naukri.com",
+    "subject": "New jobs for .NET Developer",
+    "received_at": "2026-09-08T03:10:00Z",
+    "alert_source": "naukri"
+  },
+  "jobs": [
+    {
+      "title": ".NET Developer",
+      "company": "Initech Technologies Pvt Ltd",
+      "location": "Hyderabad",
+      "url": "https://www.naukri.com/job-listings-dot-net-developer-initech-hyderabad-3-to-6-years-090926012345?src=jobalert",
+      "posted_text": "Today",
+      "salary_text": "12-20 Lacs PA",
+      "snippet": "C# ASP.NET Core SQL Server"
+    }
+  ]
+}

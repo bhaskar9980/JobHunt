@@ -1,0 +1,58 @@
+[project]
+name = "jobhunt"
+version = "0.1.0"
+description = "Personal job-hunt assistant: discovery, tracking and approve-then-submit applications"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "typer>=0.12",
+  "httpx>=0.27",
+  "pyyaml>=6",
+  "markdownify>=0.13",
+  "feedparser>=6",
+  "jinja2>=3.1",
+  "rapidfuzz>=3.9",
+  "playwright>=1.47",
+  "pypdf>=4",
+  "python-dotenv>=1",
+  "beautifulsoup4>=4.15.0",
+]
+
+[project.scripts]
+jobhunt = "jobhunt.cli:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8",
+  "pytest-cov",
+  "respx>=0.21",
+  "freezegun",
+  "ruff",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["jobhunt"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["data", "logs", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "T20", "PL"]
+ignore = ["PLR2004"]
+
+[tool.ruff.lint.pylint]
+max-args = 8
+max-statements = 40
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PL", "T20"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
